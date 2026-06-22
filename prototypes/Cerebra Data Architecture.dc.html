@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F5F1E8; }
+  ::selection { background: rgba(177,116,87,.25); }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#F5F1E8; font-family:'Source Sans 3',system-ui,sans-serif; color:#1F2522; padding:64px 40px 96px;">
+<div style="max-width:1180px; margin:0 auto;">
+
+  <!-- MASTHEAD -->
+  <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; border-bottom:1px solid rgba(48,67,61,.18); padding-bottom:28px; margin-bottom:40px;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:#61715A; margin-bottom:14px;">Cerebra · Phase 1 · Data Spine</div>
+      <h1 style="font-family:'Spectral',serif; font-weight:500; font-size:48px; line-height:1.04; letter-spacing:-.01em; margin:0; color:#30433D;">Data Architecture</h1>
+      <p style="font-family:'Spectral',serif; font-style:italic; font-size:19px; color:#61715A; margin:14px 0 0; max-width:560px; line-height:1.45;">Mastery is event-derived. Learner actions append immutable events; a projection job derives every metric the interface reads.</p>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8D9C84; text-align:right; line-height:1.9; flex:none; padding-bottom:6px;">
+      <div>9 entities</div>
+      <div>4 groups</div>
+      <div>PostgreSQL · SQLAlchemy</div>
+    </div>
+  </div>
+
+  <!-- PRINCIPLE BANNER -->
+  <div style="display:flex; align-items:stretch; gap:0; background:#30433D; border-radius:12px; overflow:hidden; margin-bottom:56px;">
+    <div style="flex:1; padding:24px 28px; border-right:1px solid rgba(245,241,232,.14);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Write path</div>
+      <div style="color:#F5F1E8; font-size:15px; line-height:1.5;">Events are <span style="color:#D9C8A9;">append-only and immutable</span> — never edited, only superseded.</div>
+    </div>
+    <div style="flex:1; padding:24px 28px; border-right:1px solid rgba(245,241,232,.14);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Derive</div>
+      <div style="color:#F5F1E8; font-size:15px; line-height:1.5;">Projections are <span style="color:#D9C8A9;">idempotent &amp; replayable</span> — rebuildable from the log alone.</div>
+    </div>
+    <div style="flex:1; padding:24px 28px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Read path</div>
+      <div style="color:#F5F1E8; font-size:15px; line-height:1.5;">The UI reads <span style="color:#D9C8A9;">projection tables only</span> — never aggregates events live.</div>
+    </div>
+  </div>
+
+  <!-- SECTION: PIPELINE -->
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:24px;">
+    <h2 style="font-family:'Spectral',serif; font-weight:500; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#30433D; margin:0;">Event → Projection Pipeline</h2>
+    <div style="flex:1; height:1px; background:rgba(48,67,61,.16);"></div>
+  </div>
+
+  <div style="display:flex; gap:14px; margin-bottom:18px; flex-wrap:wrap;">
+
+    <!-- Stage 1 -->
+    <div style="flex:1; min-width:230px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-top:3px solid #B17457; border-radius:10px; padding:20px; box-shadow:0 1px 2px rgba(31,37,34,.04);">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:#B17457; border:1px solid #B17457; border-radius:5px; padding:2px 7px;">01</span>
+        <span style="font-family:'Spectral',serif; font-size:18px; color:#30433D;">Capture</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.5; color:#4a514d; margin:0 0 14px;">Learner produces an answer → the AI assigns a score → append an immutable event.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#B17457; background:rgba(177,116,87,.1); border-radius:4px; padding:3px 7px;">recall_events</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#B17457; background:rgba(177,116,87,.1); border-radius:4px; padding:3px 7px;">problem_attempts</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#B17457; background:rgba(177,116,87,.1); border-radius:4px; padding:3px 7px;">explanation_events</span>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; color:#8D9C84; font-size:22px; flex:none;">›</div>
+
+    <!-- Stage 2 -->
+    <div style="flex:1; min-width:230px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-top:3px solid #61715A; border-radius:10px; padding:20px; box-shadow:0 1px 2px rgba(31,37,34,.04);">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:#61715A; border:1px solid #61715A; border-radius:5px; padding:2px 7px;">02</span>
+        <span style="font-family:'Spectral',serif; font-size:18px; color:#30433D;">Derive</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.5; color:#4a514d; margin:0 0 14px;">Projection reads a recency-windowed event slice per concept and computes accuracy, retention &amp; mastery.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#61715A; background:rgba(97,113,90,.12); border-radius:4px; padding:3px 7px;">mastery</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#61715A; background:rgba(97,113,90,.12); border-radius:4px; padding:3px 7px;">retention</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#61715A; background:rgba(97,113,90,.12); border-radius:4px; padding:3px 7px;">heat_state</span>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; color:#8D9C84; font-size:22px; flex:none;">›</div>
+
+    <!-- Stage 3 -->
+    <div style="flex:1; min-width:230px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-top:3px solid #61715A; border-radius:10px; padding:20px; box-shadow:0 1px 2px rgba(31,37,34,.04);">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:#61715A; border:1px solid #61715A; border-radius:5px; padding:2px 7px;">03</span>
+        <span style="font-family:'Spectral',serif; font-size:18px; color:#30433D;">Schedule</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.5; color:#4a514d; margin:0 0 14px;">SM-2 turns the latest recall score into the next interval and due date.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#61715A; background:rgba(97,113,90,.12); border-radius:4px; padding:3px 7px;">ease_factor</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#61715A; background:rgba(97,113,90,.12); border-radius:4px; padding:3px 7px;">due_at</span>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; color:#8D9C84; font-size:22px; flex:none;">›</div>
+
+    <!-- Stage 4 -->
+    <div style="flex:1; min-width:230px; background:#30433D; border:1px solid #30433D; border-top:3px solid #D9C8A9; border-radius:10px; padding:20px; box-shadow:0 1px 2px rgba(31,37,34,.08);">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; color:#D9C8A9; border:1px solid rgba(217,200,169,.6); border-radius:5px; padding:2px 7px;">04</span>
+        <span style="font-family:'Spectral',serif; font-size:18px; color:#F5F1E8;">Serve</span>
+      </div>
+      <p style="font-size:13.5px; line-height:1.5; color:#cdd3c8; margin:0 0 14px;">Every page reads projection tables only — the read path never touches the event log.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#30433D; background:#D9C8A9; border-radius:4px; padding:3px 7px;">concept_metrics</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#30433D; background:#D9C8A9; border-radius:4px; padding:3px 7px;">review_schedule</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- pipeline properties -->
+  <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:48px;">
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#61715A; border:1px dashed rgba(97,113,90,.45); border-radius:20px; padding:5px 13px;">idempotent</span>
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#61715A; border:1px dashed rgba(97,113,90,.45); border-radius:20px; padding:5px 13px;">replayable</span>
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#61715A; border:1px dashed rgba(97,113,90,.45); border-radius:20px; padding:5px 13px;">versioned</span>
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#61715A; border:1px dashed rgba(97,113,90,.45); border-radius:20px; padding:5px 13px;">never live-aggregated</span>
+  </div>
+
+  <!-- DERIVATION + SM-2 ROW -->
+  <div style="display:flex; gap:20px; margin-bottom:56px; flex-wrap:wrap;">
+
+    <!-- derivation formulas -->
+    <div style="flex:1.3; min-width:340px; background:rgba(141,156,132,.1); border:1px solid rgba(48,67,61,.15); border-radius:12px; padding:26px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#61715A; margin-bottom:18px;">Stage 02 · Metric derivation</div>
+      <div style="display:flex; flex-direction:column; gap:14px; font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.55; color:#30433D;">
+        <div><span style="color:#B17457;">recall_accuracy</span> = Σ wᵢ·(scoreᵢ/3) / Σ wᵢ</div>
+        <div><span style="color:#B17457;">problem_accuracy</span> = Σ wᵢ·correctᵢ / Σ wᵢ</div>
+        <div><span style="color:#B17457;">retention</span> = exp(−Δt / stability)</div>
+        <div style="padding-top:6px; border-top:1px dashed rgba(48,67,61,.18);"><span style="color:#30433D; font-weight:600;">mastery</span> = 0.45·recall + 0.25·problem + 0.30·retention</div>
+      </div>
+      <p style="font-size:12.5px; line-height:1.55; color:#61715A; margin:18px 0 0; font-style:italic; font-family:'Spectral',serif;">Recency weight wᵢ = exp(−λ·age); Δt = now − last_reviewed_at. A small capped bonus from explanation quality feeds mastery.</p>
+    </div>
+
+    <!-- SM-2 -->
+    <div style="flex:1; min-width:300px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-radius:12px; padding:26px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#61715A; margin-bottom:18px;">Stage 03 · SM-2 (0–3 adaptation)</div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12.5px; line-height:1.7; color:#30433D;">
+        <div><span style="color:#8D9C84;">q ≤ 1</span> → reps=0, interval=1d</div>
+        <div><span style="color:#8D9C84;">q ≥ 2</span> → reps+=1; interval =</div>
+        <div style="padding-left:22px; color:#61715A;">[1d, 6d, round(prev·EF)]</div>
+        <div style="padding-top:8px;">EF += 0.1 − (3−q)(0.08+(3−q)·0.02)</div>
+        <div style="color:#61715A;">EF = max(EF, 1.3) · default 2.5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEAT LEGEND -->
+  <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-bottom:56px; padding:18px 22px; background:#FBF9F3; border:1px solid rgba(48,67,61,.12); border-radius:10px;">
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#61715A;">Heat states</span>
+    <div style="display:flex; align-items:center; gap:8px;"><span style="width:13px; height:13px; border-radius:50%; background:#30433D; display:inline-block;"></span><span style="font-size:13px; color:#30433D;">Mastered</span></div>
+    <div style="display:flex; align-items:center; gap:8px;"><span style="width:13px; height:13px; border-radius:50%; background:#61715A; display:inline-block;"></span><span style="font-size:13px; color:#30433D;">Hot</span></div>
+    <div style="display:flex; align-items:center; gap:8px;"><span style="width:13px; height:13px; border-radius:50%; background:#D9C8A9; display:inline-block;"></span><span style="font-size:13px; color:#30433D;">Warm</span></div>
+    <div style="display:flex; align-items:center; gap:8px;"><span style="width:13px; height:13px; border-radius:50%; background:#B17457; display:inline-block;"></span><span style="font-size:13px; color:#30433D;">Cold</span></div>
+    <div style="display:flex; align-items:center; gap:8px;"><span style="width:13px; height:13px; border-radius:50%; background:#6b6f6c; display:inline-block;"></span><span style="font-size:13px; color:#30433D;">Frozen</span></div>
+  </div>
+
+  <!-- SECTION: SCHEMA / ERD -->
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:8px;">
+    <h2 style="font-family:'Spectral',serif; font-weight:500; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#30433D; margin:0;">Schema — Entity Relationships</h2>
+    <div style="flex:1; height:1px; background:rgba(48,67,61,.16);"></div>
+  </div>
+  <p style="font-size:14px; color:#61715A; margin:0 0 32px; max-width:620px; line-height:1.5;">Nine entities in four groups. Concepts are first-class; relationships form a directed graph; metrics and schedule are 1:1 projections; layout is decoupled from knowledge.</p>
+
+  <!-- groups render here -->
+  <sc-for list="{{ groups }}" as="group" hint-placeholder-count="4">
+    <div style="margin-bottom:38px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+        <span style="width:11px; height:11px; border-radius:3px; background:{{ group.color }}; display:inline-block; flex:none;"></span>
+        <span style="font-family:'Spectral',serif; font-size:21px; color:#30433D;">{{ group.label }}</span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#8D9C84;">{{ group.note }}</span>
+      </div>
+
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:flex-start;">
+        <sc-for list="{{ group.tables }}" as="table" hint-placeholder-count="3">
+          <div style="flex:1; min-width:300px; max-width:420px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(31,37,34,.05);">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:{{ group.color }};">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; font-weight:600; color:#F5F1E8;">{{ table.name }}</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:#F5F1E8; background:rgba(245,241,232,.16); border-radius:4px; padding:2px 7px;">{{ group.tag }}</span>
+            </div>
+            <sc-for list="{{ table.cols }}" as="col" hint-placeholder-count="6">
+              <div style="display:flex; align-items:baseline; gap:10px; padding:{{ rowPad }} 16px; border-top:1px solid rgba(48,67,61,.07);">
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:#1F2522; flex:none;">{{ col.name }}</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8D9C84; flex:none;">{{ col.type }}</span>
+                <sc-if value="{{ col.badge }}" hint-placeholder-val="">
+                  <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:.08em; color:#61715A; background:rgba(255,255,255,.6); border:1px solid rgba(48,67,61,.2); border-radius:3px; padding:1px 5px; flex:none;">{{ col.badge }}</span>
+                </sc-if>
+                <span style="flex:1;"></span>
+                <sc-if value="{{ col.note }}" hint-placeholder-val="">
+                  <span style="font-size:11.5px; color:#a0958a; text-align:right; line-height:1.35;">{{ col.note }}</span>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-for>
+
+  <div style="margin-top:48px; padding-top:24px; border-top:1px solid rgba(48,67,61,.14); font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8D9C84; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <span>Cerebra Data Architecture v1.0 · companion to data-architecture.md</span>
+    <span>Exit: seed → project → verify against hand-computed metrics</span>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;comfortable&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;comfortable&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const showNotes = this.props.showNotes ?? true;
+    const rowPad = (this.props.density ?? 'comfortable') === 'compact' ? '5px' : '9px';
+
+    const raw = [
+      {
+        label: 'Core — graph model', tag: 'core', note: 'authored · structural', color: '#30433D',
+        tables: [
+          { name: 'subjects', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'name', type: 'text', note: 'not null' },
+            { name: 'description', type: 'text', note: 'nullable' },
+            { name: 'accent', type: 'text', note: 'hex override' },
+            { name: 'created_at', type: 'timestamptz' },
+            { name: 'updated_at', type: 'timestamptz' },
+          ]},
+          { name: 'concepts', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'subject_id', type: 'uuid', badge: 'FK', note: '→ subjects.id' },
+            { name: 'name', type: 'text' },
+            { name: 'slug', type: 'text', badge: 'UQ', note: 'per subject' },
+            { name: 'importance', type: 'smallint', note: '1–5 · node size' },
+            { name: 'intuition', type: 'text' },
+            { name: 'definition', type: 'text', note: 'KaTeX' },
+            { name: 'notes', type: 'text' },
+            { name: 'created_at', type: 'timestamptz' },
+            { name: 'updated_at', type: 'timestamptz' },
+          ]},
+          { name: 'concept_relationships', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'subject_id', type: 'uuid', badge: 'FK', note: '→ subjects.id' },
+            { name: 'source_concept_id', type: 'uuid', badge: 'FK', note: 'prerequisite' },
+            { name: 'target_concept_id', type: 'uuid', badge: 'FK', note: 'dependent' },
+            { name: 'type', type: 'enum', note: 'prereq·related·extends' },
+            { name: 'strength', type: 'real', note: '0–1 · edge weight' },
+            { name: 'created_at', type: 'timestamptz' },
+            { name: 'UQ', type: '(source,target,type)', badge: 'UQ' },
+          ]},
+        ]
+      },
+      {
+        label: 'Events — append-only log', tag: 'event', note: 'immutable · occurred_at', color: '#B17457',
+        tables: [
+          { name: 'recall_events', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'concept_id', type: 'uuid', badge: 'FK', note: '→ concepts.id' },
+            { name: 'prompt', type: 'text' },
+            { name: 'learner_answer', type: 'text' },
+            { name: 'model_answer', type: 'text' },
+            { name: 'score', type: 'smallint', note: '0–3 · AI-assigned' },
+            { name: 'rationale', type: 'text' },
+            { name: 'assessed_by', type: 'text', note: 'model id' },
+            { name: 'occurred_at', type: 'timestamptz' },
+          ]},
+          { name: 'problem_attempts', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'concept_id', type: 'uuid', badge: 'FK', note: '→ concepts.id' },
+            { name: 'prompt', type: 'text' },
+            { name: 'learner_answer', type: 'text' },
+            { name: 'is_correct', type: 'boolean' },
+            { name: 'partial', type: 'real', note: '0–1 · nullable' },
+            { name: 'occurred_at', type: 'timestamptz' },
+          ]},
+          { name: 'explanation_events', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'concept_id', type: 'uuid', badge: 'FK', note: '→ concepts.id' },
+            { name: 'content', type: 'text' },
+            { name: 'direction', type: 'enum', note: 'feynman / ai' },
+            { name: 'quality', type: 'smallint', note: '0–3 · nullable' },
+            { name: 'occurred_at', type: 'timestamptz' },
+          ]},
+        ]
+      },
+      {
+        label: 'Projections — UI reads only these', tag: 'derived', note: '1:1 per concept · rewritten by job', color: '#61715A',
+        tables: [
+          { name: 'concept_metrics', cols: [
+            { name: 'concept_id', type: 'uuid', badge: 'PK', note: '→ concepts.id' },
+            { name: 'mastery', type: 'real', note: '0–1 · composite' },
+            { name: 'retention', type: 'real', note: 'forgetting curve' },
+            { name: 'recall_accuracy', type: 'real', note: 'recency-weighted' },
+            { name: 'problem_accuracy', type: 'real' },
+            { name: 'heat_state', type: 'enum', note: 'mastered…frozen' },
+            { name: 'stability', type: 'real', note: 'SM-2 strength' },
+            { name: 'review_count', type: 'int' },
+            { name: 'last_reviewed_at', type: 'timestamptz', note: 'nullable' },
+            { name: 'projection_version', type: 'int' },
+            { name: 'updated_at', type: 'timestamptz' },
+          ]},
+          { name: 'review_schedule', cols: [
+            { name: 'concept_id', type: 'uuid', badge: 'PK', note: '→ concepts.id' },
+            { name: 'due_at', type: 'timestamptz' },
+            { name: 'interval_days', type: 'real' },
+            { name: 'ease_factor', type: 'real', note: 'SM-2 · def 2.5' },
+            { name: 'repetitions', type: 'int' },
+            { name: 'last_score', type: 'smallint', note: '0–3' },
+            { name: 'last_reviewed_at', type: 'timestamptz', note: 'nullable' },
+            { name: 'updated_at', type: 'timestamptz' },
+          ]},
+        ]
+      },
+      {
+        label: 'Layout — decoupled from knowledge', tag: 'layout', note: 'positions ≠ relationships', color: '#8D9C84',
+        tables: [
+          { name: 'graph_layouts', cols: [
+            { name: 'id', type: 'uuid', badge: 'PK' },
+            { name: 'subject_id', type: 'uuid', badge: 'FK', note: '→ subjects.id' },
+            { name: 'concept_id', type: 'uuid', badge: 'FK', note: '→ concepts.id' },
+            { name: 'x', type: 'real' },
+            { name: 'y', type: 'real' },
+            { name: 'pinned', type: 'boolean', note: 'user vs auto' },
+            { name: 'layout_version', type: 'int' },
+            { name: 'updated_at', type: 'timestamptz' },
+            { name: 'UQ', type: '(concept,version)', badge: 'UQ' },
+          ]},
+        ]
+      },
+    ];
+
+    const groups = raw.map(g => ({
+      ...g,
+      tables: g.tables.map(t => ({
+        ...t,
+        cols: t.cols.map(c => ({
+          name: c.name,
+          type: c.type,
+          badge: c.badge || '',
+          note: showNotes ? (c.note || '') : '',
+        })),
+      })),
+    }));
+
+    return { groups, rowPad };
+  }
+}
+</script>
+</body>
+</html>

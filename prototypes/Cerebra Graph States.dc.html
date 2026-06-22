@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>*,*::before,*::after{box-sizing:border-box;}
+  .kg-frame > .sc-host { height: 100% !important; display: block; }</style>
+</helmet>
+
+<div style="width:max-content;min-width:100%;min-height:100vh;box-sizing:border-box;padding:48px;background:#cfccc2;font-family:'Hanken Grotesk',sans-serif;-webkit-font-smoothing:antialiased;">
+
+  <div style="margin-bottom:30px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:#6f6b60;margin-bottom:10px;">Cerebra · Hi-fi · Earthy Glass</div>
+    <h1 style="font-family:'Newsreader',serif;font-size:30px;font-weight:500;color:#1F2522;margin:0 0 8px;letter-spacing:-0.01em;">Knowledge Graph <span style="color:#8D9C84;">·</span> Variation B</h1>
+    <p style="font-size:14px;line-height:1.6;color:#54514a;margin:0;max-width:860px;">Canvas + floating glass inspector. The graph is live in both frames — drag to pan, scroll to zoom, hover a node to spotlight its neighbors, click to inspect, and use the chips to filter. Two states shown below; both cross-link into the Concept Page.</p>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start;">
+
+    <!-- STATE 1 -->
+    <div style="flex:none;width:1180px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6b6760;margin-bottom:10px;">01 · Explore — Eigenvectors selected <span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:4px;">default</span></div>
+      <div style="background:#faf9f6;border-radius:6px;box-shadow:0 6px 28px rgba(31,37,34,.16);overflow:hidden;">
+        <div style="height:30px;background:#e8e6df;border-bottom:1px solid #d6d3c9;display:flex;align-items:center;padding:0 12px;gap:6px;">
+          <span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span>
+          <span style="margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a39f93;">cerebra · knowledge atlas</span>
+        </div>
+        <div class="kg-frame" style="height:760px;">
+          <dc-import name="Cerebra Knowledge Graph" initial-selected="eigvec" initial-filter="none" hint-size="100%,100%"></dc-import>
+        </div>
+      </div>
+      <p style="font-size:12.5px;line-height:1.55;color:#6f6b60;margin:12px 2px 0;">Heat coloring at a glance: the <strong style="color:#30433D;">Eigen</strong> cluster runs cold (Characteristic polynomial is Frozen), while <strong style="color:#54614c;">Vectors</strong> is mostly mastered. Distant subjects (Probability, Signal) sit faded at the rim.</p>
+    </div>
+
+    <!-- STATE 2 -->
+    <div style="flex:none;width:1180px;">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6b6760;margin-bottom:10px;">02 · Dependency path traced — what Eigenvectors rests on</div>
+      <div style="background:#faf9f6;border-radius:6px;box-shadow:0 6px 28px rgba(31,37,34,.16);overflow:hidden;">
+        <div style="height:30px;background:#e8e6df;border-bottom:1px solid #d6d3c9;display:flex;align-items:center;padding:0 12px;gap:6px;">
+          <span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span>
+          <span style="margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a39f93;">cerebra · knowledge atlas · path</span>
+        </div>
+        <div class="kg-frame" style="height:760px;">
+          <dc-import name="Cerebra Knowledge Graph" initial-selected="eigvec" initial-filter="deps" hint-size="100%,100%"></dc-import>
+        </div>
+      </div>
+      <p style="font-size:12.5px;line-height:1.55;color:#6f6b60;margin:12px 2px 0;">The <strong style="color:#30433D;">Dependency path</strong> chip dims everything except the prerequisite chain feeding Eigenvectors — surfacing that the weak link traces back through Eigenvalues to the Frozen <strong style="color:#B17457;">Characteristic polynomial</strong>. Try the <strong>Highlight weak</strong> chip too.</p>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

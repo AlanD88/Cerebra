@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+3:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F5F1E8; }
+  ::selection { background: rgba(177,116,87,.25); }
+</style>
+</helmet>
+
+<div style="min-height:100vh; background:#F5F1E8; font-family:'Source Sans 3',system-ui,sans-serif; color:#1F2522; padding:64px 40px 96px;">
+<div style="max-width:1180px; margin:0 auto;">
+
+  <!-- MASTHEAD -->
+  <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:32px; border-bottom:1px solid rgba(48,67,61,.18); padding-bottom:28px; margin-bottom:40px;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:#61715A; margin-bottom:14px;">Cerebra · Phase 0 · Foundations</div>
+      <h1 style="font-family:'Spectral',serif; font-weight:500; font-size:48px; line-height:1.04; letter-spacing:-.01em; margin:0; color:#30433D;">Scaffold &amp; Tokens</h1>
+      <p style="font-family:'Spectral',serif; font-style:italic; font-size:19px; color:#61715A; margin:14px 0 0; max-width:580px; line-height:1.45;">The groundwork every later phase assumes — colors, surfaces, heat, motion, type, and the shell. Make the tokens resolve before building anything.</p>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8D9C84; text-align:right; line-height:1.9; flex:none; padding-bottom:6px;">
+      <div>Vite · React · TS</div>
+      <div>Tailwind · TanStack</div>
+      <div>React Flow · KaTeX</div>
+    </div>
+  </div>
+
+  <!-- STACK BANNER -->
+  <div style="display:flex; align-items:stretch; gap:0; background:#30433D; border-radius:12px; overflow:hidden; margin-bottom:56px;">
+    <div style="flex:1; padding:22px 26px; border-right:1px solid rgba(245,241,232,.14);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Frontend</div>
+      <div style="color:#F5F1E8; font-size:13.5px; line-height:1.55; font-family:'IBM Plex Mono',monospace;">react · vite · typescript<br/>tailwind · tanstack-query<br/>reactflow · katex</div>
+    </div>
+    <div style="flex:1; padding:22px 26px; border-right:1px solid rgba(245,241,232,.14);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Backend (repo only)</div>
+      <div style="color:#F5F1E8; font-size:13.5px; line-height:1.55; font-family:'IBM Plex Mono',monospace;">fastapi · uvicorn<br/>sqlalchemy · alembic<br/>psycopg · pydantic</div>
+    </div>
+    <div style="flex:1; padding:22px 26px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#8D9C84; margin-bottom:9px;">Tooling</div>
+      <div style="color:#F5F1E8; font-size:13.5px; line-height:1.55; font-family:'IBM Plex Mono',monospace;">eslint · prettier<br/>vitest<br/>postcss · autoprefixer</div>
+    </div>
+  </div>
+
+  <!-- COLOR TOKENS -->
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:22px;">
+    <h2 style="font-family:'Spectral',serif; font-weight:500; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#30433D; margin:0;">Color Tokens</h2>
+    <div style="flex:1; height:1px; background:rgba(48,67,61,.16);"></div>
+  </div>
+  <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:12px; margin-bottom:52px;">
+    <sc-for list="{{ colors }}" as="c" hint-placeholder-count="7">
+      <div style="background:#FBF9F3; border:1px solid rgba(48,67,61,.12); border-radius:10px; overflow:hidden; box-shadow:0 1px 2px rgba(31,37,34,.04);">
+        <div style="height:64px; background:{{ c.hex }}; border-bottom:1px solid rgba(48,67,61,.08);"></div>
+        <div style="padding:10px 11px;">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1F2522; font-weight:500;">{{ c.token }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#a0958a; margin-top:2px;">{{ c.hex }}</div>
+          <div style="font-size:10.5px; color:#8D9C84; margin-top:5px; line-height:1.3;">{{ c.role }}</div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <!-- SURFACE SYSTEM -->
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:8px;">
+    <h2 style="font-family:'Spectral',serif; font-weight:500; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#30433D; margin:0;">Surface System</h2>
+    <div style="flex:1; height:1px; background:rgba(48,67,61,.16);"></div>
+  </div>
+  <p style="font-size:14px; color:#61715A; margin:0 0 24px; max-width:600px; line-height:1.5;">Elevation is expressed by the surface, not arbitrary shadow. Map every raised element to one of these — over an L0 cream canvas.</p>
+  <div style="background:#F5F1E8; border:1px dashed rgba(48,67,61,.2); border-radius:14px; padding:30px; margin-bottom:52px;">
+    <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#8D9C84; margin-bottom:20px;">L0 · canvas — cream #F5F1E8</div>
+    <div style="display:flex; gap:18px; flex-wrap:wrap; align-items:stretch;">
+      <!-- L1 paper -->
+      <div style="flex:1; min-width:200px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-radius:11px; padding:20px; box-shadow:0 1px 3px rgba(31,37,34,.05);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#B17457; margin-bottom:10px;">L1 · paper</div>
+        <div style="font-family:'Spectral',serif; font-size:18px; color:#30433D; margin-bottom:6px;">Paper card</div>
+        <div style="font-size:12.5px; color:#8a8472; line-height:1.45;">Default card. 1px forest/14, radius 10–11, faint shadow.</div>
+      </div>
+      <!-- L2 glass -->
+      <div style="flex:1; min-width:200px; background:linear-gradient(155deg,rgba(255,255,255,.72),rgba(241,236,221,.6)); backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.8); border-radius:13px; padding:20px; box-shadow:0 6px 22px rgba(31,37,34,.08);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#61715A; margin-bottom:10px;">L2 · glass</div>
+        <div style="font-family:'Spectral',serif; font-size:18px; color:#30433D; margin-bottom:6px;">Glass panel</div>
+        <div style="font-size:12.5px; color:#6f6b60; line-height:1.45;">Translucent white over cream, 20px blur. Learning health, drawers.</div>
+      </div>
+      <!-- L3 floating -->
+      <div style="flex:1; min-width:200px; background:#fff; border:1px solid rgba(48,67,61,.06); border-radius:13px; padding:20px; box-shadow:0 6px 22px rgba(31,37,34,.12);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#61715A; margin-bottom:10px;">L3 · floating</div>
+        <div style="font-family:'Spectral',serif; font-size:18px; color:#30433D; margin-bottom:6px;">Floating</div>
+        <div style="font-size:12.5px; color:#8a8472; line-height:1.45;">White, radius 13, lifted shadow. Graph inspector, popovers.</div>
+      </div>
+      <!-- L4 modal -->
+      <div style="flex:1; min-width:200px; background:#fff; border-radius:13px; padding:20px; box-shadow:0 24px 60px rgba(31,37,34,.28); outline:6px solid rgba(31,37,34,.10);">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:#30433D; margin-bottom:10px;">L4 · modal</div>
+        <div style="font-family:'Spectral',serif; font-size:18px; color:#30433D; margin-bottom:6px;">Modal</div>
+        <div style="font-size:12.5px; color:#8a8472; line-height:1.45;">White card on charcoal/40 scrim. Heaviest shadow.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HEAT + MOTION ROW -->
+  <div style="display:flex; gap:20px; margin-bottom:52px; flex-wrap:wrap; align-items:stretch;">
+    <!-- heat scale -->
+    <div style="flex:1.5; min-width:380px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-radius:12px; padding:26px; box-shadow:0 1px 3px rgba(31,37,34,.05);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#61715A; margin-bottom:6px;">Heat scale · single source of truth</div>
+      <div style="font-size:13px; color:#8a8472; margin-bottom:20px;">heatState(mastery) → color · 0–100</div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <sc-for list="{{ heat }}" as="h" hint-placeholder-count="5">
+          <div style="display:flex; align-items:center; gap:14px;">
+            <span style="width:34px; height:34px; border-radius:8px; background:{{ h.hex }}; flex:none; border:1px solid rgba(255,255,255,.4);"></span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:13px; color:#1F2522; width:96px;">{{ h.token }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#61715A; width:78px;">{{ h.range }}</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#a0958a;">{{ h.hex }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <!-- motion -->
+    <div style="flex:1; min-width:280px; background:rgba(141,156,132,.1); border:1px solid rgba(48,67,61,.15); border-radius:12px; padding:26px;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#61715A; margin-bottom:20px;">Motion tokens</div>
+      <div style="display:flex; flex-direction:column; gap:18px;">
+        <div>
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:#30433D;">fast</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#61715A;">150ms</span>
+          </div>
+          <div style="font-size:12.5px; color:#6f6b60;">reveal · hover · fades</div>
+        </div>
+        <div style="padding-top:16px; border-top:1px dashed rgba(48,67,61,.18);">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:6px;">
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:14px; color:#30433D;">normal</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#61715A;">250ms</span>
+          </div>
+          <div style="font-size:12.5px; color:#6f6b60;">reposition · panel transitions</div>
+        </div>
+        <div style="padding-top:16px; border-top:1px dashed rgba(48,67,61,.18); font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#42513c; line-height:1.6;">
+          ease cubic-bezier(.4,0,.2,1)<br/>
+          <span style="color:#B17457;">no bounce · no elastic</span><br/>
+          honors prefers-reduced-motion
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE TOKENS -->
+  <div style="display:flex; align-items:baseline; gap:16px; margin-bottom:22px;">
+    <h2 style="font-family:'Spectral',serif; font-weight:500; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#30433D; margin:0;">Type Tokens</h2>
+    <div style="flex:1; height:1px; background:rgba(48,67,61,.16);"></div>
+  </div>
+  <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:52px;">
+    <!-- display -->
+    <div style="display:flex; align-items:center; gap:28px; background:#FBF9F3; border:1px solid rgba(48,67,61,.12); border-radius:11px; padding:22px 26px;">
+      <div style="width:130px; flex:none;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1F2522; font-weight:500;">display</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#a0958a; margin-top:3px;">Newsreader 500</div>
+      </div>
+      <div style="font-family:'Newsreader',serif; font-weight:500; font-size:42px; color:#30433D; line-height:1;">Concept mastery</div>
+    </div>
+    <!-- body -->
+    <div style="display:flex; align-items:center; gap:28px; background:#FBF9F3; border:1px solid rgba(48,67,61,.12); border-radius:11px; padding:22px 26px;">
+      <div style="width:130px; flex:none;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1F2522; font-weight:500;">body</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#a0958a; margin-top:3px;">Hanken Grotesk</div>
+      </div>
+      <div style="font-family:'Hanken Grotesk',sans-serif; font-size:16px; color:#27302b; line-height:1.5; max-width:560px;">Active recall and spaced repetition build durable understanding — the body face carries running text, labels, and list rows.</div>
+    </div>
+    <!-- mono -->
+    <div style="display:flex; align-items:center; gap:28px; background:#FBF9F3; border:1px solid rgba(48,67,61,.12); border-radius:11px; padding:22px 26px;">
+      <div style="width:130px; flex:none;">
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#1F2522; font-weight:500;">mono</div>
+        <div style="font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#a0958a; margin-top:3px;">JetBrains Mono</div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#61715A; letter-spacing:.04em;">MASTERY 0.61 · RETENTION 64% · DUE 18 · STREAK 12d</div>
+    </div>
+  </div>
+
+  <!-- SHELL + CONFIG ROW -->
+  <div style="display:flex; gap:20px; margin-bottom:52px; flex-wrap:wrap; align-items:stretch;">
+    <!-- shell anatomy -->
+    <div style="flex:1; min-width:300px; background:#FBF9F3; border:1px solid rgba(48,67,61,.14); border-radius:12px; padding:0; overflow:hidden; box-shadow:0 1px 3px rgba(31,37,34,.05);">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#61715A; padding:22px 24px 14px;">Global shell</div>
+      <div style="display:flex; height:200px; border-top:1px solid rgba(48,67,61,.1);">
+        <div style="width:52px; flex:none; background:#30433D; display:flex; flex-direction:column; align-items:center; padding:16px 0; gap:14px;">
+          <span style="width:18px; height:18px; border-radius:5px; background:#D9C8A9;"></span>
+          <span style="width:18px; height:18px; border-radius:5px; background:rgba(245,241,232,.4);"></span>
+          <span style="width:18px; height:18px; border-radius:5px; background:rgba(245,241,232,.4);"></span>
+          <span style="width:18px; height:18px; border-radius:5px; background:rgba(245,241,232,.4);"></span>
+          <span style="width:18px; height:18px; border-radius:5px; background:rgba(245,241,232,.4); margin-top:auto;"></span>
+        </div>
+        <div style="flex:1; background:#F5F1E8; padding:18px; display:flex; align-items:flex-start; justify-content:center;">
+          <div style="width:100%; max-width:240px; height:100%; border:1px dashed rgba(48,67,61,.22); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#a0958a; text-align:center; line-height:1.5;">1400px<br/>centered content</div>
+        </div>
+      </div>
+      <div style="padding:16px 24px; font-size:12.5px; color:#6f6b60; line-height:1.55;">52px Forest sidebar, icon-only, hover-expands. Nav: Dashboard · Subjects · Graph · Reviews · Settings. Review renders full-screen, outside the shell.</div>
+    </div>
+    <!-- tailwind config -->
+    <div style="flex:1.2; min-width:340px; background:#30433D; border-radius:12px; padding:24px 26px; overflow:hidden;">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:#8D9C84; margin-bottom:16px;">tailwind.config.ts</div>
+      <pre style="margin:0; font-family:'IBM Plex Mono',monospace; font-size:11.5px; line-height:1.7; color:#cdd3c8; white-space:pre-wrap;"><span style="color:#8D9C84;">extend</span>: {
+  <span style="color:#D9C8A9;">colors</span>: { forest, moss, sage, clay,
+           sand, cream, charcoal,
+           <span style="color:#D9C8A9;">heat</span>: { mastered, hot, warm,
+                  cold, frozen } },
+  <span style="color:#D9C8A9;">fontFamily</span>: { display, body, mono },
+  <span style="color:#D9C8A9;">transitionDuration</span>: { fast:<span style="color:#B17457;">'150ms'</span>,
+                       normal:<span style="color:#B17457;">'250ms'</span> },
+  <span style="color:#D9C8A9;">maxWidth</span>: { content:<span style="color:#B17457;">'1400px'</span> },
+}</pre>
+    </div>
+  </div>
+
+  <div style="padding-top:24px; border-top:1px solid rgba(48,67,61,.14); font-family:'IBM Plex Mono',monospace; font-size:11px; color:#8D9C84; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <span>Cerebra Foundations v1.0 · companion to foundations.md</span>
+    <span>Exit: shell renders · tokens resolve · heat utility shared · projection read proven</span>
+  </div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  renderVals() {
+    const colors = [
+      { token: 'forest',   hex: '#30433D', role: 'primary dark · mastered' },
+      { token: 'moss',     hex: '#61715A', role: 'secondary · hot' },
+      { token: 'sage',     hex: '#8D9C84', role: 'muted accent · labels' },
+      { token: 'clay',     hex: '#B17457', role: 'warning · cold' },
+      { token: 'sand',     hex: '#D9C8A9', role: 'highlight · warm' },
+      { token: 'cream',    hex: '#F5F1E8', role: 'L0 canvas · paper' },
+      { token: 'charcoal', hex: '#1F2522', role: 'body text' },
+    ];
+    const heat = [
+      { token: 'mastered', range: '≥ 85',    hex: '#30433D' },
+      { token: 'hot',      range: '70–84',   hex: '#61715A' },
+      { token: 'warm',     range: '50–69',   hex: '#D9C8A9' },
+      { token: 'cold',     range: '25–49',   hex: '#B17457' },
+      { token: 'frozen',   range: '< 25',    hex: '#6b6f6c' },
+    ];
+    return { colors, heat };
+  }
+}
+</script>
+</body>
+</html>

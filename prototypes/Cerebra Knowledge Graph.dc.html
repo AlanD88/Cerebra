@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    .kg-root { font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" class="kg-root" style="display:flex;width:100%;height:100%;background:#F5F1E8;overflow:hidden;">
+
+  <!-- sidebar -->
+  <div style="width:64px;flex:none;background:#30433D;display:flex;flex-direction:column;align-items:center;padding:18px 0;gap:6px;">
+    <a href="Cerebra Prototype.dc.html" title="Prototype home" style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;text-decoration:none;"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #F5F1E8;"></span></a>
+    <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="2.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="11.5" y="2.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="2.5" y="11.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="11.5" y="11.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/></svg></div>
+    <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3.5" width="14" height="4.2" rx="1.4" fill="#F5F1E8" opacity="0.5"/><rect x="3" y="9.5" width="14" height="4.2" rx="1.4" fill="#F5F1E8" opacity="0.4"/><rect x="3" y="15.5" width="9" height="3" rx="1.2" fill="#F5F1E8" opacity="0.3"/></svg></div>
+    <div style="width:40px;height:40px;border-radius:9px;background:#D9C8A9;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="6" y1="6" x2="13" y2="13" stroke="#30433D" stroke-width="1.4"/><line x1="13" y1="6" x2="7" y2="13" stroke="#30433D" stroke-width="1.4"/><circle cx="5" cy="5" r="2.6" fill="#30433D"/><circle cx="15" cy="5" r="2.6" fill="#30433D"/><circle cx="14" cy="15" r="2.6" fill="#30433D"/></svg></div>
+    <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16 10a6 6 0 1 1-2-4.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round"/><path d="M16 4.5 L16 7 L13.5 7" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div style="margin-top:auto;width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="6.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.2" fill="#F5F1E8" opacity="0.5"/></svg></div>
+  </div>
+
+  <!-- canvas + overlays -->
+  <div style="flex:1;position:relative;overflow:hidden;background:radial-gradient(circle at 42% 38%, #FBF8F0 0%, #EDE7DA 64%, #E3DCCC 100%);">
+
+    <svg ref="{{ svgRef }}" viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid meet" style="position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;">{{ graph }}</svg>
+
+    <!-- search (top-left) -->
+    <div style="position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.72);border-radius:10px;padding:9px 13px;width:248px;box-shadow:0 4px 16px rgba(31,37,34,.08);">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="6" cy="6" r="4.5" stroke="#8D9C84" stroke-width="1.5"/><line x1="9.5" y1="9.5" x2="13" y2="13" stroke="#8D9C84" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="Search concepts…" style="border:none;background:none;outline:none;font-family:'Hanken Grotesk',sans-serif;font-size:13px;color:#1F2522;width:100%;" />
+    </div>
+
+    <!-- filter chips (top-right) -->
+    <div style="position:absolute;top:18px;right:18px;display:flex;gap:8px;">
+      <button onClick="{{ toggleWeak }}" style="display:flex;align-items:center;gap:6px;background:{{ weakBg }};backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid {{ weakBorder }};border-radius:20px;padding:8px 14px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:{{ weakFg }};cursor:pointer;box-shadow:0 4px 14px rgba(31,37,34,.07);"><span style="width:8px;height:8px;border-radius:50%;background:#B17457;"></span>Highlight weak</button>
+      <button onClick="{{ toggleDeps }}" style="display:flex;align-items:center;gap:6px;background:{{ depsBg }};backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid {{ depsBorder }};border-radius:20px;padding:8px 14px;font-family:'Hanken Grotesk',sans-serif;font-size:12px;font-weight:600;color:{{ depsFg }};cursor:pointer;box-shadow:0 4px 14px rgba(31,37,34,.07);"><span style="width:8px;height:8px;border-radius:50%;background:#30433D;"></span>Dependency path</button>
+    </div>
+
+    <!-- zoom (bottom-left) -->
+    <div style="position:absolute;bottom:18px;left:18px;display:flex;flex-direction:column;background:rgba(255,255,255,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.72);border-radius:10px;overflow:hidden;box-shadow:0 4px 16px rgba(31,37,34,.08);">
+      <button onClick="{{ zoomIn }}" style="border:none;background:none;padding:9px 13px;font-size:17px;color:#42513c;cursor:pointer;line-height:1;border-bottom:1px solid rgba(141,156,132,.2);">+</button>
+      <button onClick="{{ zoomOut }}" style="border:none;background:none;padding:9px 13px;font-size:17px;color:#42513c;cursor:pointer;line-height:1;border-bottom:1px solid rgba(141,156,132,.2);">−</button>
+      <button onClick="{{ resetView }}" style="border:none;background:none;padding:8px 13px;font-size:11px;font-family:'JetBrains Mono',monospace;color:#8D9C84;cursor:pointer;">fit</button>
+    </div>
+
+    <!-- legend (bottom-center) -->
+    <div style="position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:13px;background:rgba(255,255,255,.55);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.68);border-radius:20px;padding:7px 16px;box-shadow:0 4px 14px rgba(31,37,34,.06);">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8D9C84;">Heat</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#54514a;"><span style="width:9px;height:9px;border-radius:50%;background:#30433D;"></span>Mastered</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#54514a;"><span style="width:9px;height:9px;border-radius:50%;background:#61715A;"></span>Hot</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#54514a;"><span style="width:9px;height:9px;border-radius:50%;background:#D9C8A9;"></span>Warm</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#54514a;"><span style="width:9px;height:9px;border-radius:50%;background:#B17457;"></span>Cold</span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;color:#54514a;"><span style="width:9px;height:9px;border-radius:50%;background:#5a5e5c;"></span>Frozen</span>
+    </div>
+
+    <!-- inspector (floating L3, right) -->
+    <div style="position:absolute;top:70px;right:18px;width:286px;background:rgba(255,255,255,.62);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(255,255,255,.78);border-radius:14px;padding:18px;box-shadow:0 12px 36px rgba(31,37,34,.16);">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;">Inspector</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#a99f8c;">{{ selSubject }}</div>
+      </div>
+      <h3 style="font-family:'Newsreader',serif;font-size:24px;font-weight:500;color:#1F2522;margin:0 0 8px;letter-spacing:-0.01em;line-height:1.05;">{{ selName }}</h3>
+      <div style="display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;"><span style="width:11px;height:11px;border-radius:50%;background:{{ selHeatColor }};"></span><span style="font-size:12px;font-weight:600;color:#1F2522;">{{ selHeatLabel }}</span></div>
+      <div style="display:flex;gap:10px;margin-bottom:16px;">
+        <div style="flex:1;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.6);border-radius:8px;padding:10px 12px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:#8D9C84;margin-bottom:4px;">Mastery</div>
+          <div style="font-family:'Newsreader',serif;font-size:24px;font-weight:500;color:#30433D;line-height:1;">{{ selMastery }}</div>
+        </div>
+        <div style="flex:1;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.6);border-radius:8px;padding:10px 12px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:#8D9C84;margin-bottom:4px;">Retention</div>
+          <div style="font-family:'Newsreader',serif;font-size:24px;font-weight:500;color:#61715A;line-height:1;">{{ selRetention }}</div>
+        </div>
+      </div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#8D9C84;margin-bottom:9px;">Prerequisites</div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+        <sc-for list="{{ selPrereqs }}" as="p" hint-placeholder-count="3">
+          <button onClick="{{ p.on }}" style="display:flex;align-items:center;gap:9px;background:none;border:none;padding:0;cursor:pointer;text-align:left;width:100%;"><span style="width:9px;height:9px;border-radius:50%;flex:none;background:{{ p.color }};"></span><span style="flex:1;font-size:13px;color:#27302b;">{{ p.name }}</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#a99f8c;">{{ p.heat }}</span></button>
+        </sc-for>
+        <sc-if value="{{ noPrereqs }}" hint-placeholder-val="{{ false }}"><div style="font-size:12px;color:#a99f8c;font-style:italic;">Foundational — no prerequisites.</div></sc-if>
+      </div>
+      <a href="Cerebra Concept Page.dc.html" style="text-decoration:none;display:block;text-align:center;background:#30433D;color:#F5F1E8;font-size:12px;font-weight:600;padding:10px;border-radius:8px;margin-bottom:8px;">Open concept page →</a>
+      <button onClick="{{ toggleDeps }}" style="width:100%;background:rgba(48,67,61,.07);border:1px solid rgba(48,67,61,.16);color:#30433D;font-size:12px;font-weight:600;padding:9px;border-radius:8px;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;">{{ depsActionLabel }}</button>
+    </div>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1296,&quot;height&quot;:820},&quot;initialSelected&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;eigvec&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;initialFilter&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;none&quot;,&quot;weak&quot;,&quot;deps&quot;],&quot;default&quot;:&quot;deps&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const f = props.initialFilter && props.initialFilter !== 'none' ? props.initialFilter : null;
+    this.state = { tx: 30, ty: 70, s: 1.02, hoverId: null, search: '', selected: props.initialSelected || 'eigvec', filter: f };
+  }
+
+  svgRef = React.createRef();
+  rootRef = React.createRef();
+
+  nodes() {
+    return [
+      ['vectors','Vectors','Linear Algebra','Vectors',92,26,150,160],
+      ['lincomb','Linear combinations','Linear Algebra','Vectors',80,18,78,255],
+      ['span','Span','Linear Algebra','Vectors',74,18,195,278],
+      ['basis','Basis','Linear Algebra','Vectors',82,20,150,352],
+      ['dot','Dot product','Linear Algebra','Vectors',88,18,268,175],
+      ['norm','Norm','Linear Algebra','Vectors',72,16,288,272],
+      ['matmul','Matrix multiplication','Linear Algebra','Matrices',92,26,420,150],
+      ['linmap','Linear maps','Linear Algebra','Matrices',90,22,500,258],
+      ['det','Determinants','Linear Algebra','Matrices',62,20,560,160],
+      ['inverse','Matrix inverse','Linear Algebra','Matrices',58,17,640,212],
+      ['rank','Rank','Linear Algebra','Matrices',66,16,575,318],
+      ['charpoly','Characteristic polynomial','Linear Algebra','Eigen',38,20,665,188],
+      ['eigval','Eigenvalues','Linear Algebra','Eigen',60,20,760,168],
+      ['eigvec','Eigenvectors','Linear Algebra','Eigen',64,29,785,288,0,68,61],
+      ['diag','Diagonalization','Linear Algebra','Eigen',55,20,700,368],
+      ['symm','Symmetric matrices','Linear Algebra','SVD',70,18,500,442],
+      ['orth','Orthogonality','Linear Algebra','SVD',74,18,610,505],
+      ['svd','SVD','Linear Algebra','SVD',20,22,738,505],
+      ['prob','Probability','Probability','Probability',58,18,1000,128,1],
+      ['bayes','Bayes\u2019 theorem','Probability','Probability',48,16,1086,186,1],
+      ['dist','Distributions','Probability','Probability',60,16,1008,214,1],
+      ['expect','Expectation','Probability','Probability',52,15,1092,100,1],
+      ['fourier','Fourier transform','Signal Processing','Signal',45,18,1006,560,1],
+      ['sampling','Sampling','Signal Processing','Signal',40,16,1090,612,1],
+      ['conv','Convolution','Signal Processing','Signal',50,16,998,650,1],
+      ['filters','Filters','Signal Processing','Signal',42,15,1090,534,1]
+    ].map(a => ({ id:a[0], name:a[1], subject:a[2], region:a[3], heat:a[4], r:a[5], x:a[6], y:a[7], faded:!!a[8], m:a[9], ret:a[10] }));
+  }
+  prereq() {
+    return { lincomb:['vectors'], span:['lincomb'], basis:['span','lincomb'], dot:['vectors'], norm:['dot'],
+      matmul:['vectors'], linmap:['matmul','basis'], det:['matmul'], inverse:['det'], rank:['linmap'],
+      charpoly:['det'], eigval:['charpoly'], eigvec:['eigval','linmap'], diag:['eigvec','eigval'],
+      symm:['eigvec','dot'], orth:['dot','symm'], svd:['diag','orth','symm'],
+      bayes:['prob'], dist:['prob'], expect:['dist'], sampling:['fourier'], conv:['fourier'], filters:['conv'] };
+  }
+  regions() {
+    return [
+      { label:'Vectors', cx:180, cy:255, rx:165, ry:145, faded:false },
+      { label:'Matrices', cx:545, cy:235, rx:155, ry:130, faded:false },
+      { label:'Eigen', cx:725, cy:280, rx:135, ry:135, faded:false },
+      { label:'SVD', cx:615, cy:475, rx:175, ry:95, faded:false },
+      { label:'Probability', cx:1046, cy:158, rx:100, ry:92, faded:true },
+      { label:'Signal Processing', cx:1046, cy:592, rx:105, ry:92, faded:true }
+    ];
+  }
+  byId() { if (!this._byId) { this._byId = {}; this.nodes().forEach(n => this._byId[n.id] = n); } return this._byId; }
+  heatColor(h) { return h>=90?'#30433D':h>=75?'#61715A':h>=50?'#D9C8A9':h>=25?'#B17457':'#5a5e5c'; }
+  heatLabel(h) { return h>=90?'Mastered':h>=75?'Hot':h>=50?'Warm':h>=25?'Cold':'Frozen'; }
+  ancestors(id) { const pr=this.prereq(); const out=new Set(); const walk=(x)=>{ (pr[x]||[]).forEach(p=>{ if(!out.has(p)){ out.add(p); walk(p);} }); }; walk(id); return out; }
+  neighbors(id) { const pr=this.prereq(); const s=new Set(pr[id]||[]); Object.keys(pr).forEach(k=>{ if((pr[k]||[]).includes(id)) s.add(k); }); return s; }
+
+  activeInfo(selected) {
+    const { hoverId, search, filter } = this.state;
+    if (hoverId) { const s=this.neighbors(hoverId); s.add(hoverId); return { set:s, dim:true, color:'#30433D' }; }
+    if (search && search.trim()) { const q=search.trim().toLowerCase(); const s=new Set(); this.nodes().forEach(n=>{ if(n.name.toLowerCase().includes(q)) s.add(n.id); }); return { set:s, dim:true, color:'#30433D' }; }
+    if (filter==='weak') { const s=new Set(); this.nodes().forEach(n=>{ if(n.heat<50) s.add(n.id); }); return { set:s, dim:true, color:'#B17457' }; }
+    if (filter==='deps' || filter==='path') { const s=this.ancestors(selected); s.add(selected); return { set:s, dim:true, color:'#30433D' }; }
+    return { set:null, dim:false, color:'#30433D' };
+  }
+
+  clientToVB(cx, cy) { const svg=this.svgRef.current; const pt=svg.createSVGPoint(); pt.x=cx; pt.y=cy; const m=svg.getScreenCTM().inverse(); const p=pt.matrixTransform(m); return { x:p.x, y:p.y }; }
+
+  componentDidMount() {
+    const svg=this.svgRef.current; if(!svg) return;
+    this._wheel=(e)=>{ e.preventDefault(); const vb=this.clientToVB(e.clientX,e.clientY); this.setState(st=>{ const factor=e.deltaY<0?1.12:1/1.12; const ns=Math.max(0.55,Math.min(2.6,st.s*factor)); const wx=(vb.x-st.tx)/st.s, wy=(vb.y-st.ty)/st.s; return { s:ns, tx:vb.x-wx*ns, ty:vb.y-wy*ns }; }); };
+    svg.addEventListener('wheel', this._wheel, { passive:false });
+    this._bgDown=(e)=>{ if(e.target.dataset && e.target.dataset.bg){ this.panning=true; this.pan={ x:e.clientX, y:e.clientY, a:svg.getScreenCTM().a }; try{svg.setPointerCapture(e.pointerId);}catch(_){ } } };
+    this._bgMove=(e)=>{ if(!this.panning) return; const a=this.pan.a||1; const dx=(e.clientX-this.pan.x)/a, dy=(e.clientY-this.pan.y)/a; this.pan.x=e.clientX; this.pan.y=e.clientY; this.setState(st=>({ tx:st.tx+dx, ty:st.ty+dy })); };
+    this._bgUp=()=>{ this.panning=false; };
+    svg.addEventListener('pointerdown', this._bgDown);
+    svg.addEventListener('pointermove', this._bgMove);
+    window.addEventListener('pointerup', this._bgUp);
+  }
+  componentWillUnmount() { const svg=this.svgRef.current; if(svg){ svg.removeEventListener('wheel',this._wheel); svg.removeEventListener('pointerdown',this._bgDown); svg.removeEventListener('pointermove',this._bgMove);} window.removeEventListener('pointerup',this._bgUp); }
+
+  selectNode=(id)=>{ this.setState({ selected:id }); };
+  setHover=(id)=>{ this.setState({ hoverId:id }); };
+  clearHover=()=>{ this.setState({ hoverId:null }); };
+  onSearch=(e)=>{ this.setState({ search:e.target.value }); };
+  toggleWeak=()=>{ this.setState(st=>({ filter: st.filter==='weak'?null:'weak' })); };
+  toggleDeps=()=>{ this.setState(st=>({ filter: (st.filter==='deps'||st.filter==='path')?null:'deps' })); };
+  zoomIn=()=>{ this.setState(st=>{ const ns=Math.min(2.6,st.s*1.18); const k=ns/st.s; return { s:ns, tx:600-(600-st.tx)*k, ty:380-(380-st.ty)*k }; }); };
+  zoomOut=()=>{ this.setState(st=>{ const ns=Math.max(0.55,st.s/1.18); const k=ns/st.s; return { s:ns, tx:600-(600-st.tx)*k, ty:380-(380-st.ty)*k }; }); };
+  resetView=()=>{ this.setState({ tx:30, ty:70, s:1.02 }); };
+
+  buildGraph(sel) {
+    const h=React.createElement; const nodes=this.nodes(); const pr=this.prereq(); const by=this.byId();
+    const ai=this.activeInfo(sel); const { set, dim, color } = ai;
+    const inSet=(id)=> !dim || (set && set.has(id));
+    const { hoverId, s, tx, ty } = this.state;
+    const kids=[];
+    // region backdrops
+    this.regions().forEach((rg,i)=>{
+      kids.push(h('ellipse',{ key:'rg'+i, cx:rg.cx, cy:rg.cy, rx:rg.rx, ry:rg.ry, fill: rg.faded?'rgba(141,156,132,0.05)':'rgba(141,156,132,0.07)', stroke: rg.faded?'rgba(141,156,132,0.18)':'rgba(141,156,132,0.28)', strokeWidth:1.3, strokeDasharray:'4 7' }));
+      kids.push(h('text',{ key:'rgl'+i, x:rg.cx, y:rg.cy-rg.ry+16, fill: rg.faded?'#b3ac9c':'#9aa491', fontSize:11, letterSpacing:'0.12em', fontFamily:'JetBrains Mono, monospace', textAnchor:'middle', style:{ textTransform:'uppercase' } }, rg.label));
+    });
+    // edges
+    nodes.forEach(n=>{ (pr[n.id]||[]).forEach(pid=>{ const a=by[pid], b=n; if(!a) return; const both=inSet(a.id)&&inSet(b.id); let stroke='rgba(141,156,132,0.32)', w=1.5, op=1; if(dim){ if(both){ stroke=color; w=2.6; op=0.95; } else { stroke='rgba(141,156,132,0.4)'; w=1.2; op=0.07; } } else if((a.faded||b.faded)){ op=0.4; } kids.push(h('line',{ key:'e'+pid+n.id, x1:a.x, y1:a.y, x2:b.x, y2:b.y, stroke, strokeWidth:w, opacity:op })); }); });
+    // nodes
+    nodes.forEach(n=>{
+      const on= inSet(n.id); const isSel= n.id===sel; const isHover= n.id===hoverId;
+      let op= n.faded?0.45:1; if(dim && !on) op= n.faded?0.12:0.16;
+      const r= n.r*(isHover?1.12:1);
+      const g=[];
+      if(isSel){ g.push(h('circle',{ key:'ring', r:r+7, fill:'none', stroke:'#30433D', strokeWidth:2.5, opacity:0.9 })); g.push(h('circle',{ key:'glow', r:r+14, fill:'#30433D', opacity:0.08 })); }
+      g.push(h('circle',{ key:'c', r, fill:this.heatColor(n.heat), stroke:'rgba(255,255,255,0.7)', strokeWidth:1.5,
+        onClick:(e)=>{ e.stopPropagation(); this.selectNode(n.id); },
+        onMouseEnter:()=>this.setHover(n.id), onMouseLeave:()=>this.clearHover(),
+        style:{ cursor:'pointer' } }));
+      const showLabel= !n.faded && (!dim || on);
+      if(showLabel){ g.push(h('text',{ key:'t', y:r+15, textAnchor:'middle', fill: isSel?'#1F2522':'#3a4039', fontSize: n.r>=24?13:12, fontWeight: isSel?700:500, fontFamily:'Hanken Grotesk, sans-serif', style:{pointerEvents:'none'} }, n.name)); }
+      kids.push(h('g',{ key:'n'+n.id, transform:`translate(${n.x},${n.y})`, opacity:op, style:{ transition:'opacity 150ms ease' } }, g));
+    });
+    return h('g',{},
+      h('rect',{ key:'bg', x:-2000, y:-2000, width:5400, height:5400, fill:'transparent', 'data-bg':'1', style:{ cursor:'grab' } }),
+      h('g',{ key:'world', transform:`translate(${tx},${ty}) scale(${s})` }, kids)
+    );
+  }
+
+  renderVals() {
+    const by=this.byId(); const sel= by[this.state.selected] ? this.state.selected : 'eigvec';
+    const node=by[sel]; const pr=this.prereq();
+    const prereqs=(pr[sel]||[]).map(pid=>{ const p=by[pid]; return { name:p.name, color:this.heatColor(p.heat), heat:p.heat, on:()=>this.selectNode(pid) }; });
+    const filter=this.state.filter; const depsOn= filter==='deps'||filter==='path';
+    const chip=(active)=>({ bg: active?'rgba(48,67,61,0.92)':'rgba(255,255,255,0.6)', border: active?'rgba(48,67,61,0.92)':'rgba(255,255,255,0.72)', fg: active?'#F5F1E8':'#42513c' });
+    const w=chip(filter==='weak'), d=chip(depsOn);
+    return {
+      rootRef:this.rootRef, svgRef:this.svgRef,
+      graph:this.buildGraph(sel),
+      search:this.state.search, onSearch:this.onSearch,
+      toggleWeak:this.toggleWeak, toggleDeps:this.toggleDeps,
+      zoomIn:this.zoomIn, zoomOut:this.zoomOut, resetView:this.resetView,
+      weakBg:w.bg, weakBorder:w.border, weakFg:w.fg,
+      depsBg:d.bg, depsBorder:d.border, depsFg:d.fg,
+      selName:node.name, selSubject:node.subject, selHeatColor:this.heatColor(node.heat), selHeatLabel:this.heatLabel(node.heat),
+      selMastery: node.m!=null?node.m:node.heat, selRetention: node.ret!=null?node.ret:Math.max(0,node.heat-5),
+      selPrereqs:prereqs, noPrereqs: prereqs.length===0,
+      depsActionLabel: depsOn?'Clear dependency path':'Trace dependency path'
+    };
+  }
+}
+</script>
+</body>
+</html>

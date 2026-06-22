@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+    .katex { font-size: 1em; }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="width: max-content; min-width: 100%; min-height: 100vh; box-sizing: border-box; padding: 48px; background: #cfccc2;">
+
+  <!-- deliverable header -->
+  <div style="width: 1360px; margin-bottom: 30px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6f6b60; margin-bottom: 10px;">Cerebra · Hi-fi · Earthy Glass</div>
+    <h1 style="font-family: 'Newsreader', serif; font-size: 30px; font-weight: 500; color: #1F2522; margin: 0 0 8px; letter-spacing: -0.01em;">Concept Page <span style="color:#8D9C84;">·</span> Eigenvectors</h1>
+    <p style="font-size: 14px; line-height: 1.6; color: #54514a; margin: 0; max-width: 760px;">Variation A — visualization-dominant. The transformation panel is live: drag <strong>v</strong> until <strong>Av</strong> snaps parallel and you've found an eigenvector. Below, the recall flow hands grading to the AI.</p>
+  </div>
+
+  <!-- ============ SCREEN 1 · CONCEPT PAGE ============ -->
+  <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">01 · Concept Page</div>
+  <div style="width: 1360px; background: #faf9f6; border-radius: 6px; box-shadow: 0 6px 28px rgba(31,37,34,.16); overflow: hidden; margin-bottom: 56px;">
+    <div style="height: 30px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 12px; gap: 6px;">
+      <span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span>
+      <span style="margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a39f93;">cerebra · linear-algebra / eigenvectors</span>
+    </div>
+    <div style="display: flex; min-height: 1020px; background: #F5F1E8;">
+
+      <!-- sidebar -->
+      <div style="width: 64px; flex: none; background: #30433D; display: flex; flex-direction: column; align-items: center; padding: 18px 0; gap: 6px;">
+        <a href="Cerebra Prototype.dc.html" title="Prototype home" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;text-decoration:none;">
+          <span style="width:14px;height:14px;border-radius:50%;border:2px solid #F5F1E8;"></span>
+        </a>
+        <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="2.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="11.5" y="2.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="2.5" y="11.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/><rect x="11.5" y="11.5" width="6" height="6" rx="1.5" fill="#F5F1E8" opacity="0.5"/></svg></div>
+        <div style="width:40px;height:40px;border-radius:9px;background:#D9C8A9;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3.5" width="14" height="4.2" rx="1.4" fill="#30433D"/><rect x="3" y="9.5" width="14" height="4.2" rx="1.4" fill="#30433D" opacity="0.6"/><rect x="3" y="15.5" width="9" height="3" rx="1.2" fill="#30433D" opacity="0.4"/></svg></div>
+        <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="6" y1="6" x2="13" y2="13" stroke="#F5F1E8" stroke-width="1.4" opacity="0.5"/><line x1="13" y1="6" x2="7" y2="13" stroke="#F5F1E8" stroke-width="1.4" opacity="0.5"/><circle cx="5" cy="5" r="2.6" fill="#F5F1E8" opacity="0.5"/><circle cx="15" cy="5" r="2.6" fill="#F5F1E8" opacity="0.5"/><circle cx="14" cy="15" r="2.6" fill="#F5F1E8" opacity="0.5"/></svg></div>
+        <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16 10a6 6 0 1 1-2-4.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round"/><path d="M16 4.5 L16 7 L13.5 7" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <div style="margin-top: auto; width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="6.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.2" fill="#F5F1E8" opacity="0.5"/></svg></div>
+      </div>
+
+      <!-- content -->
+      <div style="flex: 1; padding: 30px 40px 44px; overflow: hidden;">
+
+        <!-- ConceptHeader -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 22px;">
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: #8D9C84; margin-bottom: 8px;">Linear Algebra &nbsp;/&nbsp; Vectors</div>
+            <h2 style="font-family: 'Newsreader', serif; font-size: 44px; font-weight: 500; color: #1F2522; margin: 0 0 10px; letter-spacing: -0.015em; line-height: 1;">Eigenvectors</h2>
+            <div style="display: flex; align-items: center; gap: 12px; font-size: 13px; color: #6f6b60;">
+              <span style="display:inline-flex;align-items:center;gap:7px;"><span style="width:11px;height:11px;border-radius:50%;background:#D9C8A9;box-shadow:0 0 0 3px rgba(217,200,169,.3);"></span><span style="font-weight:600;color:#1F2522;">Warm</span></span>
+              <span style="color:#c3bdae;">·</span>
+              <span>Mastery <strong style="color:#30433D;">68</strong></span>
+              <span style="color:#c3bdae;">·</span>
+              <span>Next review in <strong style="color:#1F2522;">2 days</strong></span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex: none;">
+            <a href="#review" style="text-decoration:none;background:#30433D;color:#F5F1E8;font-size:13px;font-weight:600;padding:11px 20px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;">Practice recall <span style="opacity:.7;">→</span></a>
+            <button style="background:rgba(141,156,132,.14);color:#42513c;font-size:13px;font-weight:600;padding:11px 18px;border-radius:8px;border:1px solid rgba(141,156,132,.35);cursor:pointer;">Open in graph</button>
+          </div>
+        </div>
+
+        <!-- ConceptMetrics -->
+        <div style="display: flex; gap: 12px; margin-bottom: 22px;">
+          <div style="flex:1;background:#fff;border:1px solid #E3D6BC;border-radius:9px;padding:14px 16px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:9px;">Mastery</div>
+            <div style="display:flex;align-items:baseline;gap:4px;"><span style="font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:#30433D;line-height:1;">68</span><span style="font-size:12px;color:#aaa28c;">/100</span></div>
+            <div style="height:4px;background:#EFE7D6;border-radius:2px;margin-top:11px;overflow:hidden;"><div style="height:100%;width:68%;background:#30433D;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;background:#fff;border:1px solid #E3D6BC;border-radius:9px;padding:14px 16px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:9px;">Retention</div>
+            <div style="display:flex;align-items:baseline;gap:4px;"><span style="font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:#61715A;line-height:1;">61</span><span style="font-size:12px;color:#aaa28c;">/100</span></div>
+            <div style="height:4px;background:#EFE7D6;border-radius:2px;margin-top:11px;overflow:hidden;"><div style="height:100%;width:61%;background:#61715A;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;background:#fff;border:1px solid #E3D6BC;border-radius:9px;padding:14px 16px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:9px;">Recall accuracy</div>
+            <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:#1F2522;line-height:1;">74</span><span style="font-size:16px;color:#1F2522;">%</span></div>
+            <div style="height:4px;background:#EFE7D6;border-radius:2px;margin-top:11px;overflow:hidden;"><div style="height:100%;width:74%;background:#8D9C84;border-radius:2px;"></div></div>
+          </div>
+          <div style="flex:1;background:#fff;border:1px solid #E3D6BC;border-radius:9px;padding:14px 16px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:9px;">Problem accuracy</div>
+            <div style="display:flex;align-items:baseline;gap:2px;"><span style="font-family:'Newsreader',serif;font-size:32px;font-weight:500;color:#B17457;line-height:1;">58</span><span style="font-size:16px;color:#B17457;">%</span></div>
+            <div style="height:4px;background:#EFE7D6;border-radius:2px;margin-top:11px;overflow:hidden;"><div style="height:100%;width:58%;background:#B17457;border-radius:2px;"></div></div>
+          </div>
+        </div>
+
+        <!-- VisualizationPanel -->
+        <div style="background: linear-gradient(155deg, #F1ECDD 0%, #ECE2CD 52%, #E6D9BE 100%); border: 1px solid #E3D6BC; border-radius: 14px; padding: 18px 20px; margin-bottom: 22px; box-shadow: 0 1px 2px rgba(31,37,34,.05);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#7d7560;">Visualization · Eigen-transformation</div>
+              <span style="font-size:9px;font-family:'JetBrains Mono',monospace;background:rgba(48,67,61,.1);color:#42513c;padding:2px 7px;border-radius:10px;">never hidden</span>
+            </div>
+            <div style="display:flex;gap:14px;align-items:center;font-size:11px;color:#7d7560;">
+              <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:14px;height:3px;border-radius:2px;background:#B17457;display:inline-block;"></span>v</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:14px;height:3px;border-radius:2px;background:#61715A;display:inline-block;"></span>Av</span>
+              <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:14px;height:0;border-top:1.5px dashed #30433D;display:inline-block;"></span>eigen-guides</span>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 322px; gap: 18px; align-items: stretch;">
+            <!-- svg stage -->
+            <div style="background: rgba(255,255,255,.42); border: 1px solid rgba(255,255,255,.6); border-radius: 11px; height: 360px; padding: 6px;">
+              <svg viewBox="0 0 460 360" ref="{{ svgRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMove }}" onPointerUp="{{ onUp }}" onPointerLeave="{{ onUp }}" style="width:100%;height:100%;display:block;cursor:grab;touch-action:none;">{{ vizContent }}</svg>
+            </div>
+            <!-- glass readout -->
+            <div style="background: rgba(255,255,255,.52); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.72); border-radius: 11px; padding: 16px 18px; display: flex; flex-direction: column; box-shadow: 0 6px 20px rgba(31,37,34,.08);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:12px;">Live computation</div>
+              <div ref="{{ liveRef }}" style="color:#1F2522;min-height:54px;display:flex;align-items:center;font-size:14px;overflow-x:auto;"></div>
+              <div style="height:1px;background:rgba(141,156,132,.28);margin:14px 0;"></div>
+              <div style="font-family:'Newsreader',serif;font-style:italic;font-size:14px;color:#42513c;margin-bottom:6px;">An eigenvector satisfies</div>
+              <div data-tex="A\mathbf{v} = \lambda\,\mathbf{v}" data-display="1" style="color:#30433D;margin-bottom:14px;"></div>
+              <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:16px;">
+                <span style="width:9px;height:9px;border-radius:50%;flex:none;margin-top:4px;background:{{ statusColor }};"></span>
+                <div style="font-size:12.5px;line-height:1.45;font-weight:500;color:{{ statusColor }};">{{ status }}</div>
+              </div>
+              <div style="margin-top:auto;display:flex;flex-direction:column;gap:8px;">
+                <sc-for list="{{ snapButtons }}" as="b" hint-placeholder-count="2">
+                  <button onClick="{{ b.on }}" style="text-align:left;background:rgba(48,67,61,.07);border:1px solid rgba(48,67,61,.16);border-radius:7px;padding:9px 12px;font-size:12px;font-weight:600;color:#30433D;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;">{{ b.label }}</button>
+                </sc-for>
+                <button onClick="{{ reset }}" style="background:none;border:none;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;cursor:pointer;padding:2px;text-align:left;">↺ reset vector</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- two-col content -->
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px;">
+
+          <!-- LEFT -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:10px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:11px;">Intuition</div>
+              <p style="margin:0;font-size:15px;line-height:1.72;color:#27302b;">Most vectors get knocked off their line when <em>A</em> acts on them — rotated and stretched at once. An <strong>eigenvector</strong> is the rare direction <em>A</em> leaves pointing the same way: it only gets scaled, by a factor <span data-tex="\lambda" style="color:#30433D;"></span> called the eigenvalue. Drag <strong style="color:#B17457;">v</strong> in the panel until it lands on a guide and watch <strong style="color:#61715A;">Av</strong> snap parallel.</p>
+            </div>
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:10px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:11px;">Definition</div>
+              <p style="margin:0 0 12px;font-size:15px;line-height:1.72;color:#27302b;">For a square matrix <em>A</em>, a non-zero vector <strong>v</strong> is an eigenvector when there exists a scalar <span data-tex="\lambda" style="color:#30433D;"></span> such that</p>
+              <div data-tex="A\mathbf{v} = \lambda\mathbf{v}, \qquad \mathbf{v} \neq \mathbf{0}" data-display="1" style="color:#1F2522;margin:0 0 12px;"></div>
+              <p style="margin:0;font-size:15px;line-height:1.72;color:#27302b;">Equivalently, <span data-tex="(A-\lambda I)\mathbf{v}=\mathbf{0}" style="color:#30433D;"></span> has a non-trivial solution, so <span data-tex="\det(A-\lambda I)=0" style="color:#30433D;"></span>. Geometrically, <strong>v</strong> spans an invariant line of the transformation.</p>
+            </div>
+            <div style="background:#FBF7EC;border:1px solid #E8DCC2;border-radius:10px;padding:20px 22px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#a99b78;margin-bottom:11px;">Notes</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="font-family:'Newsreader',serif;font-style:italic;font-size:16px;line-height:1.5;color:#42513c;">— Symmetric <em>A</em> ⇒ eigenvectors are orthogonal (note the 90° between the guide lines).</div>
+                <div style="font-family:'Newsreader',serif;font-style:italic;font-size:16px;line-height:1.5;color:#42513c;">— An <span data-tex="n\times n" style="color:#42513c;"></span> matrix has at most <em>n</em> independent eigenvectors; repeated eigenvalues can be defective.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:10px;padding:18px 20px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;">Recall · last 7 days</div>
+                <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#B17457;background:rgba(177,116,87,.1);padding:2px 7px;border-radius:10px;">4 due</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:11px;">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:#61715A;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;">State the defining equation of an eigenvector</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;">mostly</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:#B17457;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;">Why is <span data-tex="\lambda=0" style="color:#27302b;"></span> a special case?</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;">forgot</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:#D9C8A9;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;">Eigenvectors of a symmetric matrix are…?</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;">warm</span></div>
+              </div>
+              <a href="#review" style="text-decoration:none;display:block;margin-top:14px;text-align:center;background:#30433D;color:#F5F1E8;font-size:12px;font-weight:600;padding:9px;border-radius:7px;">Begin recall practice →</a>
+            </div>
+
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:10px;padding:18px 20px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:12px;">Problems · 58% accuracy</div>
+              <p style="margin:0 0 8px;font-size:13px;color:#27302b;">Find the eigenvalues of <span data-tex="A=\begin{bmatrix}2&1\\1&2\end{bmatrix}" style="color:#1F2522;"></span> :</p>
+              <div data-tex="\det(A-\lambda I)=\lambda^2-4\lambda+3=0 \;\Rightarrow\; \lambda=1,\,3" data-display="1" style="color:#42513c;font-size:13px;margin:0 0 12px;"></div>
+              <button style="width:100%;background:rgba(141,156,132,.14);border:1px solid rgba(141,156,132,.35);color:#42513c;font-size:12px;font-weight:600;padding:9px;border-radius:7px;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;">Attempt a problem</button>
+            </div>
+
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:10px;padding:18px 20px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:13px;">Dependencies</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:center;gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:#30433D;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;">Matrix multiplication</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;">mastered</span></div>
+                <div style="display:flex;align-items:center;gap:10px;"><span style="width:9px;height:9px;border-radius:50%;background:#D9C8A9;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;">Determinants</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8D9C84;">warm</span></div>
+                <div style="display:flex;align-items:center;gap:10px;background:rgba(177,116,87,.08);border:1px solid rgba(177,116,87,.22);border-radius:6px;padding:7px 9px;margin:0 -3px;"><span style="width:9px;height:9px;border-radius:50%;background:#B17457;flex:none;"></span><span style="flex:1;font-size:13px;color:#27302b;font-weight:600;">Characteristic polynomial</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#fff;background:#B17457;padding:2px 6px;border-radius:8px;">root weakness</span></div>
+              </div>
+              <button style="margin-top:14px;width:100%;background:none;border:none;font-family:'JetBrains Mono',monospace;font-size:11px;color:#61715A;cursor:pointer;text-align:left;padding:0;">Show learning path →</button>
+            </div>
+
+            <div style="background:#30433D;border-radius:10px;padding:18px 20px;box-shadow:0 4px 16px rgba(48,67,61,.2);">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:11px;">
+                <span style="width:7px;height:7px;border-radius:50%;background:#D9C8A9;"></span>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(245,241,232,.65);">AI Insight</div>
+              </div>
+              <p style="margin:0 0 14px;font-size:13.5px;line-height:1.62;color:#EDE7D8;">Recall is strong, but problem accuracy trails. The gap traces back to <strong style="color:#fff;">Characteristic polynomial</strong> (Cold) — a 20-minute review there should unlock faster eigenvalue computation here.</p>
+              <button style="background:rgba(245,241,232,.14);border:1px solid rgba(245,241,232,.25);color:#F5F1E8;font-size:12px;font-weight:600;padding:8px 14px;border-radius:7px;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;">Open suggestion</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 2 · REVIEW (linked) ============ -->
+  <div id="review" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">02 · Recall practice — AI grades it <span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:4px;">Review · variation A</span></div>
+  <div style="width: 1360px; background: #faf9f6; border-radius: 6px; box-shadow: 0 6px 28px rgba(31,37,34,.16); overflow: hidden;">
+    <div style="height: 30px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 12px; gap: 6px;">
+      <span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span>
+      <span style="margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a39f93;">cerebra · review session</span>
+    </div>
+    <div style="min-height: 620px; background: #F5F1E8; display: flex; flex-direction: column;">
+      <!-- progress -->
+      <div style="padding: 16px 32px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid #E4DDCC;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8D9C84;">Recall · 1 / 4</div>
+        <div style="flex:1;height:5px;background:#E4DDCC;border-radius:3px;overflow:hidden;"><div style="height:100%;width:25%;background:#30433D;border-radius:3px;"></div></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8D9C84;">Eigenvectors</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#bcb3a0;cursor:pointer;">✕ Exit</div>
+      </div>
+      <!-- body -->
+      <div style="flex:1;padding:30px 32px;display:flex;flex-direction:column;gap:16px;max-width:660px;width:100%;margin:0 auto;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#8D9C84;margin-bottom:10px;">Prompt</div>
+          <div style="font-family:'Newsreader',serif;font-size:24px;font-weight:500;color:#1F2522;line-height:1.4;">What makes a non-zero vector <span style="font-style:italic;">v</span> an eigenvector of a matrix <span style="font-style:italic;">A</span>?</div>
+        </div>
+        <div style="background:#fff;border:1px solid #E3D6BC;border-radius:9px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#8D9C84;margin-bottom:9px;">Your recall</div>
+          <div style="font-size:14px;color:#27302b;line-height:1.6;">A vector whose direction is unchanged when A is applied — A only scales it, never rotates it off its line.</div>
+        </div>
+        <div style="background:#F1ECDD;border:1px solid #E8DCC2;border-radius:9px;padding:16px;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.06em;color:#a99b78;margin-bottom:10px;">Model answer</div>
+          <p style="margin:0 0 8px;font-size:14px;color:#27302b;line-height:1.6;"><strong>v</strong> is an eigenvector of <em>A</em> when it is non-zero and <em>A</em> maps it to a scalar multiple of itself:</p>
+          <div data-tex="A\mathbf{v} = \lambda\mathbf{v}" data-display="1" style="color:#1F2522;"></div>
+          <p style="margin:8px 0 0;font-size:14px;color:#27302b;line-height:1.6;">The scalar <span data-tex="\lambda" style="color:#30433D;"></span> is the eigenvalue — the factor by which <strong>v</strong> is stretched.</p>
+        </div>
+      </div>
+      <!-- AI verdict bar -->
+      <div style="border-top:1px solid #E4DDCC;background:#EFEAE0;padding:16px 32px;display:flex;align-items:center;gap:18px;">
+        <div style="display:flex;align-items:center;gap:10px;flex:none;">
+          <span style="width:12px;height:12px;border-radius:50%;background:#61715A;box-shadow:0 0 0 3px rgba(97,113,90,.2);"></span>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:#1F2522;">Mostly correct</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:.05em;color:#8D9C84;">AI-assessed · score 2</div>
+          </div>
+        </div>
+        <div style="flex:1;font-size:12px;color:#6f6b60;line-height:1.5;border-left:1px solid #DDD6C6;padding-left:18px;">Captured the "direction unchanged, only scaled" intuition — to reach <em>Perfect</em>, name the relationship <span data-tex="A\mathbf{v}=\lambda\mathbf{v}" style="color:#42513c;"></span> explicitly.</div>
+        <div style="text-align:right;flex:none;">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#8D9C84;margin-bottom:7px;">next review · in 4 days</div>
+          <button style="background:#30433D;color:#F5F1E8;font-size:13px;font-weight:600;padding:10px 24px;border-radius:8px;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;">Continue →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1456, &quot;height&quot;: 1120}, &quot;matrix&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;symmetric&quot;, &quot;stretch&quot;], &quot;default&quot;: &quot;symmetric&quot;, &quot;tsType&quot;: &quot;string&quot;}, &quot;showGuides&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { vx: 1.5, vy: 0.5 };
+  svgRef = React.createRef();
+  liveRef = React.createRef();
+  rootRef = React.createRef();
+  dragging = false;
+
+  presets() {
+    return {
+      symmetric: { label: '\\begin{bmatrix}2&1\\\\1&2\\end{bmatrix}', m: [[2,1],[1,2]], eigs: [ {val:3, d:[0.70711,0.70711]}, {val:1, d:[0.70711,-0.70711]} ] },
+      stretch:   { label: '\\begin{bmatrix}2&0\\\\0&0.5\\end{bmatrix}', m: [[2,0],[0,0.5]], eigs: [ {val:2, d:[1,0]}, {val:0.5, d:[0,1]} ] }
+    };
+  }
+  cur() { const p = this.props.matrix || 'symmetric'; return this.presets()[p] || this.presets().symmetric; }
+
+  ptr = (e) => {
+    const svg = this.svgRef.current; if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const ratio = 460 / rect.width;
+    let mx = ((e.clientX - rect.left) * ratio - 230) / 40;
+    let my = -(((e.clientY - rect.top) * ratio) - 180) / 40;
+    let r = Math.hypot(mx, my) || 1e-6;
+    const max = 1.95, min = 0.2;
+    if (r > max) { mx *= max / r; my *= max / r; }
+    if (r < min) { mx *= min / r; my *= min / r; }
+    this.setState({ vx: mx, vy: my });
+  };
+  down = (e) => { this.dragging = true; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (_) {} this.ptr(e); };
+  move = (e) => { if (this.dragging) this.ptr(e); };
+  up = () => { this.dragging = false; };
+  setEig = (i) => { const e = this.cur().eigs[i]; this.setState({ vx: e.d[0] * 1.45, vy: e.d[1] * 1.45 }); };
+  reset = () => { this.setState({ vx: 1.5, vy: 0.5 }); };
+
+  componentDidMount() {
+    this._poll = () => {
+      if (window.katex) { this.renderMath(); this.renderLive(); }
+      else { this._t = setTimeout(this._poll, 120); }
+    };
+    this._poll();
+  }
+  componentDidUpdate() { if (window.katex) { this.renderMath(); this.renderLive(); } }
+  componentWillUnmount() { if (this._t) clearTimeout(this._t); }
+
+  renderMath() {
+    const root = this.rootRef.current; if (!root || !window.katex) return;
+    root.querySelectorAll('[data-tex]').forEach((el) => {
+      if (el.dataset.rendered) return;
+      try { window.katex.render(el.dataset.tex, el, { throwOnError: false, displayMode: el.dataset.display === '1' }); el.dataset.rendered = '1'; } catch (_) {}
+    });
+  }
+  renderLive() {
+    const el = this.liveRef.current; if (!el || !window.katex) return;
+    const { vx, vy } = this.state; const cur = this.cur(); const m = cur.m;
+    const avx = m[0][0]*vx + m[0][1]*vy, avy = m[1][0]*vx + m[1][1]*vy;
+    const f = (n) => (Math.round(n*10)/10).toFixed(1);
+    const tex = `A\\mathbf{v}=${cur.label}\\!\\begin{bmatrix}${f(vx)}\\\\${f(vy)}\\end{bmatrix}=\\begin{bmatrix}${f(avx)}\\\\${f(avy)}\\end{bmatrix}`;
+    try { window.katex.render(tex, el, { throwOnError: false, displayMode: true }); } catch (_) {}
+  }
+
+  buildViz(o) {
+    const h = React.createElement; const S = 40, cx = 230, cy = 180;
+    const { vx, vy } = this.state; const cur = this.cur();
+    const px = (x) => cx + x*S, py = (y) => cy - y*S;
+    const vColor = o.vColor;
+    const mk = (id, c) => h('marker', { key: id, id, markerWidth: 11, markerHeight: 11, refX: 7, refY: 3.2, orient: 'auto', markerUnits: 'userSpaceOnUse' }, h('path', { d: 'M0,0 L8,3.2 L0,6.4 Z', fill: c }));
+    const kids = [ h('defs', { key: 'defs' }, mk('ah-clay','#B17457'), mk('ah-forest','#30433D'), mk('ah-moss','#61715A')) ];
+    const grid = [];
+    for (let k = -5; k <= 5; k++) { const X = px(k); if (X >= 8 && X <= 452) grid.push(h('line', { key:'gv'+k, x1:X, y1:8, x2:X, y2:352, stroke:'rgba(141,156,132,0.16)', strokeWidth:1 })); }
+    for (let k = -4; k <= 4; k++) { const Y = py(k); if (Y >= 8 && Y <= 352) grid.push(h('line', { key:'gh'+k, x1:8, y1:Y, x2:452, y2:Y, stroke:'rgba(141,156,132,0.16)', strokeWidth:1 })); }
+    kids.push(h('g', { key: 'grid' }, grid));
+    kids.push(h('line', { key:'ax', x1:8, y1:cy, x2:452, y2:cy, stroke:'rgba(141,156,132,0.5)', strokeWidth:1.3 }));
+    kids.push(h('line', { key:'ay', x1:cx, y1:8, x2:cx, y2:352, stroke:'rgba(141,156,132,0.5)', strokeWidth:1.3 }));
+    if (this.props.showGuides !== false) {
+      cur.eigs.forEach((e, i) => {
+        const Lu = 5.3;
+        kids.push(h('line', { key:'el'+i, x1:px(e.d[0]*Lu), y1:py(e.d[1]*Lu), x2:px(-e.d[0]*Lu), y2:py(-e.d[1]*Lu), stroke:'#30433D', strokeWidth:1.4, strokeDasharray:'5 6', opacity:0.36 }));
+        kids.push(h('text', { key:'elt'+i, x:px(e.d[0]*4.6), y:py(e.d[1]*4.6), fill:'#5b6b54', fontSize:12, fontFamily:'JetBrains Mono, monospace', textAnchor:'middle', dominantBaseline:'middle' }, 'λ=' + e.val));
+      });
+    }
+    const avx = o.avx, avy = o.avy;
+    kids.push(h('line', { key:'av', x1:px(0), y1:py(0), x2:px(avx), y2:py(avy), stroke:'#61715A', strokeWidth:3, opacity:0.9, markerEnd:'url(#ah-moss)' }));
+    kids.push(h('text', { key:'avl', x:px(avx)+(avx>=0?12:-12), y:py(avy)-8, fill:'#4f5d49', fontSize:14, fontWeight:600, fontFamily:'Hanken Grotesk, sans-serif', textAnchor:avx>=0?'start':'end' }, 'Av'));
+    if (o.aligned) kids.push(h('circle', { key:'glow', cx:px(vx), cy:py(vy), r:18, fill:'#30433D', opacity:0.13 }));
+    kids.push(h('line', { key:'v', x1:px(0), y1:py(0), x2:px(vx), y2:py(vy), stroke:vColor, strokeWidth:3.6, markerEnd: o.aligned ? 'url(#ah-forest)' : 'url(#ah-clay)' }));
+    kids.push(h('text', { key:'vl', x:px(vx)+(vx>=0?12:-12), y:py(vy)+(vy>=0?-10:18), fill:vColor, fontSize:14, fontWeight:700, fontFamily:'Hanken Grotesk, sans-serif', textAnchor:vx>=0?'start':'end' }, 'v'));
+    kids.push(h('circle', { key:'tipr', cx:px(vx), cy:py(vy), r:8, fill:'#fff', stroke:vColor, strokeWidth:2.5 }));
+    kids.push(h('circle', { key:'tip', cx:px(vx), cy:py(vy), r:3.4, fill:vColor }));
+    kids.push(h('circle', { key:'o', cx:cx, cy:cy, r:3, fill:'#30433D' }));
+    return h('g', {}, kids);
+  }
+
+  renderVals() {
+    const { vx, vy } = this.state; const cur = this.cur(); const m = cur.m;
+    const avx = m[0][0]*vx + m[0][1]*vy, avy = m[1][0]*vx + m[1][1]*vy;
+    const r = Math.hypot(vx, vy) || 1e-6;
+    let aligned = null;
+    cur.eigs.forEach((e) => { const c = Math.abs(vx*e.d[1] - vy*e.d[0]) / r; if (c < 0.06) aligned = e; });
+    const vColor = aligned ? '#30433D' : '#B17457';
+    const status = aligned
+      ? ('v lies on an eigen-direction — Av = ' + aligned.val + ' · v, parallel and ' + (aligned.val >= 1 ? 'stretched' : 'shrunk') + '.')
+      : 'Drag the tip onto a dashed guide so Av turns parallel to v.';
+    const statusColor = aligned ? '#30433D' : '#8a7c66';
+    const snapButtons = cur.eigs.map((e, i) => ({ label: 'Align to  λ = ' + e.val, on: () => this.setEig(i) }));
+    const vizContent = this.buildViz({ avx, avy, aligned, vColor });
+    return {
+      svgRef: this.svgRef, liveRef: this.liveRef, rootRef: this.rootRef,
+      onDown: this.down, onMove: this.move, onUp: this.up, reset: this.reset, setEig: this.setEig,
+      vizContent, status, statusColor, snapButtons
+    };
+  }
+}
+</script>
+</body>
+</html>

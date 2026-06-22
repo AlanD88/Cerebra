@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: #F5F1E8; color: #1F2522; font-family: 'Inter', sans-serif; }
+    .doc { box-sizing: border-box; max-width: 8.5in; margin: 0 auto; background: inherit; padding: 48px clamp(24px, 5vw, 0.75in) 96px; }
+    .doc-frame { width: 100%; border-collapse: collapse; }
+    .doc-frame td { padding: 0; }
+    .running-hdr, .running-ftr, .hdr-space, .ftr-space { display: none; }
+    h1, h2, h3 { text-wrap: balance; }
+    p, li { text-wrap: pretty; }
+    @page { size: letter; margin: 0; }
+    @media print {
+      html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      html, body { margin: 0; padding: 0; }
+      .doc { max-width: none !important; margin: 0 !important; padding: 0 0.75in !important; box-shadow: none !important; border: none !important; }
+      #dc-root, .sc-host { height: auto !important; }
+      .hdr-space, .ftr-space { display: table-cell; height: 0.75in !important; }
+      h1, h2, h3, h4 { break-after: avoid; }
+      figure, pre, blockquote, table { break-inside: avoid; }
+      .card, .callout, .heat-grid, .principle-block { break-inside: avoid; }
+      p, li { orphans: 3; widows: 3; }
+      .screen-only { display: none !important; }
+    }
+  </style>
+</helmet>
+
+<main class="doc">
+  <table class="doc-frame" role="presentation">
+    <thead><tr><td class="hdr-space"></td></tr></thead>
+    <tbody><tr><td>
+
+      <!-- COVER BLOCK -->
+      <div style="border-bottom: 2px solid #30433D; padding-bottom: 32px; margin-bottom: 48px;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <div style="width: 10px; height: 10px; border-radius: 50%; background: #30433D;"></div>
+          <span style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #61715A;">Document Analysis</span>
+        </div>
+        <h1 style="font-size: 38px; font-weight: 700; color: #1F2522; margin: 0 0 12px; line-height: 1.15; letter-spacing: -0.02em;">Cerebra: System Analysis</h1>
+        <p style="font-size: 16px; color: #61715A; margin: 0 0 24px; max-width: 560px; line-height: 1.6;">A synthesis of the Design System, Technical Architecture, and Product Vision documents. Observations, alignment notes, and recommended next steps.</p>
+        <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+          <div><span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 500;">Sources</span><br><span style="font-size: 13px; color: #1F2522; font-weight: 500;">5 documents reviewed</span></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 500;">Version</span><br><span style="font-size: 13px; color: #1F2522; font-weight: 500;">DS v1.0 · Arch v2.0</span></div>
+          <div><span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 500;">Date</span><br><span style="font-size: 13px; color: #1F2522; font-weight: 500;">June 2026</span></div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: PRODUCT VISION -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">01 — Product Vision</h2>
+
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px; color: #1F2522;">Cerebra is defined as a <strong>personal learning operating system</strong> — a tool whose purpose is long-term concept mastery and retention, not content consumption or course completion. This positions it firmly against LMS tools, note-taking apps, and productivity dashboards.</p>
+
+      <div style="background: rgba(48,67,61,0.06); border-left: 3px solid #30433D; border-radius: 0 4px 4px 0; padding: 16px 20px; margin: 0 0 24px;">
+        <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #1F2522; font-style: italic;">"The system should become a living representation of the learner's knowledge state rather than a repository of notes."</p>
+        <p style="margin: 8px 0 0; font-size: 11px; color: #8D9C84; text-transform: uppercase; letter-spacing: 0.08em;">— Cerebra Technical Architecture, p.18</p>
+      </div>
+
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">The north-star user question the system must answer at any moment:</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 32px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">What do I know?</div>
+          <div style="font-size: 12px; color: #8D9C84; line-height: 1.5;">Mastery & heat state per concept</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">What am I forgetting?</div>
+          <div style="font-size: 12px; color: #8D9C84; line-height: 1.5;">Retention score & heat decay</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">Why am I struggling?</div>
+          <div style="font-size: 12px; color: #8D9C84; line-height: 1.5;">Dependency engine & root weakness detection</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">What should I study next?</div>
+          <div style="font-size: 12px; color: #8D9C84; line-height: 1.5;">SM-2 scheduling & learning paths</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px; grid-column: 1 / -1;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">How are concepts connected?</div>
+          <div style="font-size: 12px; color: #8D9C84; line-height: 1.5;">Knowledge graph with prerequisite/dependency edges</div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: DESIGN SYSTEM -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">02 — Design System</h2>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Philosophy</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">The design vocabulary is anchored in a single metaphor: <strong>Earthy Glass</strong> — the warmth of analogue study tools (leather notebooks, botanical journals, wooden desks) married to the translucency of modern spatial interfaces. The interface should feel like a personal study sanctuary, not a productivity cockpit.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0 0 28px;">
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #61715A; margin-bottom: 10px;">Should feel</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #30433D; flex-shrink: 0;"></span>Calm · Focused · Reflective</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #30433D; flex-shrink: 0;"></span>Curious · Intentional · Scholarly</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #30433D; flex-shrink: 0;"></span>A personal study sanctuary</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #30433D; flex-shrink: 0;"></span>A handcrafted field journal</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #B17457; margin-bottom: 10px;">Must never feel</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B17457; flex-shrink: 0;"></span>Gamified or competitive</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B17457; flex-shrink: 0;"></span>Social-media inspired</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B17457; flex-shrink: 0;"></span>Corporate KPI dashboard</div>
+            <div style="font-size: 13px; color: #1F2522; display: flex; align-items: center; gap: 8px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B17457; flex-shrink: 0;"></span>Crypto / neon aesthetic</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Color System</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Seven core colors, all nature-derived. Each carries semantic meaning that maps directly onto the knowledge heat-state model:</p>
+
+      <div style="display: flex; flex-direction: column; gap: 6px; margin: 0 0 20px;">
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #30433D;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Forest</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#30433D</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Primary UI · Headers · Active nav · Mastered state</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #61715A;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Moss</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#61715A</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Success states · Hot concepts · Positive indicators</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #8D9C84;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Sage</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#8D9C84</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Secondary UI · Borders · Subtle emphasis</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #B17457;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Clay</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#B17457</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Warnings · Weak concepts · Learning gaps · Cold state</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #D9C8A9;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Sand</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#D9C8A9</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Surfaces · Highlights · Accent backgrounds · Warm state</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #F5F1E8; border-right: 1px solid #D9C8A9;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Cream</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#F5F1E8</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Primary background — digital paper</div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden;">
+          <div style="width: 48px; flex-shrink: 0; background: #1F2522;"></div>
+          <div style="padding: 10px 16px; flex: 1; display: flex; justify-content: space-between; align-items: center; background: #fff;">
+            <div><span style="font-weight: 600; font-size: 13px;">Charcoal</span> <span style="font-size: 12px; color: #8D9C84; font-family: 'JetBrains Mono', monospace;">#1F2522</span></div>
+            <div style="font-size: 12px; color: #8D9C84;">Primary text — never pure black</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Knowledge Heat States</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">The heat system is the most distinctive design pattern — a direct visual encoding of the spaced-repetition retention model. Colors are not decorative; they are data.</p>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 28px;">
+        <div style="background: #30433D; color: #F5F1E8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">Mastered · 90+</div>
+        <div style="background: #61715A; color: #F5F1E8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">Hot · 75–89</div>
+        <div style="background: #D9C8A9; color: #1F2522; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">Warm · 50–74</div>
+        <div style="background: #B17457; color: #F5F1E8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">Cold · 25–49</div>
+        <div style="background: #5a5e5c; color: #F5F1E8; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 500;">Frozen · 0–24</div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Typography</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 0 0 28px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 22px; font-weight: 600; color: #1F2522; font-family: 'Inter', sans-serif; margin-bottom: 8px;">Inter</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 600; margin-bottom: 6px;">Primary</div>
+          <div style="font-size: 12px; color: #61715A; line-height: 1.5;">Headings, navigation, body text</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 18px; font-weight: 400; color: #1F2522; font-family: 'JetBrains Mono', monospace; margin-bottom: 8px;">JetBrains</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 600; margin-bottom: 6px;">Code</div>
+          <div style="font-size: 12px; color: #61715A; line-height: 1.5;">Code blocks, API responses, technical examples</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 20px; font-weight: 400; color: #1F2522; margin-bottom: 8px;">∫ f(x)dx</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; font-weight: 600; margin-bottom: 6px;">Math</div>
+          <div style="font-size: 12px; color: #61715A; line-height: 1.5;">KaTeX — all equations. Screenshots of math are prohibited.</div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Surface System</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Four elevation levels create depth without drama. The glass specification (20px blur, 12% white, subtle border) is precise and must be applied consistently:</p>
+      <div style="border: 1px solid #D9C8A9; border-radius: 4px; overflow: hidden; margin: 0 0 16px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <thead>
+            <tr style="background: #30433D; color: #F5F1E8;">
+              <th style="padding: 10px 14px; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Level</th>
+              <th style="padding: 10px 14px; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Name</th>
+              <th style="padding: 10px 14px; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Used For</th>
+              <th style="padding: 10px 14px; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;">Properties</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-top: 1px solid #D9C8A9; background: #F5F1E8;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #8D9C84;">0</td>
+              <td style="padding: 10px 14px; font-weight: 500;">Background</td>
+              <td style="padding: 10px 14px; color: #61715A;">App canvas</td>
+              <td style="padding: 10px 14px; color: #8D9C84; font-family: 'JetBrains Mono', monospace; font-size: 11px;">Cream paper. No borders.</td>
+            </tr>
+            <tr style="border-top: 1px solid #D9C8A9; background: #fff;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #8D9C84;">1</td>
+              <td style="padding: 10px 14px; font-weight: 500;">Paper Card</td>
+              <td style="padding: 10px 14px; color: #61715A;">Notes, content sections</td>
+              <td style="padding: 10px 14px; color: #8D9C84; font-family: 'JetBrains Mono', monospace; font-size: 11px;">Slight elevation. Soft border.</td>
+            </tr>
+            <tr style="border-top: 1px solid #D9C8A9; background: #fff;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #8D9C84;">2</td>
+              <td style="padding: 10px 14px; font-weight: 500;">Glass Panel</td>
+              <td style="padding: 10px 14px; color: #61715A;">Widgets, concept summaries</td>
+              <td style="padding: 10px 14px; color: #8D9C84; font-family: 'JetBrains Mono', monospace; font-size: 11px;">blur:20px · rgba(255,255,255,0.12)</td>
+            </tr>
+            <tr style="border-top: 1px solid #D9C8A9; background: #fff;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #8D9C84;">3</td>
+              <td style="padding: 10px 14px; font-weight: 500;">Floating Surface</td>
+              <td style="padding: 10px 14px; color: #61715A;">Side panels, graph inspectors</td>
+              <td style="padding: 10px 14px; color: #8D9C84; font-family: 'JetBrains Mono', monospace; font-size: 11px;">Elevated. Soft shadow.</td>
+            </tr>
+            <tr style="border-top: 1px solid #D9C8A9; background: #fff;">
+              <td style="padding: 10px 14px; font-weight: 600; color: #8D9C84;">4</td>
+              <td style="padding: 10px 14px; font-weight: 500;">Modal</td>
+              <td style="padding: 10px 14px; color: #61715A;">Review dialogs. Use sparingly.</td>
+              <td style="padding: 10px 14px; color: #8D9C84; font-family: 'JetBrains Mono', monospace; font-size: 11px;">Highest elevation.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Motion System</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">Motion is functional, not decorative. Three durations cover all cases. Graph animations should feel organic — nodes gently reposition with no sudden jumps. Bounce and elastic effects are explicitly forbidden.</p>
+      <div style="display: flex; gap: 10px; margin: 0 0 32px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 18px; text-align: center; flex: 1;">
+          <div style="font-size: 20px; font-weight: 700; color: #30433D;">150ms</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-top: 4px;">Fast</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 18px; text-align: center; flex: 1;">
+          <div style="font-size: 20px; font-weight: 700; color: #30433D;">250ms</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-top: 4px;">Normal</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 18px; text-align: center; flex: 1;">
+          <div style="font-size: 20px; font-weight: 700; color: #30433D;">400ms</div>
+          <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-top: 4px;">Slow</div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: TECHNICAL ARCHITECTURE -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">03 — Technical Architecture</h2>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Technology Stack</h3>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 0 24px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #30433D; margin-bottom: 10px;">Frontend</div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">React + TypeScript</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">Vite · TailwindCSS</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">React Flow</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">TanStack Query</div>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #30433D; margin-bottom: 10px;">Backend</div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">FastAPI (Python)</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">SQLAlchemy 2.x + Alembic</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">PostgreSQL + Redis</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">Celery / Dramatiq</div>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #30433D; margin-bottom: 10px;">AI Layer</div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">Provider abstraction</div>
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">OpenAI · Ollama</div>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 14px 16px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #30433D; margin-bottom: 10px;">Infra</div>
+          <div style="display: flex; flex-direction: column; gap: 5px;">
+            <div style="font-size: 13px; color: #1F2522; font-family: 'JetBrains Mono', monospace;">Docker Compose</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Domain Model</h3>
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">The architecture enforces a strict hierarchy: <strong>Subjects → Concepts → Events → Metrics</strong>. The most important design decision is the separation of <em>events as truth</em> from <em>metrics as projections</em>. Mastery scores are never stored on the concept — they are always recomputed from evidence.</p>
+
+      <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 20px 24px; margin: 0 0 20px;">
+        <div style="display: flex; align-items: stretch; gap: 0;">
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 0; flex-shrink: 0; margin-right: 20px;">
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #30433D; margin-top: 6px;"></div>
+            <div style="width: 1px; flex: 1; background: #D9C8A9; margin: 4px 0;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #61715A;"></div>
+            <div style="width: 1px; flex: 1; background: #D9C8A9; margin: 4px 0;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #B17457;"></div>
+            <div style="width: 1px; flex: 1; background: #D9C8A9; margin: 4px 0;"></div>
+            <div style="width: 10px; height: 10px; border-radius: 50%; background: #8D9C84;"></div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px; flex: 1;">
+            <div><div style="font-size: 13px; font-weight: 600; color: #1F2522; margin-bottom: 2px;">Subjects</div><div style="font-size: 12px; color: #8D9C84;">Independent domains: Linear Algebra, DSP, Probability…</div></div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #1F2522; margin-bottom: 2px;">Concepts</div><div style="font-size: 12px; color: #8D9C84;">First-class entities with title, intuition, formal definition, notes. No mastery stored here.</div></div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #1F2522; margin-bottom: 2px;">Events (source of truth)</div><div style="font-size: 12px; color: #8D9C84;">recall_events · problem_attempts · explanation_events — immutable log</div></div>
+            <div><div style="font-size: 13px; font-weight: 600; color: #1F2522; margin-bottom: 2px;">Metrics (projections)</div><div style="font-size: 12px; color: #8D9C84;">concept_metrics computed from events. Rebuildable. Not authoritative.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Mastery Formula</h3>
+      <div style="background: rgba(48,67,61,0.05); border: 1px solid rgba(48,67,61,0.15); border-radius: 4px; padding: 16px 20px; margin: 0 0 16px;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #1F2522; line-height: 1.8;">
+          mastery_score = (recall_score × 0.50)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (problem_score × 0.30)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ (explanation_score × 0.20)
+        </div>
+        <div style="margin-top: 10px; display: flex; gap: 20px; flex-wrap: wrap;">
+          <div style="font-size: 12px; color: #8D9C84;"><span style="color: #30433D; font-weight: 600;">50%</span> Recall performance</div>
+          <div style="font-size: 12px; color: #8D9C84;"><span style="color: #30433D; font-weight: 600;">30%</span> Problem solving</div>
+          <div style="font-size: 12px; color: #8D9C84;"><span style="color: #30433D; font-weight: 600;">20%</span> Explanation quality (Feynman)</div>
+        </div>
+      </div>
+      <p style="font-size: 14px; line-height: 1.65; color: #61715A; margin: 0 0 24px;">Normalized to 0–100. Retention score separately models the forgetting curve, outputting a probability (0–100) of successful recall at review time.</p>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">MVP Phases</h3>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin: 0 0 32px;">
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</div>
+          <div><span style="font-size: 13px; font-weight: 600;">Subjects + Concept CRUD + Relationships</span></div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</div>
+          <div><span style="font-size: 13px; font-weight: 600;">Graph Visualization</span> — React Flow, search</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</div>
+          <div><span style="font-size: 13px; font-weight: 600;">Review Engine</span> — SM-2 scheduling, daily queue</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</div>
+          <div><span style="font-size: 13px; font-weight: 600;">Metrics Projection</span> — mastery, retention, heat states</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">5</div>
+          <div><span style="font-size: 13px; font-weight: 600;">AI Tutor</span> — Feynman evaluation, question generation, misconception detection</div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 14px; background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #30433D; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">6</div>
+          <div><span style="font-size: 13px; font-weight: 600;">Earthy Glass Interface</span> — animations, heat map polish, dashboard</div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: CROSS-DOCUMENT OBSERVATIONS -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">04 — Cross-Document Observations</h2>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Strong Alignments</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 24px;">
+        <div style="background: rgba(48,67,61,0.05); border: 1px solid rgba(48,67,61,0.2); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">Heat states bridge design and data</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The color system (Forest → Moss → Sand → Clay → Muted Charcoal) maps exactly to the five heat states derived from retention scores (90+ → 75–89 → 50–74 → 25–49 → 0–24). Design and data model are unified — no translation layer needed.</div>
+        </div>
+        <div style="background: rgba(48,67,61,0.05); border: 1px solid rgba(48,67,61,0.2); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">Concept Page is the priority on both sides</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The design doc names it "the most important page in the system — design priority: Highest." The architecture doc gives it the most detailed component breakdown. Both teams are aligned on where the most UX investment should go.</div>
+        </div>
+        <div style="background: rgba(48,67,61,0.05); border: 1px solid rgba(48,67,61,0.2); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">Graph layout is intentionally decoupled</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #D9C8A9; padding: 1px 4px; border-radius: 2px;">graph_layouts</code> table separates visualization state from knowledge relationships — a mature decision that enables the design's "explorable atlas" feel without coupling visual positions to semantic data.</div>
+        </div>
+        <div style="background: rgba(48,67,61,0.05); border: 1px solid rgba(48,67,61,0.2); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #30433D; margin-bottom: 4px;">Events-as-truth supports non-gamified design</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">Because mastery cannot be manually edited and is computed purely from evidence, the system structurally prevents the gamification patterns the design doc explicitly rejects (streaks manipulation, score padding, social competition).</div>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; color: #1F2522; margin: 0 0 12px;">Tensions &amp; Open Questions</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; margin: 0 0 32px;">
+        <div style="background: rgba(177,116,87,0.07); border: 1px solid rgba(177,116,87,0.3); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #B17457; margin-bottom: 4px;">TailwindCSS vs. the spacing system</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The design system defines a strict 4px-base spacing scale (4, 8, 12, 16, 24, 32, 48, 64). Tailwind's default scale is also 4px-based but uses arbitrary class names — the team needs a Tailwind config that maps <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #D9C8A9; padding: 1px 4px; border-radius: 2px;">spacing</code> and <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #D9C8A9; padding: 1px 4px; border-radius: 2px;">colors</code> to the Cerebra palette explicitly, or visual drift will occur at implementation.</div>
+        </div>
+        <div style="background: rgba(177,116,87,0.07); border: 1px solid rgba(177,116,87,0.3); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #B17457; margin-bottom: 4px;">Glass surfaces require a non-solid background</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The glassmorphism spec (backdrop-filter: blur 20px) only has visual effect when layered over non-uniform backgrounds. The design's Cream (#F5F1E8) base is nearly uniform, so glass panels may appear flat unless the background carries texture, imagery, or the Knowledge Graph canvas.</div>
+        </div>
+        <div style="background: rgba(177,116,87,0.07); border: 1px solid rgba(177,116,87,0.3); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #B17457; margin-bottom: 4px;">Phase 6 defers the designed interface to last</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The MVP roadmap places the Earthy Glass visual polish in Phase 6. Phases 1–5 presumably use a utilitarian UI. This is pragmatic but creates a risk: interaction patterns built without the glassmorphism context may need re-layout when Phase 6 arrives. Partial glass treatment should be introduced earlier.</div>
+        </div>
+        <div style="background: rgba(177,116,87,0.07); border: 1px solid rgba(177,116,87,0.3); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #B17457; margin-bottom: 4px;">Review interface assessment buttons need visual design</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">The design doc says assessment buttons (Forgot / Partial / Mostly Correct / Perfect) "should be visually distinct" but does not define how. These map to SM-2 score values 0–3. Their visual treatment is critical UX — color, size, and layout will influence recall ratings and therefore mastery scores.</div>
+        </div>
+        <div style="background: rgba(177,116,87,0.07); border: 1px solid rgba(177,116,87,0.3); border-radius: 4px; padding: 14px 18px;">
+          <div style="font-size: 13px; font-weight: 600; color: #B17457; margin-bottom: 4px;">No authentication or multi-user model defined</div>
+          <div style="font-size: 13px; color: #1F2522; line-height: 1.6;">All entities use UUID primary keys and there is no <code style="font-family: 'JetBrains Mono', monospace; font-size: 11px; background: #D9C8A9; padding: 1px 4px; border-radius: 2px;">user_id</code> in the schema. This is consistent with the "personal" framing but means collaborative features or auth will require a schema migration. Worth confirming whether single-user is a long-term constraint.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 5: KEY PAGES -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">05 — Key Pages Summary</h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 32px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 18px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-bottom: 10px;">Dashboard</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #1F2522;">Learning Health · Due Reviews (highest priority) · Weak Concepts · Retention Trends · Knowledge Heat Map · Recent Activity</div>
+          <div style="margin-top: 8px; font-size: 12px; color: #8D9C84; font-style: italic;">Reads only from projections. Never aggregates raw events live.</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 18px; border-top: 2px solid #30433D;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #30433D; margin-bottom: 10px;">Concept Page ★ Highest Priority</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #1F2522;">Header · Metrics Bar · Intuition · Definition · Visualization Area (prominent) · Recall · Problems · Dependencies · AI Insights · Notes</div>
+          <div style="margin-top: 8px; font-size: 12px; color: #8D9C84; font-style: italic;">Visualizations must never be hidden behind tabs.</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 18px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-bottom: 10px;">Review Interface</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #1F2522;">Prompt → Answer Area → Reveal → Assessment (Forgot / Partial / Mostly / Perfect) → Progress Indicator</div>
+          <div style="margin-top: 8px; font-size: 12px; color: #8D9C84; font-style: italic;">Minimal distractions. Focused recall context.</div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 18px;">
+          <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #8D9C84; margin-bottom: 10px;">Knowledge Graph</div>
+          <div style="font-size: 13px; line-height: 1.6; color: #1F2522;">Circular nodes sized by importance, colored by heat state. Edges subtle until interaction. Zoom, Pan, Search, Dependency highlight, Weak concept highlight, Learning paths.</div>
+          <div style="margin-top: 8px; font-size: 12px; color: #8D9C84; font-style: italic;">"A living atlas of understanding." Not a dev dependency graph.</div>
+        </div>
+      </div>
+
+      <!-- SECTION 6: GAPS & RECOMMENDED NEXT STEPS -->
+      <h2 style="font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8D9C84; margin: 0 0 16px; padding-bottom: 8px; border-bottom: 1px solid #D9C8A9;">06 — Recommended Next Documents</h2>
+
+      <p style="font-size: 15px; line-height: 1.7; margin: 0 0 16px;">The <code style="font-family: 'JetBrains Mono', monospace; font-size: 12px; background: #D9C8A9; padding: 1px 5px; border-radius: 2px;">next-docs.md</code> file explicitly flags three documents as needed before implementation begins:</p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin: 0 0 28px;">
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #B17457; border-radius: 3px; padding: 4px 8px; flex-shrink: 0; margin-top: 1px;">NEEDED</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: #1F2522; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;">ui-wireframes.md</div>
+            <div style="font-size: 13px; color: #61715A; line-height: 1.6;">Screen-level layouts for the four key pages. Needed to resolve open questions about the Concept Page visualization placement, the assessment button treatment in Review, and the sidebar collapsing behavior.</div>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #B17457; border-radius: 3px; padding: 4px 8px; flex-shrink: 0; margin-top: 1px;">NEEDED</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: #1F2522; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;">roadmap.md</div>
+            <div style="font-size: 13px; color: #61715A; line-height: 1.6;">Phase timelines with acceptance criteria per phase. Should address the Phase 6 glass-deferred risk and establish a Tailwind design-token configuration milestone.</div>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #D9C8A9; border-radius: 4px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
+          <div style="font-size: 11px; font-weight: 700; color: #F5F1E8; background: #B17457; border-radius: 3px; padding: 4px 8px; flex-shrink: 0; margin-top: 1px;">NEEDED</div>
+          <div>
+            <div style="font-size: 14px; font-weight: 600; color: #1F2522; margin-bottom: 4px; font-family: 'JetBrains Mono', monospace;">agent-rules.md</div>
+            <div style="font-size: 13px; color: #61715A; line-height: 1.6;">Rules for AI agents (code generation, design generation). Should encode the design system anti-patterns, the spacing scale, the color token names, and the KaTeX-for-math requirement as hard constraints.</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size: 14px; line-height: 1.7; color: #61715A; margin: 0;">Additionally, consider formalizing a <strong>Tailwind config spec</strong> that maps Cerebra's seven colors and spacing scale directly to Tailwind utility classes — this would prevent visual drift between the design system and the implementation across all six MVP phases.</p>
+
+    </td></tr></tbody>
+    <tfoot><tr><td class="ftr-space"></td></tr></tfoot>
+  </table>
+</main>
+
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Hanken Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+  </style>
+</helmet>
+
+<div ref="{{ rootRef }}" style="width: max-content; min-width: 100%; min-height: 100vh; box-sizing: border-box; padding: 48px; background: #cfccc2; font-family: 'Hanken Grotesk', sans-serif;">
+
+  <div style="width: 1360px; margin-bottom: 30px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #6f6b60; margin-bottom: 10px;">Cerebra · Hi-fi · Earthy Glass</div>
+    <h1 style="font-family: 'Newsreader', serif; font-size: 30px; font-weight: 500; color: #1F2522; margin: 0 0 8px; letter-spacing: -0.01em;">Dashboard <span style="color:#8D9C84;">·</span> Variation A — Study Desk</h1>
+    <p style="font-size: 14px; line-height: 1.6; color: #54514a; margin: 0; max-width: 820px;">The home base. Reading column answers <em>what's due</em> and <em>what am I forgetting</em>; the right rail holds learning health at a glance. The retention chart is live — hover it. Heat cells and rows link out to the Graph, Concept Page, and Review.</p>
+  </div>
+
+  <div style="width: 1360px; background: #faf9f6; border-radius: 6px; box-shadow: 0 6px 28px rgba(31,37,34,.16); overflow: hidden;">
+    <div style="height: 30px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 12px; gap: 6px;">
+      <span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span><span style="width:9px;height:9px;border-radius:50%;background:#cfccc2;"></span>
+      <span style="margin-left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#a39f93;">cerebra · dashboard</span>
+    </div>
+
+    <div style="display: flex; background: #F5F1E8;">
+      <!-- sidebar -->
+      <div style="width: 64px; flex: none; background: #30433D; display: flex; flex-direction: column; align-items: center; padding: 18px 0; gap: 6px;">
+        <a href="Cerebra Prototype.dc.html" title="Prototype home" style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;margin-bottom:8px;text-decoration:none;"><span style="width:14px;height:14px;border-radius:50%;border:2px solid #F5F1E8;"></span></a>
+        <div style="width:40px;height:40px;border-radius:9px;background:#D9C8A9;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2.5" y="2.5" width="6" height="6" rx="1.5" fill="#30433D"/><rect x="11.5" y="2.5" width="6" height="6" rx="1.5" fill="#30433D" opacity="0.55"/><rect x="2.5" y="11.5" width="6" height="6" rx="1.5" fill="#30433D" opacity="0.55"/><rect x="11.5" y="11.5" width="6" height="6" rx="1.5" fill="#30433D" opacity="0.55"/></svg></div>
+        <div style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3.5" width="14" height="4.2" rx="1.4" fill="#F5F1E8" opacity="0.5"/><rect x="3" y="9.5" width="14" height="4.2" rx="1.4" fill="#F5F1E8" opacity="0.4"/><rect x="3" y="15.5" width="9" height="3" rx="1.2" fill="#F5F1E8" opacity="0.3"/></svg></div>
+        <a href="Cerebra Graph States.dc.html" style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><line x1="6" y1="6" x2="13" y2="13" stroke="#F5F1E8" stroke-width="1.4" opacity="0.5"/><line x1="13" y1="6" x2="7" y2="13" stroke="#F5F1E8" stroke-width="1.4" opacity="0.5"/><circle cx="5" cy="5" r="2.6" fill="#F5F1E8" opacity="0.5"/><circle cx="15" cy="5" r="2.6" fill="#F5F1E8" opacity="0.5"/><circle cx="14" cy="15" r="2.6" fill="#F5F1E8" opacity="0.5"/></svg></a>
+        <a href="Cerebra Concept Page.dc.html#review" style="width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;text-decoration:none;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M16 10a6 6 0 1 1-2-4.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round"/><path d="M16 4.5 L16 7 L13.5 7" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div style="margin-top:auto;width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="6.5" stroke="#F5F1E8" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.2" fill="#F5F1E8" opacity="0.5"/></svg></div>
+      </div>
+
+      <!-- content -->
+      <div style="flex: 1; padding: 30px 38px 40px;">
+        <!-- greeting -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:24px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:#8D9C84;margin-bottom:7px;">{{ dateLine }}</div>
+            <h2 style="font-family:'Newsreader',serif;font-size:34px;font-weight:500;color:#1F2522;margin:0;letter-spacing:-0.015em;">{{ greeting }}, Maya.</h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;background:rgba(141,156,132,.14);border:1px solid rgba(141,156,132,.32);border-radius:20px;padding:8px 15px;">
+            <span style="font-size:15px;">🔥</span>
+            <span style="font-size:13px;color:#42513c;"><strong style="color:#1F2522;">12-day</strong> streak</span>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.62fr 1fr;gap:22px;">
+
+          <!-- MAIN COLUMN -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+
+            <!-- DueReviews hero -->
+            <div style="background:#30433D;border-radius:13px;padding:24px 26px;box-shadow:0 6px 22px rgba(48,67,61,.24);position:relative;overflow:hidden;">
+              <div style="position:absolute;right:-30px;top:-30px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(217,200,169,.18),transparent 68%);"></div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;position:relative;">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,232,.6);margin-bottom:14px;">Due for review</div>
+                  <div style="display:flex;align-items:baseline;gap:12px;">
+                    <span style="font-family:'Newsreader',serif;font-size:64px;font-weight:500;color:#F5F1E8;line-height:.9;">18</span>
+                    <span style="font-size:14px;color:rgba(245,241,232,.78);">concepts<br/>across 3 subjects</span>
+                  </div>
+                  <div style="display:flex;gap:8px;margin-top:18px;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,241,232,.1);border-radius:16px;padding:5px 11px;font-size:11px;color:#EDE7D8;"><span style="width:7px;height:7px;border-radius:50%;background:#B17457;"></span>7 overdue</span>
+                    <span style="display:inline-flex;align-items:center;gap:6px;background:rgba(245,241,232,.1);border-radius:16px;padding:5px 11px;font-size:11px;color:#EDE7D8;"><span style="width:7px;height:7px;border-radius:50%;background:#D9C8A9;"></span>11 due today</span>
+                  </div>
+                </div>
+                <a href="Cerebra Concept Page.dc.html#review" style="text-decoration:none;background:#F5F1E8;color:#30433D;font-size:14px;font-weight:700;padding:13px 24px;border-radius:9px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;">Begin review <span>→</span></a>
+              </div>
+            </div>
+
+            <!-- WeakConcepts -->
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:11px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;">Weakest concepts · what you're forgetting</div>
+                <span style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#B17457;background:rgba(177,116,87,.1);padding:2px 8px;border-radius:10px;">attention needed</span>
+              </div>
+              <div style="display:flex;flex-direction:column;">
+                <sc-for list="{{ weak }}" as="w" hint-placeholder-count="5">
+                  <a href="Cerebra Concept Page.dc.html" style="text-decoration:none;display:flex;align-items:center;gap:13px;padding:11px 8px;border-radius:8px;border-bottom:1px solid #F2ECDF;" style-hover="text-decoration:none;display:flex;align-items:center;gap:13px;padding:11px 8px;border-radius:8px;border-bottom:1px solid #F2ECDF;background:#FAF6EC;">
+                    <span style="width:10px;height:10px;border-radius:50%;flex:none;background:{{ w.color }};"></span>
+                    <div style="flex:1;">
+                      <div style="font-size:14px;font-weight:600;color:#27302b;">{{ w.name }}</div>
+                      <div style="font-size:11px;color:#a99f8c;">{{ w.subject }}</div>
+                    </div>
+                    <div style="width:120px;flex:none;display:flex;align-items:center;gap:9px;">
+                      <div style="flex:1;height:5px;background:#EFE7D6;border-radius:3px;overflow:hidden;"><div style="height:100%;border-radius:3px;width:{{ w.pct }};background:{{ w.color }};"></div></div>
+                      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8a8472;width:22px;text-align:right;">{{ w.mastery }}</span>
+                    </div>
+                    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#bcb3a0;white-space:nowrap;">{{ w.heat }}</span>
+                  </a>
+                </sc-for>
+              </div>
+            </div>
+
+            <!-- RetentionTrends (interactive) -->
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:11px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;">
+                <div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:5px;">Retention trend · 30 days</div>
+                  <div style="font-size:12px;color:#a99f8c;">Estimated recall probability, with review bumps</div>
+                </div>
+                <div ref="{{ readoutRef }}" style="text-align:right;min-width:120px;">
+                  <div style="font-family:'Newsreader',serif;font-size:28px;font-weight:500;color:#61715A;line-height:1;">{{ chartReadVal }}</div>
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#a99f8c;margin-top:3px;">{{ chartReadDay }}</div>
+                </div>
+              </div>
+              <div style="margin-top:8px;">{{ chart }}</div>
+            </div>
+          </div>
+
+          <!-- RIGHT RAIL -->
+          <div style="display:flex;flex-direction:column;gap:18px;">
+
+            <!-- LearningHealth glass -->
+            <div style="background:linear-gradient(155deg,rgba(255,255,255,.72),rgba(241,236,221,.6));backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.8);border-radius:13px;padding:20px 22px;box-shadow:0 6px 22px rgba(31,37,34,.08);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:16px;">Learning health</div>
+              <div style="display:flex;align-items:center;gap:18px;">
+                <div style="position:relative;width:96px;height:96px;flex:none;">{{ ring }}<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;"><span style="font-family:'Newsreader',serif;font-size:30px;font-weight:500;color:#30433D;line-height:1;">61</span><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#8D9C84;text-transform:uppercase;letter-spacing:.05em;">avg mastery</span></div></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:12px;">
+                  <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;color:#8D9C84;margin-bottom:3px;">Retention</div><div style="font-size:15px;color:#1F2522;"><strong>64%</strong> <span style="font-size:11px;color:#61715A;">▲ 3</span></div></div>
+                  <div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;color:#8D9C84;margin-bottom:3px;">Concepts tracked</div><div style="font-size:15px;color:#1F2522;"><strong>148</strong> <span style="font-size:11px;color:#a99f8c;">across 3</span></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- KnowledgeHeatMap -->
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:11px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;">Knowledge heat</div>
+                <div ref="{{ heatLabelRef }}" style="font-size:11px;color:#a99f8c;min-height:15px;">{{ heatHover }}</div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:11px;">
+                <sc-for list="{{ heatRows }}" as="row" hint-placeholder-count="3">
+                  <div>
+                    <div style="font-size:11px;color:#6f6b60;margin-bottom:6px;">{{ row.subject }}</div>
+                    <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                      <sc-for list="{{ row.cells }}" as="c" hint-placeholder-count="8">
+                        <div onMouseEnter="{{ c.on }}" onMouseLeave="{{ c.off }}" title="{{ c.title }}" style="width:24px;height:24px;border-radius:5px;background:{{ c.color }};cursor:pointer;border:1px solid rgba(255,255,255,.5);"></div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <!-- SubjectProgress -->
+            <div style="background:#fff;border:1px solid #E3D6BC;border-radius:11px;padding:20px 22px;box-shadow:0 1px 2px rgba(31,37,34,.04);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8D9C84;margin-bottom:15px;">Subject progress</div>
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <sc-for list="{{ subjects }}" as="s" hint-placeholder-count="3">
+                  <div>
+                    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;gap:10px;"><span style="font-size:13px;font-weight:600;color:#27302b;white-space:nowrap;">{{ s.name }}</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8a8472;flex:none;">{{ s.mastery }}</span></div>
+                    <div style="height:7px;background:#EFE7D6;border-radius:4px;overflow:hidden;"><div style="height:100%;border-radius:4px;width:{{ s.pct }};background:{{ s.color }};"></div></div>
+                  </div>
+                </sc-for>
+              </div>
+              <a href="Cerebra Concept Page.dc.html" style="text-decoration:none;display:block;margin-top:16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#61715A;">Open a concept page →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;: {&quot;width&quot;: 1456, &quot;height&quot;: 980}}">
+class Component extends DCLogic {
+  state = { greeting: 'Good evening', dateLine: '', hoverIdx: null, heatHover: 'Hover a cell' };
+  rootRef = React.createRef();
+
+  componentDidMount() {
+    const d = new Date();
+    const h = d.getHours();
+    const greeting = h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening';
+    const dateLine = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).toUpperCase();
+    this.setState({ greeting, dateLine });
+  }
+
+  heatColor(h) { return h>=85?'#30433D':h>=70?'#61715A':h>=50?'#D9C8A9':h>=25?'#B17457':'#6b6f6c'; }
+  heatLabel(h) { return h>=85?'Mastered':h>=70?'Hot':h>=50?'Warm':h>=25?'Cold':'Frozen'; }
+
+  retentionSeries() {
+    // 30 daily points; decays then bumps at review days
+    const reviews = { 5: 1, 11: 1, 16: 1, 22: 1, 27: 1 };
+    let v = 58; const pts = [];
+    for (let i = 0; i <= 30; i++) {
+      if (reviews[i]) v = Math.min(96, v + 26);
+      else v = Math.max(30, v - (v > 70 ? 3.4 : 2.2));
+      pts.push(Math.round(v));
+    }
+    return pts;
+  }
+  reviewsPerDay() { return [4,2,0,5,3,6,1,0,4,7,2,3,5,8].map((n,i)=>({n,i})); }
+
+  setHover = (i) => { this.setState({ hoverIdx: i }); };
+  clearHover = () => { this.setState({ hoverIdx: null }); };
+  setHeat = (label) => { this.setState({ heatHover: label }); };
+  clearHeat = () => { this.setState({ heatHover: 'Hover a cell' }); };
+
+  buildRing() {
+    const h = React.createElement; const R = 42, C = 2 * Math.PI * R, val = 61;
+    return h('svg', { width: 96, height: 96, viewBox: '0 0 96 96' },
+      h('circle', { cx: 48, cy: 48, r: R, fill: 'none', stroke: 'rgba(141,156,132,0.22)', strokeWidth: 8 }),
+      h('circle', { cx: 48, cy: 48, r: R, fill: 'none', stroke: '#30433D', strokeWidth: 8, strokeLinecap: 'round', strokeDasharray: `${C*val/100} ${C}`, transform: 'rotate(-90 48 48)' })
+    );
+  }
+
+  buildChart() {
+    const h = React.createElement;
+    const pts = this.retentionSeries();
+    const W = 760, H = 200, pad = { l: 8, r: 8, t: 14, b: 56 };
+    const cw = W - pad.l - pad.r, chartH = H - pad.t - pad.b;
+    const x = (i) => pad.l + (i / 30) * cw;
+    const y = (v) => pad.t + (1 - (v - 20) / 80) * chartH;
+    const bars = this.reviewsPerDay();
+    const baseY = H - 12;
+    const { hoverIdx } = this.state;
+
+    // smooth path
+    let d = '';
+    pts.forEach((v, i) => { const X = x(i), Y = y(v); d += (i === 0 ? `M${X},${Y}` : ` L${X},${Y}`); });
+    const area = d + ` L${x(30)},${y(20)} L${x(0)},${y(20)} Z`;
+
+    const kids = [];
+    kids.push(h('defs', { key: 'd' },
+      h('linearGradient', { id: 'retfill', x1: 0, y1: 0, x2: 0, y2: 1 },
+        h('stop', { offset: '0%', stopColor: '#61715A', stopOpacity: 0.26 }),
+        h('stop', { offset: '100%', stopColor: '#61715A', stopOpacity: 0 }))));
+    // gridlines
+    [40, 60, 80].forEach((gv, k) => {
+      kids.push(h('line', { key: 'g' + k, x1: pad.l, y1: y(gv), x2: W - pad.r, y2: y(gv), stroke: 'rgba(141,156,132,0.16)', strokeWidth: 1 }));
+      kids.push(h('text', { key: 'gt' + k, x: pad.l + 2, y: y(gv) - 4, fill: '#bcb3a0', fontSize: 9, fontFamily: 'JetBrains Mono, monospace' }, gv + '%'));
+    });
+    kids.push(h('path', { key: 'area', d: area, fill: 'url(#retfill)' }));
+    kids.push(h('path', { key: 'line', d, fill: 'none', stroke: '#61715A', strokeWidth: 2.4, strokeLinejoin: 'round', strokeLinecap: 'round' }));
+    // review bump markers
+    [5, 11, 16, 22, 27].forEach((ri) => {
+      kids.push(h('circle', { key: 'rv' + ri, cx: x(ri), cy: y(pts[ri]), r: 3.4, fill: '#fff', stroke: '#30433D', strokeWidth: 2 }));
+    });
+    // reviews-per-day bars
+    const maxB = 8;
+    bars.forEach((b) => {
+      const bx = pad.l + (b.i / 13) * cw, bh = (b.n / maxB) * 30;
+      kids.push(h('rect', { key: 'b' + b.i, x: bx - 6, y: baseY - bh, width: 12, height: bh, rx: 2, fill: 'rgba(177,116,87,0.55)' }));
+    });
+    kids.push(h('text', { key: 'blab', x: pad.l, y: baseY + 11, fill: '#bcb3a0', fontSize: 9, fontFamily: 'JetBrains Mono, monospace' }, 'reviews / day · last 14'));
+    // hover
+    if (hoverIdx != null) {
+      const X = x(hoverIdx), Y = y(pts[hoverIdx]);
+      kids.push(h('line', { key: 'hv', x1: X, y1: pad.t, x2: X, y2: pad.t + chartH, stroke: '#30433D', strokeWidth: 1, strokeDasharray: '3 3', opacity: 0.5 }));
+      kids.push(h('circle', { key: 'hc', cx: X, cy: Y, r: 5, fill: '#30433D', stroke: '#fff', strokeWidth: 2 }));
+    }
+    // hit targets
+    for (let i = 0; i <= 30; i++) {
+      kids.push(h('rect', { key: 'hit' + i, x: x(i) - cw / 60, y: pad.t, width: cw / 30, height: chartH, fill: 'transparent', onMouseEnter: () => this.setHover(i), onMouseLeave: this.clearHover, style: { cursor: 'crosshair' } }));
+    }
+    return h('svg', { viewBox: `0 0 ${W} ${H}`, style: { width: '100%', height: 'auto', display: 'block' } }, kids);
+  }
+
+  renderVals() {
+    const pts = this.retentionSeries();
+    const { hoverIdx } = this.state;
+    const idx = hoverIdx != null ? hoverIdx : 30;
+    const chartReadVal = pts[idx] + '%';
+    const chartReadDay = hoverIdx != null ? ('day ' + hoverIdx + ' of 30') : 'today';
+
+    const mk = (name, subject, m) => ({ name, subject, mastery: m, pct: m + '%', color: this.heatColor(m), heat: this.heatLabel(m) });
+    const weak = [
+      mk('Characteristic polynomial', 'Linear Algebra', 18),
+      mk('Singular Value Decomposition', 'Linear Algebra', 20),
+      mk('Bayes\u2019 theorem', 'Probability', 31),
+      mk('Convolution', 'Signal Processing', 34),
+      mk('Fourier transform', 'Signal Processing', 41)
+    ];
+    const subjects = [
+      { name: 'Linear Algebra', mastery: 68, pct: '68%', color: this.heatColor(68) },
+      { name: 'Probability', mastery: 52, pct: '52%', color: this.heatColor(52) },
+      { name: 'Signal Processing', mastery: 43, pct: '43%', color: this.heatColor(43) }
+    ];
+    const heatData = [
+      { subject: 'Linear Algebra', vals: [[ 'Vectors',92],['Dot product',88],['Span',74],['Basis',82],['Matrix mult.',92],['Determinants',62],['Eigenvalues',60],['Eigenvectors',64],['Char. poly',18],['SVD',20]] },
+      { subject: 'Probability', vals: [['Probability',58],['Distributions',60],['Expectation',52],['Bayes\u2019 thm',31],['Markov chains',44],['Variance',55]] },
+      { subject: 'Signal Processing', vals: [['Fourier',41],['Sampling',40],['Convolution',34],['Filters',42],['Z-transform',28]] }
+    ];
+    const heatRows = heatData.map((r) => ({
+      subject: r.subject,
+      cells: r.vals.map(([nm, hv]) => ({ color: this.heatColor(hv), title: nm + ' · ' + this.heatLabel(hv) + ' (' + hv + ')', on: () => this.setHeat(nm + ' · ' + this.heatLabel(hv)), off: this.clearHeat }))
+    }));
+
+    return {
+      rootRef: this.rootRef,
+      greeting: this.state.greeting, dateLine: this.state.dateLine,
+      weak, subjects, heatRows, heatHover: this.state.heatHover,
+      chart: this.buildChart(), ring: this.buildRing(),
+      chartReadVal, chartReadDay
+    };
+  }
+}
+</script>
+</body>
+</html>

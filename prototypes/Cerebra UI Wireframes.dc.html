@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Inter', sans-serif; }
+  </style>
+</helmet>
+
+<div style="width: max-content; min-width: 100%; min-height: 100vh; box-sizing: border-box; padding: 56px; background: #d6d3cb;">
+
+  <!-- ===== TITLE / LEGEND ===== -->
+  <div style="width: 760px; margin-bottom: 48px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #7a766c; margin-bottom: 10px;">Cerebra · ui-wireframes.md</div>
+    <h1 style="font-size: 30px; font-weight: 700; color: #2b2a26; margin: 0 0 12px; letter-spacing: -0.02em;">UI Wireframes</h1>
+    <p style="font-size: 14px; line-height: 1.65; color: #54514a; margin: 0 0 20px;">Structured low-fidelity layouts for the four key pages. Three variations each, exploring the open layout questions from the design system. Desktop, 1400px max content width. Real component names from the technical architecture.</p>
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; background: #efece4; border: 1px solid #cfccc2; border-radius: 4px; padding: 12px 16px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: #908c82;">Heat legend</div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 50%; background: #30433D;"></span><span style="font-size: 11px; color: #54514a;">Mastered</span></div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 50%; background: #61715A;"></span><span style="font-size: 11px; color: #54514a;">Hot</span></div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 50%; background: #D9C8A9;"></span><span style="font-size: 11px; color: #54514a;">Warm</span></div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 50%; background: #B17457;"></span><span style="font-size: 11px; color: #54514a;">Cold</span></div>
+      <div style="display: flex; align-items: center; gap: 6px;"><span style="width: 11px; height: 11px; border-radius: 50%; background: #6b6f6c;"></span><span style="font-size: 11px; color: #54514a;">Frozen</span></div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- ROW 1 — DASHBOARD -->
+  <!-- ========================================================= -->
+  <div style="margin-bottom: 16px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #2b2a26;">01 · Dashboard</div>
+    <div style="font-size: 12px; color: #7a766c; margin-top: 2px;">Answers: What do I know? · What am I forgetting? · What should I study next? — reads only from projections.</div>
+  </div>
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 56px;">
+
+    <!-- DASH V1 — Study Desk -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">A · "Study Desk" — reading column + rail<span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:6px;">✓ selected</span></div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 540px;">
+          <!-- sidebar -->
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <!-- content -->
+          <div style="flex: 1; padding: 22px 24px; background: #f5f1e8; display: flex; gap: 20px;">
+            <!-- main column -->
+            <div style="flex: 1.7; display: flex; flex-direction: column; gap: 16px;">
+              <div><div style="height: 9px; width: 130px; background: #d8d2c2; border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 6px; width: 200px; background: #e4ded0; border-radius: 3px;"></div></div>
+              <!-- Due Reviews HERO -->
+              <div style="background: #30433D; border-radius: 8px; padding: 20px; color: #f5f1e8;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,241,232,.6);">DueReviews · priority</div>
+                <div style="font-size: 30px; font-weight: 700; margin: 6px 0 2px;">12 concepts due</div>
+                <div style="font-size: 12px; color: rgba(245,241,232,.7); margin-bottom: 14px;">Across Linear Algebra · est. 18 min</div>
+                <div style="display: inline-block; background: #f5f1e8; color: #30433D; font-size: 12px; font-weight: 600; padding: 9px 18px; border-radius: 6px;">Begin Review →</div>
+              </div>
+              <!-- Weak Concepts -->
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 6px; padding: 14px 16px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">WeakConcepts</div>
+                <div style="display: flex; flex-direction: column; gap: 9px;">
+                  <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #B17457;"></span><div style="height: 7px; flex: 1; background: #ece6d8; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #b8ad98;">34</span></div>
+                  <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #6b6f6c;"></span><div style="height: 7px; flex: 1; background: #ece6d8; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #b8ad98;">18</span></div>
+                  <div style="display: flex; align-items: center; gap: 10px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #B17457;"></span><div style="height: 7px; flex: 1; background: #ece6d8; border-radius: 3px;"></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #b8ad98;">41</span></div>
+                </div>
+              </div>
+              <!-- Retention Trends -->
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 6px; padding: 14px 16px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">RetentionTrends</div>
+                <div style="height: 90px; background: repeating-linear-gradient(135deg,#eee7d8 0 7px,#f5efe2 7px 14px); border: 1px dashed #d8cfbd; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #b3a890;">retention curve · 30d</div>
+              </div>
+            </div>
+            <!-- right rail -->
+            <div style="flex: 1; display: flex; flex-direction: column; gap: 14px;">
+              <div style="background: rgba(255,255,255,.55); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,.7); border-radius: 6px; padding: 14px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">LearningHealth · glass</div>
+                <div style="display: flex; gap: 12px;">
+                  <div><div style="font-size: 22px; font-weight: 700; color: #30433D;">73</div><div style="font-size: 10px; color: #9a917f;">avg mastery</div></div>
+                  <div><div style="font-size: 22px; font-weight: 700; color: #61715A;">9</div><div style="font-size: 10px; color: #9a917f;">day streak</div></div>
+                </div>
+              </div>
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 6px; padding: 14px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">KnowledgeHeatMap</div>
+                <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px;">
+                  <span style="height:20px;border-radius:3px;background:#30433D;"></span><span style="height:20px;border-radius:3px;background:#61715A;"></span><span style="height:20px;border-radius:3px;background:#D9C8A9;"></span><span style="height:20px;border-radius:3px;background:#61715A;"></span><span style="height:20px;border-radius:3px;background:#B17457;"></span><span style="height:20px;border-radius:3px;background:#30433D;"></span>
+                  <span style="height:20px;border-radius:3px;background:#D9C8A9;"></span><span style="height:20px;border-radius:3px;background:#6b6f6c;"></span><span style="height:20px;border-radius:3px;background:#61715A;"></span><span style="height:20px;border-radius:3px;background:#30433D;"></span><span style="height:20px;border-radius:3px;background:#D9C8A9;"></span><span style="height:20px;border-radius:3px;background:#61715A;"></span>
+                </div>
+              </div>
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 6px; padding: 14px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">SubjectProgress</div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div><div style="height: 6px; background: #ece6d8; border-radius: 3px; overflow: hidden;"><div style="height: 100%; width: 68%; background: #30433D;"></div></div></div>
+                  <div><div style="height: 6px; background: #ece6d8; border-radius: 3px; overflow: hidden;"><div style="height: 100%; width: 34%; background: #61715A;"></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASH V2 — Command Grid -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">B · "Command Grid" — stat tiles + 2-col grid</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 540px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; padding: 22px 24px; background: #f5f1e8; display: flex; flex-direction: column; gap: 16px;">
+            <div style="height: 9px; width: 150px; background: #d8d2c2; border-radius: 4px;"></div>
+            <!-- 3 stat tiles -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+              <div style="background: #30433D; border-radius: 7px; padding: 14px; color: #f5f1e8;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245,241,232,.6);">DueReviews</div><div style="font-size: 26px; font-weight: 700; margin-top: 4px;">12</div></div>
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 7px; padding: 14px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c;">LearningHealth</div><div style="font-size: 26px; font-weight: 700; margin-top: 4px; color: #2b2a26;">73<span style="font-size:13px;color:#a89f8c;">/100</span></div></div>
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 7px; padding: 14px;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c;">Streak</div><div style="font-size: 26px; font-weight: 700; margin-top: 4px; color: #61715A;">9d</div></div>
+            </div>
+            <!-- 2-col grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 7px; padding: 14px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">WeakConcepts</div>
+                <div style="display: flex; flex-direction: column; gap: 9px;">
+                  <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #B17457;"></span><div style="height: 6px; flex: 1; background: #ece6d8; border-radius: 3px;"></div></div>
+                  <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #6b6f6c;"></span><div style="height: 6px; flex: 1; background: #ece6d8; border-radius: 3px;"></div></div>
+                  <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #B17457;"></span><div style="height: 6px; flex: 1; background: #ece6d8; border-radius: 3px;"></div></div>
+                  <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: #B17457;"></span><div style="height: 6px; flex: 1; background: #ece6d8; border-radius: 3px;"></div></div>
+                </div>
+              </div>
+              <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 7px; padding: 14px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">RetentionDistribution</div>
+                <div style="height: 96px; display: flex; align-items: flex-end; gap: 7px; padding-top: 6px;">
+                  <div style="flex:1; height: 30%; background:#6b6f6c; border-radius:3px 3px 0 0;"></div>
+                  <div style="flex:1; height: 55%; background:#B17457; border-radius:3px 3px 0 0;"></div>
+                  <div style="flex:1; height: 80%; background:#D9C8A9; border-radius:3px 3px 0 0;"></div>
+                  <div style="flex:1; height: 65%; background:#61715A; border-radius:3px 3px 0 0;"></div>
+                  <div style="flex:1; height: 45%; background:#30433D; border-radius:3px 3px 0 0;"></div>
+                </div>
+              </div>
+            </div>
+            <!-- full-width heat map -->
+            <div style="background: #fff; border: 1px solid #e0dac9; border-radius: 7px; padding: 14px; flex: 1;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 10px;">KnowledgeHeatMap</div>
+              <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px;">
+                <span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#D9C8A9;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#B17457;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#D9C8A9;"></span><span style="height:18px;border-radius:3px;background:#6b6f6c;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#D9C8A9;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span>
+                <span style="height:18px;border-radius:3px;background:#D9C8A9;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#B17457;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#D9C8A9;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#6b6f6c;"></span><span style="height:18px;border-radius:3px;background:#61715A;"></span><span style="height:18px;border-radius:3px;background:#30433D;"></span><span style="height:18px;border-radius:3px;background:#D9C8A9;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASH V3 — Focus First -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">C · "Focus First" — centered Today panel, calm</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 540px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; background: #f5f1e8; display: flex; flex-direction: column;">
+            <!-- thin metrics bar -->
+            <div style="display: flex; gap: 22px; padding: 12px 26px; border-bottom: 1px solid #e4ddcc;">
+              <div style="font-size: 11px; color: #9a917f;">Mastery <strong style="color:#30433D;">73</strong></div>
+              <div style="font-size: 11px; color: #9a917f;">Streak <strong style="color:#61715A;">9d</strong></div>
+              <div style="font-size: 11px; color: #9a917f;">Mastered <strong style="color:#30433D;">28</strong></div>
+              <div style="font-size: 11px; color: #9a917f;">At risk <strong style="color:#B17457;">7</strong></div>
+            </div>
+            <!-- centered focus -->
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #a89f8c;">Today · Current Learning Focus</div>
+              <div style="font-size: 24px; font-weight: 700; color: #2b2a26; margin: 10px 0;">Eigenvectors &amp; Eigenvalues</div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 22px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #D9C8A9;"></span><span style="font-size: 12px; color: #7a766c;">Warm · retention 61</span></div>
+              <div style="background: #30433D; border-radius: 10px; padding: 22px 30px; color: #f5f1e8; width: 320px;">
+                <div style="font-size: 30px; font-weight: 700;">12 due</div>
+                <div style="font-size: 12px; color: rgba(245,241,232,.7); margin: 4px 0 16px;">~18 min focused review</div>
+                <div style="background: #f5f1e8; color: #30433D; font-size: 13px; font-weight: 600; padding: 10px; border-radius: 7px;">Begin Review →</div>
+              </div>
+            </div>
+            <!-- calm heat band -->
+            <div style="padding: 16px 26px; border-top: 1px solid #e4ddcc;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; color: #a89f8c; margin-bottom: 8px;">KnowledgeHeatMap</div>
+              <div style="display: grid; grid-template-columns: repeat(16, 1fr); gap: 3px;">
+                <span style="height:14px;border-radius:2px;background:#30433D;"></span><span style="height:14px;border-radius:2px;background:#61715A;"></span><span style="height:14px;border-radius:2px;background:#D9C8A9;"></span><span style="height:14px;border-radius:2px;background:#61715A;"></span><span style="height:14px;border-radius:2px;background:#B17457;"></span><span style="height:14px;border-radius:2px;background:#30433D;"></span><span style="height:14px;border-radius:2px;background:#D9C8A9;"></span><span style="height:14px;border-radius:2px;background:#6b6f6c;"></span><span style="height:14px;border-radius:2px;background:#61715A;"></span><span style="height:14px;border-radius:2px;background:#30433D;"></span><span style="height:14px;border-radius:2px;background:#D9C8A9;"></span><span style="height:14px;border-radius:2px;background:#61715A;"></span><span style="height:14px;border-radius:2px;background:#30433D;"></span><span style="height:14px;border-radius:2px;background:#B17457;"></span><span style="height:14px;border-radius:2px;background:#61715A;"></span><span style="height:14px;border-radius:2px;background:#D9C8A9;"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- ROW 2 — CONCEPT PAGE -->
+  <!-- ========================================================= -->
+  <div style="margin-bottom: 16px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #2b2a26;">02 · Concept Page <span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:2px 7px;border-radius:10px;letter-spacing:.05em;">HIGHEST PRIORITY</span></div>
+    <div style="font-size: 12px; color: #7a766c; margin-top: 2px;">Never hide visualizations behind tabs · visualization gets significant screen space. Exploring viz↔content relationship.</div>
+  </div>
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 56px;">
+
+    <!-- CONCEPT V1 — Visualization Dominant -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">A · Visualization-dominant — viz top, content below<span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:6px;">✓ selected</span></div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 580px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; background: #f5f1e8; padding: 20px 24px; display: flex; flex-direction: column; gap: 14px;">
+            <!-- ConceptHeader -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <div style="font-size: 10px; color: #a89f8c; font-family: 'JetBrains Mono', monospace;">Linear Algebra</div>
+                <div style="font-size: 22px; font-weight: 700; color: #2b2a26; margin: 2px 0 6px;">Eigenvectors</div>
+                <div style="display: flex; align-items: center; gap: 8px;"><span style="width: 9px; height: 9px; border-radius: 50%; background: #D9C8A9;"></span><span style="font-size: 11px; color: #7a766c;">Warm · Next review in 2d</span></div>
+              </div>
+            </div>
+            <!-- ConceptMetrics bar -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+              <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:10px 12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Mastery</div><div style="font-size:18px;font-weight:700;color:#30433D;">68</div></div>
+              <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:10px 12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Retention</div><div style="font-size:18px;font-weight:700;color:#61715A;">61</div></div>
+              <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:10px 12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Recall</div><div style="font-size:18px;font-weight:700;color:#2b2a26;">74%</div></div>
+              <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:10px 12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Problems</div><div style="font-size:18px;font-weight:700;color:#2b2a26;">58%</div></div>
+            </div>
+            <!-- VisualizationPanel big -->
+            <div style="background: linear-gradient(135deg,#eef0e9,#e7e2d4); border: 1px solid #d8d2c2; border-radius: 8px; height: 220px; display: flex; align-items: center; justify-content: center; position: relative;">
+              <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9a917f;">VisualizationPanel · interactive · KaTeX</div>
+              <div style="position: absolute; top: 10px; left: 12px; font-family: 'JetBrains Mono', monospace; font-size: 8px; color: #b3a890;">▣ never hidden behind tabs</div>
+            </div>
+            <!-- 2 col content -->
+            <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 12px;">
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">IntuitionCard</div><div style="height:6px;background:#ece6d8;border-radius:3px;margin-bottom:5px;"></div><div style="height:6px;width:80%;background:#ece6d8;border-radius:3px;"></div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">DefinitionCard</div><div style="height:6px;background:#ece6d8;border-radius:3px;margin-bottom:5px;"></div><div style="height:6px;width:90%;background:#ece6d8;border-radius:3px;"></div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">NotesCard</div><div style="height:6px;width:60%;background:#ece6d8;border-radius:3px;"></div></div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">RecallQuestionsPanel</div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">ProblemsPanel</div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:6px;">DependenciesPanel</div><div style="display:flex;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#B17457;"></span><span style="width:8px;height:8px;border-radius:50%;background:#30433D;"></span><span style="width:8px;height:8px;border-radius:50%;background:#61715A;"></span></div></div>
+                <div style="background:#30433D;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:rgba(245,241,232,.6);">AIInsightsPanel</div><div style="height:5px;background:rgba(245,241,232,.25);border-radius:3px;margin-top:7px;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT V2 — Side by side textbook -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">B · "Textbook" — sticky viz left, content scrolls right</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 580px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; background: #f5f1e8; display: flex; flex-direction: column;">
+            <!-- header full width -->
+            <div style="padding: 16px 22px; border-bottom: 1px solid #e4ddcc; display: flex; justify-content: space-between; align-items: center;">
+              <div><div style="font-size: 10px; color: #a89f8c; font-family: 'JetBrains Mono', monospace;">Linear Algebra</div><div style="font-size: 20px; font-weight: 700; color: #2b2a26;">Eigenvectors</div></div>
+              <div style="display: flex; gap: 16px;">
+                <div style="text-align:center;"><div style="font-size:8px;color:#a89f8c;font-family:'JetBrains Mono',monospace;">MASTERY</div><div style="font-size:16px;font-weight:700;color:#30433D;">68</div></div>
+                <div style="text-align:center;"><div style="font-size:8px;color:#a89f8c;font-family:'JetBrains Mono',monospace;">RETENTION</div><div style="font-size:16px;font-weight:700;color:#61715A;">61</div></div>
+                <div style="display:flex;align-items:center;gap:6px;"><span style="width:9px;height:9px;border-radius:50%;background:#D9C8A9;"></span><span style="font-size:11px;color:#7a766c;">Warm</span></div>
+              </div>
+            </div>
+            <div style="display: flex; flex: 1;">
+              <!-- sticky viz left -->
+              <div style="width: 44%; flex: none; padding: 16px; border-right: 1px solid #e4ddcc;">
+                <div style="background: linear-gradient(135deg,#eef0e9,#e7e2d4); border: 1px solid #d8d2c2; border-radius: 8px; height: 100%; min-height: 420px; display: flex; align-items: center; justify-content: center; position: relative;">
+                  <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #9a917f; text-align: center;">VisualizationPanel<br><span style="font-size:8px;color:#b3a890;">sticky · always visible</span></div>
+                </div>
+              </div>
+              <!-- scroll content right -->
+              <div style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">IntuitionCard</div><div style="height:6px;background:#ece6d8;border-radius:3px;margin-bottom:5px;"></div><div style="height:6px;width:85%;background:#ece6d8;border-radius:3px;"></div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">DefinitionCard</div><div style="height:6px;background:#ece6d8;border-radius:3px;"></div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">RecallQuestionsPanel</div></div>
+                <div style="background:#fff;border:1px solid #e0dac9;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">ProblemsPanel</div></div>
+                <div style="background:#30433D;border-radius:6px;padding:12px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:rgba(245,241,232,.6);">AIInsightsPanel</div></div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:#bcb3a0;text-align:center;">↓ Dependencies · Notes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONCEPT V3 — Full bleed viz + overlaid glass -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">C · Full-bleed viz + floating glass panels (spatial)</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; min-height: 580px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; position: relative; background: linear-gradient(135deg,#e9ece3 0%,#dfe0d2 40%,#e6ddcb 100%); display: flex; flex-direction: column;">
+            <!-- full bleed viz label center -->
+            <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;"><div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #a39a86;">VisualizationPanel · full-bleed canvas</div></div>
+            <!-- floating compact header glass -->
+            <div style="margin: 16px; background: rgba(255,255,255,.5); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.7); border-radius: 10px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2;">
+              <div><div style="font-size: 9px; color: #8a8270; font-family: 'JetBrains Mono', monospace;">Linear Algebra</div><div style="font-size: 18px; font-weight: 700; color: #2b2a26;">Eigenvectors</div></div>
+              <div style="display: flex; gap: 14px; align-items: center;">
+                <div style="text-align:center;"><div style="font-size:8px;color:#8a8270;font-family:'JetBrains Mono',monospace;">MAST</div><div style="font-size:15px;font-weight:700;color:#30433D;">68</div></div>
+                <div style="text-align:center;"><div style="font-size:8px;color:#8a8270;font-family:'JetBrains Mono',monospace;">RET</div><div style="font-size:15px;font-weight:700;color:#61715A;">61</div></div>
+                <span style="width:10px;height:10px;border-radius:50%;background:#D9C8A9;"></span>
+              </div>
+            </div>
+            <!-- floating side glass panel -->
+            <div style="position: absolute; top: 92px; right: 16px; width: 200px; background: rgba(255,255,255,.5); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.7); border-radius: 10px; padding: 12px; z-index: 2; display: flex; flex-direction: column; gap: 8px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#8a8270;">IntuitionCard</div>
+              <div style="height:5px;background:rgba(43,42,38,.12);border-radius:3px;"></div>
+              <div style="height:5px;width:80%;background:rgba(43,42,38,.12);border-radius:3px;"></div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#8a8270;margin-top:6px;">DependenciesPanel</div>
+              <div style="display:flex;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:#B17457;"></span><span style="width:8px;height:8px;border-radius:50%;background:#30433D;"></span><span style="width:8px;height:8px;border-radius:50%;background:#61715A;"></span></div>
+            </div>
+            <!-- bottom drawer -->
+            <div style="margin-top: auto; position: relative; z-index: 2; background: rgba(255,255,255,.62); backdrop-filter: blur(14px); border-top: 1px solid rgba(255,255,255,.8); padding: 14px 18px; display: flex; gap: 10px; align-items: center;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#8a8270;">content drawer ▴</div>
+              <div style="display:flex;gap:8px;flex:1;">
+                <div style="flex:1;height:34px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.7);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#8a8270;">Definition</div>
+                <div style="flex:1;height:34px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.7);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#8a8270;">Recall</div>
+                <div style="flex:1;height:34px;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.7);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:8px;color:#8a8270;">AI Insights</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- ROW 3 — REVIEW INTERFACE -->
+  <!-- ========================================================= -->
+  <div style="margin-bottom: 16px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #2b2a26;">03 · Review Interface</div>
+    <div style="font-size: 12px; color: #7a766c; margin-top: 2px;">Focused recall, minimal distractions. The learner <strong>produces</strong> an answer; the AI determines the score (SM-2 0–3) — no self-grading. Exploring how the auto-assessment surfaces.</div>
+  </div>
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 56px;">
+
+    <!-- REVIEW V1 — Recall then AI grades it -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">A · Recall → AI grades it <span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:4px;">recommended</span></div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="min-height: 520px; background: #f5f1e8; display: flex; flex-direction: column;">
+          <!-- progress top -->
+          <div style="padding: 14px 26px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e4ddcc;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a917f;">8 / 20</div>
+            <div style="flex:1;height:5px;background:#e4ddcc;border-radius:3px;overflow:hidden;"><div style="height:100%;width:40%;background:#30433D;"></div></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#bcb3a0;">✕ Exit</div>
+          </div>
+          <!-- recall flow -->
+          <div style="flex: 1; padding: 24px 30px; display: flex; flex-direction: column; gap: 14px; max-width: 580px; width: 100%; margin: 0 auto;">
+            <div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">Prompt · Eigenvectors</div>
+              <div style="font-size: 18px; font-weight: 600; color: #2b2a26; line-height: 1.5;">What does it mean for a vector to be an eigenvector of a matrix?</div>
+            </div>
+            <!-- your recall (filled) -->
+            <div style="background:#fff;border:1px solid #e0dac9;border-radius:8px;padding:14px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">Your recall</div>
+              <div style="font-size:13px;color:#3a352a;line-height:1.55;">A vector whose direction is unchanged when the matrix is applied — it only gets scaled.</div>
+            </div>
+            <!-- model answer -->
+            <div style="background:#f1ede3;border:1px solid #e4ddcc;border-radius:8px;padding:14px;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">Model answer</div>
+              <div style="height:6px;background:#e2dccb;border-radius:3px;margin-bottom:5px;"></div>
+              <div style="height:6px;width:88%;background:#e2dccb;border-radius:3px;margin-bottom:5px;"></div>
+              <div style="height:6px;width:62%;background:#e2dccb;border-radius:3px;"></div>
+            </div>
+          </div>
+          <!-- AI verdict — quiet, read-only outcome -->
+          <div style="border-top:1px solid #e4ddcc;background:#efece4;padding:14px 30px;display:flex;align-items:center;gap:16px;">
+            <div style="display:flex;align-items:center;gap:9px;flex:none;">
+              <span style="width:11px;height:11px;border-radius:50%;background:#61715A;"></span>
+              <div>
+                <div style="font-size:13px;font-weight:600;color:#2b2a26;">Mostly correct</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;letter-spacing:.04em;">AI-assessed · score 2</div>
+              </div>
+            </div>
+            <div style="flex:1;font-size:11px;color:#7a766c;line-height:1.45;border-left:1px solid #ddd6c6;padding-left:16px;">Captured the scaling intuition — didn't state the eigenvalue λ relationship.</div>
+            <div style="text-align:right;flex:none;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#a89f8c;margin-bottom:6px;">next review · 4d</div>
+              <span style="display:inline-block;background:#30433D;color:#f5f1e8;font-size:12px;font-weight:600;padding:9px 22px;border-radius:7px;">Continue →</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW V2 — Active recall input (pre-grade moment) -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">B · Active recall — type, then submit for grading</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="min-height: 520px; background: #f5f1e8; display: flex; flex-direction: column;">
+          <div style="padding: 14px 26px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e4ddcc;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a917f;">8 / 20</div>
+            <div style="flex:1;height:5px;background:#e4ddcc;border-radius:3px;overflow:hidden;"><div style="height:100%;width:40%;background:#30433D;"></div></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#bcb3a0;">✕</div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#a89f8c;margin-bottom:14px;">Prompt · Eigenvectors</div>
+            <div style="font-size: 19px; font-weight: 600; color: #2b2a26; max-width: 460px; line-height: 1.5;">What does it mean for a vector to be an eigenvector of a matrix?</div>
+            <!-- active answer field -->
+            <div style="margin-top: 24px; width: 480px; min-height: 96px; background: #fff; border: 1.5px solid #61715A; box-shadow: 0 0 0 3px rgba(97,113,90,.12); border-radius: 8px; padding: 16px; text-align: left;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">Your answer</div>
+              <span style="font-size:13px;color:#3a352a;line-height:1.55;">A vector that only gets scaled when the matrix is applied<span style="display:inline-block;width:1.5px;height:15px;background:#61715A;vertical-align:text-bottom;margin-left:1px;"></span></span>
+            </div>
+            <div style="margin-top: 18px;"><span style="display:inline-block;background:#30433D;color:#f5f1e8;font-size:13px;font-weight:600;padding:11px 30px;border-radius:8px;">Check my answer →</span></div>
+            <div style="margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#bcb3a0;">⏎ to submit · the AI scores it for you</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REVIEW V3 — Conversational recall thread -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">C · Conversational — graded as a quiet reply</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="min-height: 520px; background: #f5f1e8; display: flex; flex-direction: column;">
+          <div style="padding: 14px 26px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #e4ddcc;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9a917f;">8 / 20</div>
+            <div style="flex:1;height:5px;background:#e4ddcc;border-radius:3px;overflow:hidden;"><div style="height:100%;width:40%;background:#30433D;"></div></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#bcb3a0;">✕</div>
+          </div>
+          <div style="flex: 1; padding: 24px 30px; display: flex; flex-direction: column; gap: 14px; max-width: 560px; width: 100%; margin: 0 auto;">
+            <!-- prompt -->
+            <div style="align-self:flex-start;max-width:82%;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:6px;">Prompt</div>
+              <div style="background:#fff;border:1px solid #e0dac9;border-radius:10px 10px 10px 2px;padding:12px 14px;font-size:14px;color:#2b2a26;line-height:1.5;">What does it mean for a vector to be an eigenvector of a matrix?</div>
+            </div>
+            <!-- user recall -->
+            <div style="align-self:flex-end;max-width:82%;">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:6px;text-align:right;">Your recall</div>
+              <div style="background:#30433D;color:#f5f1e8;border-radius:10px 10px 2px 10px;padding:12px 14px;font-size:13px;line-height:1.5;">A vector whose direction is unchanged under the matrix — it only gets scaled.</div>
+            </div>
+            <!-- AI assessment -->
+            <div style="align-self:flex-start;max-width:86%;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Assessment</div>
+                <span style="display:inline-flex;align-items:center;gap:5px;background:#eef0e9;border:1px solid #d7ddcb;border-radius:20px;padding:2px 9px;"><span style="width:8px;height:8px;border-radius:50%;background:#61715A;"></span><span style="font-size:10px;color:#54614c;font-weight:600;">Mostly correct</span></span>
+              </div>
+              <div style="background:#f1ede3;border:1px solid #e4ddcc;border-radius:10px 10px 10px 2px;padding:12px 14px;">
+                <div style="font-size:13px;color:#3a352a;line-height:1.55;">Right intuition. To reach <em>Perfect</em>, name the eigenvalue: Av = λv.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#a89f8c;margin-top:8px;">scheduled automatically · next review in 4 days</div>
+              </div>
+            </div>
+          </div>
+          <div style="border-top:1px solid #e4ddcc;padding:14px 30px;text-align:right;">
+            <span style="display:inline-block;background:#30433D;color:#f5f1e8;font-size:12px;font-weight:600;padding:9px 24px;border-radius:7px;">Continue →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- ROW 4 — KNOWLEDGE GRAPH -->
+  <!-- ========================================================= -->
+  <div style="margin-bottom: 16px;">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; color: #2b2a26;">04 · Knowledge Graph</div>
+    <div style="font-size: 12px; color: #7a766c; margin-top: 2px;">A living atlas of understanding — nodes colored by heat, sized by importance. Exploring how much chrome surrounds the canvas.</div>
+  </div>
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-bottom: 24px;">
+
+    <!-- GRAPH V1 — Full bleed + floating controls -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">A · Full-bleed canvas, floating controls only</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; height: 540px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <!-- canvas -->
+          <div style="flex: 1; position: relative; background: radial-gradient(circle at 40% 35%, #eef0e9, #e2e3d6 70%);">
+            <!-- edges + nodes (decorative) -->
+            <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 760 540" preserveAspectRatio="none"><line x1="250" y1="180" x2="400" y2="270" stroke="#c5c1b2" stroke-width="2"/><line x1="400" y1="270" x2="540" y2="200" stroke="#c5c1b2" stroke-width="2"/><line x1="400" y1="270" x2="360" y2="400" stroke="#c5c1b2" stroke-width="2"/><line x1="250" y1="180" x2="170" y2="300" stroke="#c5c1b2" stroke-width="2"/><line x1="540" y1="200" x2="600" y2="340" stroke="#c5c1b2" stroke-width="2"/></svg>
+            <div style="position:absolute;left:218px;top:148px;width:64px;height:64px;border-radius:50%;background:#30433D;display:flex;align-items:center;justify-content:center;color:#f5f1e8;font-size:9px;font-weight:600;">Vectors</div>
+            <div style="position:absolute;left:372px;top:242px;width:56px;height:56px;border-radius:50%;background:#D9C8A9;display:flex;align-items:center;justify-content:center;color:#3a352a;font-size:8px;font-weight:600;">Eigen</div>
+            <div style="position:absolute;left:516px;top:176px;width:48px;height:48px;border-radius:50%;background:#61715A;"></div>
+            <div style="position:absolute;left:146px;top:278px;width:44px;height:44px;border-radius:50%;background:#B17457;"></div>
+            <div style="position:absolute;left:338px;top:378px;width:44px;height:44px;border-radius:50%;background:#6b6f6c;"></div>
+            <div style="position:absolute;left:578px;top:318px;width:40px;height:40px;border-radius:50%;background:#30433D;"></div>
+            <!-- region label -->
+            <div style="position:absolute;left:130px;top:120px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#a39a86;font-style:italic;">Vectors Region</div>
+            <!-- floating search top-left -->
+            <div style="position:absolute;top:14px;left:14px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:8px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8a8270;width:200px;">⌕ search concepts…</div>
+            <!-- floating filter chips top-right -->
+            <div style="position:absolute;top:14px;right:14px;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+              <div style="background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:6px 12px;font-size:10px;color:#8a8270;">Highlight Weak</div>
+              <div style="background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:6px 12px;font-size:10px;color:#8a8270;">Dependencies</div>
+              <div style="background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:20px;padding:6px 12px;font-size:10px;color:#8a8270;">Learning Paths</div>
+            </div>
+            <!-- floating zoom bottom-left -->
+            <div style="position:absolute;bottom:14px;left:14px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:8px;display:flex;flex-direction:column;overflow:hidden;">
+              <div style="padding:7px 12px;font-size:13px;color:#8a8270;border-bottom:1px solid rgba(0,0,0,.06);">+</div>
+              <div style="padding:7px 12px;font-size:13px;color:#8a8270;">−</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAPH V2 — Canvas + inspector -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">B · Canvas + floating inspector panel<span style="background:#30433D;color:#f5f1e8;font-size:9px;padding:1px 7px;border-radius:10px;margin-left:6px;">✓ selected</span></div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; height: 540px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; position: relative; background: radial-gradient(circle at 40% 40%, #eef0e9, #e2e3d6 70%);">
+            <div style="position:absolute;top:14px;left:14px;background:rgba(255,255,255,.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.75);border-radius:8px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#8a8270;width:200px;">⌕ search concepts…</div>
+            <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 540 540" preserveAspectRatio="none"><line x1="180" y1="180" x2="300" y2="260" stroke="#b9c2ad" stroke-width="2.5"/><line x1="300" y1="260" x2="190" y2="360" stroke="#b9c2ad" stroke-width="2.5"/><line x1="300" y1="260" x2="400" y2="180" stroke="#c5c1b2" stroke-width="2"/></svg>
+            <div style="position:absolute;left:150px;top:148px;width:60px;height:60px;border-radius:50%;background:#30433D;"></div>
+            <div style="position:absolute;left:268px;top:228px;width:64px;height:64px;border-radius:50%;background:#D9C8A9;border:3px solid #61715A;display:flex;align-items:center;justify-content:center;color:#3a352a;font-size:8px;font-weight:600;">Eigen</div>
+            <div style="position:absolute;left:160px;top:330px;width:48px;height:48px;border-radius:50%;background:#B17457;"></div>
+            <div style="position:absolute;left:376px;top:158px;width:44px;height:44px;border-radius:50%;background:#61715A;"></div>
+          </div>
+          <!-- inspector -->
+          <div style="width: 210px; flex: none; background: rgba(255,255,255,.7); backdrop-filter: blur(14px); border-left: 1px solid #e0dac9; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;">Inspector · selected</div>
+            <div><div style="font-size:16px;font-weight:700;color:#2b2a26;">Eigenvectors</div><div style="display:flex;align-items:center;gap:6px;margin-top:4px;"><span style="width:9px;height:9px;border-radius:50%;background:#D9C8A9;"></span><span style="font-size:11px;color:#7a766c;">Warm · 61</span></div></div>
+            <div style="border-top:1px solid #e4ddcc;padding-top:10px;"><div style="font-family:'JetBrains Mono',monospace;font-size:8px;text-transform:uppercase;color:#a89f8c;margin-bottom:8px;">Prerequisites</div>
+              <div style="display:flex;align-items:center;gap:7px;margin-bottom:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#30433D;"></span><div style="height:6px;flex:1;background:#ece6d8;border-radius:3px;"></div></div>
+              <div style="display:flex;align-items:center;gap:7px;"><span style="width:8px;height:8px;border-radius:50%;background:#B17457;"></span><div style="height:6px;flex:1;background:#ece6d8;border-radius:3px;"></div></div>
+            </div>
+            <div style="margin-top:auto;background:#30433D;color:#f5f1e8;border-radius:7px;padding:10px;text-align:center;font-size:11px;font-weight:600;">Show learning path</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAPH V3 — Toolbar + status bar -->
+    <div style="flex: none; width: 820px;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6b6760; margin-bottom: 10px;">C · Top toolbar + canvas + bottom status bar</div>
+      <div style="background: #faf9f6; border-radius: 4px; box-shadow: 0 3px 14px rgba(0,0,0,.12); overflow: hidden;">
+        <div style="height: 26px; background: #e8e6df; border-bottom: 1px solid #d6d3c9; display: flex; align-items: center; padding: 0 10px; gap: 5px;"><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span><span style="width:8px;height:8px;border-radius:50%;background:#cfccc2;"></span></div>
+        <div style="display: flex; height: 540px;">
+          <div style="width: 52px; background: #30433D; flex: none; display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 10px;">
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: #f5f1e8;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+            <div style="margin-top: auto; width: 26px; height: 26px; border-radius: 7px; background: rgba(245,241,232,.18);"></div>
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column;">
+            <!-- toolbar -->
+            <div style="height: 44px; background: #fff; border-bottom: 1px solid #e0dac9; display: flex; align-items: center; padding: 0 14px; gap: 10px;">
+              <div style="background:#f1ede3;border:1px solid #e0dac9;border-radius:6px;padding:6px 12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9a917f;width:180px;">⌕ search…</div>
+              <div style="background:#f1ede3;border:1px solid #e0dac9;border-radius:6px;padding:6px 10px;font-size:10px;color:#7a766c;">Weak</div>
+              <div style="background:#f1ede3;border:1px solid #e0dac9;border-radius:6px;padding:6px 10px;font-size:10px;color:#7a766c;">Dependencies</div>
+              <div style="background:#f1ede3;border:1px solid #e0dac9;border-radius:6px;padding:6px 10px;font-size:10px;color:#7a766c;">Paths</div>
+              <div style="margin-left:auto;background:#f1ede3;border:1px solid #e0dac9;border-radius:6px;padding:6px 10px;font-size:10px;color:#7a766c;">Auto Layout</div>
+            </div>
+            <!-- canvas -->
+            <div style="flex: 1; position: relative; background: radial-gradient(circle at 45% 40%, #eef0e9, #e2e3d6 70%);">
+              <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 700 420" preserveAspectRatio="none"><line x1="220" y1="150" x2="360" y2="220" stroke="#c5c1b2" stroke-width="2"/><line x1="360" y1="220" x2="500" y2="160" stroke="#c5c1b2" stroke-width="2"/><line x1="360" y1="220" x2="320" y2="330" stroke="#c5c1b2" stroke-width="2"/></svg>
+              <div style="position:absolute;left:192px;top:122px;width:56px;height:56px;border-radius:50%;background:#30433D;"></div>
+              <div style="position:absolute;left:334px;top:194px;width:52px;height:52px;border-radius:50%;background:#D9C8A9;"></div>
+              <div style="position:absolute;left:478px;top:138px;width:46px;height:46px;border-radius:50%;background:#61715A;"></div>
+              <div style="position:absolute;left:298px;top:308px;width:42px;height:42px;border-radius:50%;background:#B17457;"></div>
+              <div style="position:absolute;right:16px;top:16px;background:#fff;border:1px solid #e0dac9;border-radius:7px;padding:10px;font-size:9px;color:#9a917f;"><div style="font-family:'JetBrains Mono',monospace;text-transform:uppercase;margin-bottom:6px;">Legend</div><div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;"><span style="width:8px;height:8px;border-radius:50%;background:#30433D;"></span>Mastered</div><div style="display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#B17457;"></span>Cold</div></div>
+            </div>
+            <!-- status bar -->
+            <div style="height: 30px; background: #fff; border-top: 1px solid #e0dac9; display: flex; align-items: center; padding: 0 14px; gap: 18px; font-family:'JetBrains Mono',monospace; font-size: 9px; color: #a89f8c;">
+              <span>48 concepts · 72 edges</span><span>region: Vectors</span><span style="margin-left:auto;">zoom 100%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+</body>
+</html>

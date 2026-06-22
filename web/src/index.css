@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --shadow-paper: 0 1px 3px rgba(31, 37, 34, 0.05);
+  --shadow-floating: 0 6px 22px rgba(31, 37, 34, 0.1);
+  --shadow-modal: 0 24px 60px rgba(31, 37, 34, 0.28);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-cream font-body text-charcoal antialiased;
+    font-feature-settings: 'kern';
+  }
+  :focus-visible {
+    outline: 2px solid #61715a;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Four-level surface system (foundations.md §3). */
+  .surface-paper {
+    background: #fbf9f3;
+    border: 1px solid rgba(48, 67, 61, 0.14);
+    border-radius: 11px;
+    box-shadow: var(--shadow-paper);
+  }
+  .surface-glass {
+    background: linear-gradient(155deg, rgba(255, 255, 255, 0.72), rgba(245, 241, 232, 0.6));
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+  }
+  .surface-floating {
+    background: #ffffff;
+    border-radius: 13px;
+    box-shadow: var(--shadow-floating);
+  }
+  .surface-modal {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: var(--shadow-modal);
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.16em] text-charcoal/60;
+  }
+}
+
+/* Honor prefers-reduced-motion everywhere (agent-rules: motion & accessibility). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,29 @@
+# Node / frontend
+web/node_modules/
+web/dist/
+web/coverage/
+web/.vite/
+*.local
+
+# Python / backend
+api/.venv/
+api/__pycache__/
+**/__pycache__/
+*.py[cod]
+api/.pytest_cache/
+api/.ruff_cache/
+api/.coverage
+api/htmlcov/
+api/*.db
+api/*.sqlite3
+
+# Env
+.env
+.env.*
+!.env.example
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
