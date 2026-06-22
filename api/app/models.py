@@ -20,6 +20,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Integer,
+    JSON,
     SmallInteger,
     String,
     Text,
@@ -83,6 +84,9 @@ class Concept(Base):
     intuition: Mapped[Optional[str]] = mapped_column(Text)
     definition: Mapped[Optional[str]] = mapped_column(Text)  # KaTeX source
     notes: Mapped[Optional[str]] = mapped_column(Text)
+    # Declarative spec for the always-visible visualization (concept-page §8).
+    # null ⇒ the panel renders a static "coming soon" frame.
+    viz_spec: Mapped[Optional[dict]] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow
@@ -221,6 +225,27 @@ class ReviewSchedule(Base):
     )
 
     concept: Mapped["Concept"] = relationship(back_populates="schedule")
+
+
+class RecallState(Base):
+    """Per-prompt projection of recent recall outcomes (concept-page §3) — the
+    RecallCard reads this instead of scanning recall_events live. One row per
+    (concept, prompt) holding the latest score; rebuilt by the projection job."""
+
+    __tablename__ = "recall_states"
+    __table_args__ = (UniqueConstraint("concept_id", "prompt", name="uq_recall_state_prompt"),)
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    concept_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("concepts.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    prompt: Mapped[str] = mapped_column(Text, nullable=False)
+    last_score: Mapped[int] = mapped_column(SmallInteger, nullable=False)
+    last_occurred_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    heat_state: Mapped[HeatState] = mapped_column(_enum(HeatState), default=HeatState.frozen)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, onupdate=utcnow
+    )
 
 
 class MetricSnapshot(Base):

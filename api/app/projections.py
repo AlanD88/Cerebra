@@ -30,6 +30,7 @@ from .models import (
     MetricSnapshot,
     ProblemAttempt,
     RecallEvent,
+    RecallState,
     ReviewSchedule,
 )
 from .scheduler import ScheduleStep, initial_state, sm2_update
@@ -161,6 +162,16 @@ def derive_heat(
     return HeatState.cold
 
 
+def score_heat(score: int) -> HeatState:
+    """Map a single recall score to a heat state for a per-prompt RecallState."""
+    return {
+        3: HeatState.mastered,
+        2: HeatState.hot,
+        1: HeatState.cold,
+        0: HeatState.frozen,
+    }[score]
+
+
 def _explanation_bonus(explanations: list[ExplanationSample], now: datetime) -> float:
     samples = [
         (e.quality / 3.0, _days_between(now, e.occurred_at))
@@ -270,8 +281,34 @@ def run_projection(db: Session, concept_id, now: datetime | None = None) -> Metr
     rs.updated_at = now
     db.add(rs)
 
+    _rebuild_recall_states(db, concept_id, now)
+
     db.flush()
     return metrics
+
+
+def _rebuild_recall_states(db: Session, concept_id, now: datetime) -> None:
+    """Latest recall outcome per distinct prompt — idempotent (delete + rebuild)."""
+    db.query(RecallState).filter(RecallState.concept_id == concept_id).delete(
+        synchronize_session=False
+    )
+    latest: dict[str, RecallEvent] = {}
+    for ev in db.scalars(select(RecallEvent).where(RecallEvent.concept_id == concept_id)):
+        at = ensure_utc(ev.occurred_at)
+        prior = latest.get(ev.prompt)
+        if prior is None or at >= ensure_utc(prior.occurred_at):
+            latest[ev.prompt] = ev
+    for prompt, ev in latest.items():
+        db.add(
+            RecallState(
+                concept_id=concept_id,
+                prompt=prompt,
+                last_score=ev.score,
+                last_occurred_at=ensure_utc(ev.occurred_at),
+                heat_state=score_heat(ev.score),
+                updated_at=now,
+            )
+        )
 
 
 def run_all_projections(db: Session, now: datetime | None = None) -> int:

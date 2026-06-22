@@ -25,6 +25,34 @@ from .models import (
 from .projections import regenerate_snapshots, run_all_projections
 
 
+# Declarative spec for the Eigenvector visualization (drag v, watch Av snap to an
+# eigen-direction). Consumed by the frontend VisualizationPanel.
+EIGEN_VIZ_SPEC = {
+    "kind": "eigen",
+    "showGuides": True,
+    "presets": [
+        {
+            "key": "symmetric",
+            "label": r"\begin{bmatrix}2&1\\1&2\end{bmatrix}",
+            "m": [[2, 1], [1, 2]],
+            "eigs": [
+                {"val": 3, "d": [0.70711, 0.70711]},
+                {"val": 1, "d": [0.70711, -0.70711]},
+            ],
+        },
+        {
+            "key": "stretch",
+            "label": r"\begin{bmatrix}2&0\\0&0.5\end{bmatrix}",
+            "m": [[2, 0], [0, 0.5]],
+            "eigs": [
+                {"val": 2, "d": [1, 0]},
+                {"val": 0.5, "d": [0, 1]},
+            ],
+        },
+    ],
+}
+
+
 def _recall(concept: Concept, score: int, when: datetime, prompt: str) -> RecallEvent:
     return RecallEvent(
         concept_id=concept.id,
@@ -77,9 +105,14 @@ def seed(db: Session, now: datetime | None = None, *, force: bool = False) -> Su
         name="Eigenvector",
         slug="eigenvector",
         importance=4,
-        intuition="A direction left unchanged (up to scale) by a transformation.",
-        definition=r"A\vec{v} = \lambda \vec{v}",
-        notes="Eigenvalue lambda is the scaling factor.",
+        intuition=(
+            "Most vectors get knocked off their line when A acts on them. An "
+            "eigenvector is the rare direction A leaves pointing the same way — it "
+            "only gets scaled, by a factor lambda called the eigenvalue."
+        ),
+        definition=r"A\mathbf{v} = \lambda\mathbf{v}, \qquad \mathbf{v} \neq \mathbf{0}",
+        notes="Symmetric A ⇒ eigenvectors are orthogonal. An n×n matrix has at most n independent eigenvectors.",
+        viz_spec=EIGEN_VIZ_SPEC,
     )
     svd = Concept(
         subject_id=subject.id,
