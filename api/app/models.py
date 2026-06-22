@@ -14,6 +14,7 @@ from typing import Optional
 from sqlalchemy import (
     Boolean,
     CheckConstraint,
+    Date,
     DateTime,
     Enum as SAEnum,
     Float,
@@ -220,6 +221,29 @@ class ReviewSchedule(Base):
     )
 
     concept: Mapped["Concept"] = relationship(back_populates="schedule")
+
+
+class MetricSnapshot(Base):
+    """Daily time-series projection (dashboard-frontend.md §7). A row with both
+    concept_id and subject_id NULL is the all-subjects rollup. Still derived
+    only from the event log — idempotent and replayable."""
+
+    __tablename__ = "metric_snapshots"
+    __table_args__ = (
+        UniqueConstraint("concept_id", "subject_id", "as_of", name="uq_snapshot_day"),
+    )
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    subject_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+        Uuid, ForeignKey("subjects.id", ondelete="CASCADE")
+    )
+    concept_id: Mapped[Optional[uuid.UUID]] = mapped_column(
+        Uuid, ForeignKey("concepts.id", ondelete="CASCADE")
+    )
+    as_of: Mapped[datetime] = mapped_column(Date, nullable=False, index=True)
+    mastery: Mapped[float] = mapped_column(Float, default=0.0)
+    retention: Mapped[float] = mapped_column(Float, default=0.0)
+    reviews: Mapped[int] = mapped_column(Integer, default=0)
 
 
 # --------------------------------------------------------------------------- #

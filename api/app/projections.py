@@ -15,16 +15,19 @@ you get identical state.
 from __future__ import annotations
 
 import math
+from collections import defaultdict
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import date, datetime, time, timedelta, timezone
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from .enums import HeatState
 from .models import (
+    Concept,
     ConceptMetric,
     ExplanationEvent,
+    MetricSnapshot,
     ProblemAttempt,
     RecallEvent,
     ReviewSchedule,
@@ -273,10 +276,94 @@ def run_projection(db: Session, concept_id, now: datetime | None = None) -> Metr
 
 def run_all_projections(db: Session, now: datetime | None = None) -> int:
     """Replay every concept's projection. Returns the count processed."""
-    from .models import Concept
-
     now = ensure_utc(now or datetime.now(timezone.utc))
     concept_ids = list(db.scalars(select(Concept.id)))
     for cid in concept_ids:
         run_projection(db, cid, now=now)
     return len(concept_ids)
+
+
+# --------------------------------------------------------------------------- #
+# Heat from an aggregate mastery (used where only avg mastery is known, e.g.
+# subject rollups). Matches the client heatState bands (foundations.md §4).
+# --------------------------------------------------------------------------- #
+def heat_from_mastery(mastery_fraction: float) -> HeatState:
+    m = mastery_fraction * 100.0
+    if m >= 85:
+        return HeatState.mastered
+    if m >= 70:
+        return HeatState.hot
+    if m >= 50:
+        return HeatState.warm
+    if m >= 25:
+        return HeatState.cold
+    return HeatState.frozen
+
+
+# --------------------------------------------------------------------------- #
+# Daily snapshots (metric_snapshots) — the all-subjects rollup time series the
+# RetentionTrends card reads. Derived solely from the event log; idempotent
+# (delete + rebuild the rollup each run).
+# --------------------------------------------------------------------------- #
+def regenerate_snapshots(db: Session, now: datetime | None = None, window_days: int = 30) -> int:
+    now = ensure_utc(now or datetime.now(timezone.utc))
+
+    db.query(MetricSnapshot).filter(
+        MetricSnapshot.concept_id.is_(None), MetricSnapshot.subject_id.is_(None)
+    ).delete(synchronize_session=False)
+    db.flush()
+
+    recalls_by: dict = defaultdict(list)
+    problems_by: dict = defaultdict(list)
+    expl_by: dict = defaultdict(list)
+    for r in db.scalars(select(RecallEvent)):
+        recalls_by[r.concept_id].append(RecallSample(r.score, ensure_utc(r.occurred_at)))
+    for p in db.scalars(select(ProblemAttempt)):
+        problems_by[p.concept_id].append(
+            ProblemSample(p.is_correct, p.partial, ensure_utc(p.occurred_at))
+        )
+    for e in db.scalars(select(ExplanationEvent)):
+        expl_by[e.concept_id].append(
+            ExplanationSample(e.quality, e.direction.value, ensure_utc(e.occurred_at))
+        )
+
+    concept_ids = list(db.scalars(select(Concept.id)))
+    today: date = now.date()
+    rows: list[MetricSnapshot] = []
+
+    for offset in range(window_days - 1, -1, -1):
+        day = today - timedelta(days=offset)
+        cutoff = datetime.combine(day, time.max, tzinfo=timezone.utc)
+        if cutoff > now:
+            cutoff = now
+
+        masteries: list[float] = []
+        retentions: list[float] = []
+        for cid in concept_ids:
+            recs = [s for s in recalls_by[cid] if s.occurred_at <= cutoff]
+            if not recs:
+                continue
+            probs = [s for s in problems_by[cid] if s.occurred_at <= cutoff]
+            expls = [s for s in expl_by[cid] if s.occurred_at <= cutoff]
+            schedule = compute_schedule(recs)
+            m = compute_metrics(recs, probs, expls, schedule, now=cutoff)
+            masteries.append(m.mastery)
+            retentions.append(m.retention)
+
+        reviews = sum(
+            1 for samples in recalls_by.values() for s in samples if s.occurred_at.date() == day
+        )
+        rows.append(
+            MetricSnapshot(
+                subject_id=None,
+                concept_id=None,
+                as_of=day,
+                mastery=(sum(masteries) / len(masteries)) if masteries else 0.0,
+                retention=(sum(retentions) / len(retentions)) if retentions else 0.0,
+                reviews=reviews,
+            )
+        )
+
+    db.add_all(rows)
+    db.flush()
+    return len(rows)

@@ -12,8 +12,14 @@ interface HeatDotProps {
  * The dot is decorative (aria-hidden); the label carries the meaning.
  */
 export function HeatDot({ state, showLabel = true, className }: HeatDotProps) {
+  // The wrapper always carries the heat name (aria-label / title) so the meaning
+  // survives even when the visible text label is suppressed for space.
   return (
-    <span className={['inline-flex items-center gap-1.5', className].filter(Boolean).join(' ')}>
+    <span
+      className={['inline-flex items-center gap-1.5', className].filter(Boolean).join(' ')}
+      aria-label={showLabel ? undefined : HEAT_LABEL[state]}
+      title={showLabel ? undefined : HEAT_LABEL[state]}
+    >
       <span
         aria-hidden
         className="inline-block h-2.5 w-2.5 shrink-0 rounded-full"

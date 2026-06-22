@@ -55,6 +55,24 @@
   }
 }
 
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer utilities {
+  /* Fast (150ms) card reveal; collapsed by the reduced-motion rule below. */
+  .card-reveal {
+    animation: card-in 150ms var(--ease-standard) both;
+  }
+}
+
 /* Honor prefers-reduced-motion everywhere (agent-rules: motion & accessibility). */
 @media (prefers-reduced-motion: reduce) {
   *,

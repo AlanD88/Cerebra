@@ -22,7 +22,7 @@ from .models import (
     RecallEvent,
     Subject,
 )
-from .projections import run_all_projections
+from .projections import regenerate_snapshots, run_all_projections
 
 
 def _recall(concept: Concept, score: int, when: datetime, prompt: str) -> RecallEvent:
@@ -198,6 +198,7 @@ def seed(db: Session, now: datetime | None = None, *, force: bool = False) -> Su
 
     db.flush()
     run_all_projections(db, now=now)
+    regenerate_snapshots(db, now=now)
     db.commit()
     return subject
 
