@@ -115,3 +115,36 @@ class InsightOut(CamelModel):
     summary: str
     suggested_concept_id: Optional[uuid.UUID]
     cta: str
+
+
+# --- Review read/write DTOs (review-frontend.md §3) ------------------------- #
+class ReviewItemOut(CamelModel):
+    item_id: uuid.UUID
+    concept_id: uuid.UUID
+    concept_name: str
+    prompt: str
+
+
+class ReviewSessionOut(CamelModel):
+    session_id: uuid.UUID
+    total: int
+    concept_name: Optional[str]
+    items: list[ReviewItemOut]
+
+
+class CreateSessionIn(CamelModel):
+    concept_id: Optional[uuid.UUID] = None
+
+
+class AssessIn(CamelModel):
+    item_id: uuid.UUID
+    learner_answer: str
+
+
+class AssessResultOut(CamelModel):
+    score: int
+    label: str
+    rationale: str
+    next_interval_days: float
+    heat_state: HeatState
+    model_answer: Optional[str]

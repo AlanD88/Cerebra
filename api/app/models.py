@@ -294,3 +294,36 @@ class GraphLayout(Base):
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow
     )
+
+
+# --------------------------------------------------------------------------- #
+# Review sessions — a transient queue of items (operational, not a projection).
+# --------------------------------------------------------------------------- #
+class ReviewSession(Base):
+    __tablename__ = "review_sessions"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+    items: Mapped[list["ReviewSessionItem"]] = relationship(
+        back_populates="session", cascade="all, delete-orphan", order_by="ReviewSessionItem.order_index"
+    )
+
+
+class ReviewSessionItem(Base):
+    __tablename__ = "review_session_items"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    session_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("review_sessions.id", ondelete="CASCADE"), nullable=False, index=True
+    )
+    concept_id: Mapped[uuid.UUID] = mapped_column(
+        Uuid, ForeignKey("concepts.id", ondelete="CASCADE"), nullable=False
+    )
+    prompt: Mapped[str] = mapped_column(Text, nullable=False)
+    model_answer: Mapped[Optional[str]] = mapped_column(Text)
+    order_index: Mapped[int] = mapped_column(Integer, default=0)
+    assessed: Mapped[bool] = mapped_column(Boolean, default=False)
+    score: Mapped[Optional[int]] = mapped_column(SmallInteger)
+
+    session: Mapped["ReviewSession"] = relationship(back_populates="items")

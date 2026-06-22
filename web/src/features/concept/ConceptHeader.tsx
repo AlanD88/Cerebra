@@ -46,7 +46,7 @@ export function ConceptHeader({ detail }: { detail?: ConceptDetail }) {
       <div className="flex gap-2.5">
         <button
           type="button"
-          onClick={() => navigate('/review')}
+          onClick={() => navigate(`/review?concept=${detail.conceptId}`)}
           className="rounded-xl bg-forest px-4 py-2.5 text-body font-semibold text-cream transition-colors duration-fast hover:bg-forest/90"
         >
           Practice recall
