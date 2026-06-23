@@ -15,7 +15,15 @@ const fmt = (n: number) => String(Math.round(n * 100) / 100);
  * (agent-rules / concept-page-frontend.md §2). Interaction state is purely
  * local — exploration is never written back as an assessment.
  */
-export function VisualizationPanel({ vizSpec }: { vizSpec: VizSpec | null }) {
+export function VisualizationPanel({
+  vizSpec,
+  prominent = false,
+}: {
+  vizSpec: VizSpec | null;
+  // Focus mode (polish-frontend.md §1) makes the viz *more* prominent — never
+  // hidden or tab-gated. `prominent` only grows its height; bindings are identical.
+  prominent?: boolean;
+}) {
   return (
     <section className="card-reveal surface-paper p-4" aria-label="Concept visualization">
       <div className="mb-3 flex items-center justify-between">
@@ -31,23 +39,27 @@ export function VisualizationPanel({ vizSpec }: { vizSpec: VizSpec | null }) {
         </div>
       </div>
       {vizSpec?.kind === 'eigen' && vizSpec.presets.length > 0 ? (
-        <EigenViz spec={vizSpec} />
+        <EigenViz spec={vizSpec} prominent={prominent} />
       ) : (
-        <StaticFrame />
+        <StaticFrame prominent={prominent} />
       )}
     </section>
   );
 }
 
-function StaticFrame() {
+function StaticFrame({ prominent }: { prominent: boolean }) {
   return (
-    <div className="flex h-[40vh] min-h-[300px] items-center justify-center rounded-lg bg-sage/10 text-body text-charcoal/50">
+    <div
+      className={`flex ${
+        prominent ? 'h-[62vh]' : 'h-[40vh]'
+      } min-h-[300px] items-center justify-center rounded-lg bg-sage/10 text-body text-charcoal/50`}
+    >
       Interactive visualization coming soon for this concept.
     </div>
   );
 }
 
-function EigenViz({ spec }: { spec: VizSpec }) {
+function EigenViz({ spec, prominent }: { spec: VizSpec; prominent: boolean }) {
   const [presetKey, setPresetKey] = useState(spec.presets[0].key);
   const [v, setV] = useState({ x: 1.5, y: 0.5 });
   const dragging = useRef(false);
@@ -99,7 +111,11 @@ function EigenViz({ spec }: { spec: VizSpec }) {
 
   return (
     <div className="flex flex-col gap-3 lg:flex-row">
-      <div className="min-h-[300px] flex-1 rounded-lg bg-cream/40 lg:h-[40vh]">
+      <div
+        className={`min-h-[300px] flex-1 rounded-lg bg-cream/40 ${
+          prominent ? 'lg:h-[62vh]' : 'lg:h-[40vh]'
+        }`}
+      >
         <svg
           ref={svgRef}
           viewBox="0 0 460 360"

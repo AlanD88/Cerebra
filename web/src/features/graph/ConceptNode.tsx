@@ -9,6 +9,7 @@ export interface ConceptNodeData {
   mastery: number;
   dimmed: boolean;
   selected: boolean;
+  onActivate?: () => void;
 }
 
 function ConceptNodeImpl({ data }: { data: ConceptNodeData }) {
@@ -16,10 +17,20 @@ function ConceptNodeImpl({ data }: { data: ConceptNodeData }) {
 
   return (
     <div
-      className="flex flex-col items-center transition-opacity duration-fast"
+      className="flex flex-col items-center rounded transition-opacity duration-fast"
       style={{ opacity: data.dimmed ? 0.26 : 1 }}
       title={`${data.label} · ${heatLabel(data.heatState)}`}
+      // Keyboard-operable node (polish-frontend §3): Tab to focus, Enter/Space to
+      // open the inspector — the same action as a click.
+      role="button"
+      tabIndex={0}
       aria-label={`${data.label}, ${heatLabel(data.heatState)}`}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          data.onActivate?.();
+        }
+      }}
     >
       <Handle type="target" position={Position.Top} style={{ opacity: 0 }} isConnectable={false} />
       <div

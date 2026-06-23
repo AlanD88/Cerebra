@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ErrorState, Skeleton } from '../../components/feedback';
+import { ModeToggle } from '../../components/ModeToggle';
+import { useMode } from '../preferences/useMode';
 import { GraphCanvas } from './GraphCanvas';
 import { graphQueries } from './queries';
+import type { SubjectLite } from './types';
 
 /**
  * Knowledge Graph surface (Variation B — "constellation atlas"). Resolves the
@@ -15,6 +18,8 @@ export function GraphPage() {
   const { subjectId } = useParams<{ subjectId: string }>();
   const navigate = useNavigate();
   const subjectsQ = useQuery(graphQueries.subjects());
+  const { mode } = useMode('graph');
+  const immersive = mode === 'immersive';
 
   if (subjectsQ.isLoading) {
     return (
@@ -53,32 +58,69 @@ export function GraphPage() {
   }
 
   const active = subjects.find((s) => s.id === subjectId) ?? subjects[0];
+  const switcher = subjects.length > 1 && (
+    <SubjectSwitcher subjects={subjects} activeId={active.id} onPick={(id) => navigate(`/graph/${id}`)} />
+  );
+
+  // Immersive mode: the page header drops away and the canvas goes full-bleed
+  // (breaking out of the AppShell padding); chrome floats over the graph.
+  if (immersive) {
+    return (
+      <div className="-mx-8 -my-8">
+        <GraphCanvas
+          key={active.id}
+          subjectId={active.id}
+          subjectName={active.name}
+          immersive
+          overlay={
+            <div className="surface-floating flex items-center gap-3 px-4 py-2">
+              {switcher}
+              <ModeToggle surface="graph" />
+            </div>
+          }
+        />
+      </div>
+    );
+  }
 
   return (
     <div>
       <GraphHeader>
-        {subjects.length > 1 && (
-          <div className="flex flex-wrap gap-1.5">
-            {subjects.map((s) => (
-              <button
-                key={s.id}
-                type="button"
-                onClick={() => navigate(`/graph/${s.id}`)}
-                aria-pressed={s.id === active.id}
-                className={`rounded-full px-3 py-1 text-caption transition-colors duration-fast ${
-                  s.id === active.id
-                    ? 'bg-forest text-cream'
-                    : 'border border-forest/20 text-charcoal/70 hover:bg-forest/5'
-                }`}
-              >
-                {s.name}
-              </button>
-            ))}
-          </div>
-        )}
+        {switcher}
+        <ModeToggle surface="graph" />
       </GraphHeader>
 
       <GraphCanvas key={active.id} subjectId={active.id} subjectName={active.name} />
+    </div>
+  );
+}
+
+function SubjectSwitcher({
+  subjects,
+  activeId,
+  onPick,
+}: {
+  subjects: SubjectLite[];
+  activeId: string;
+  onPick: (id: string) => void;
+}) {
+  return (
+    <div className="flex flex-wrap gap-1.5">
+      {subjects.map((s) => (
+        <button
+          key={s.id}
+          type="button"
+          onClick={() => onPick(s.id)}
+          aria-pressed={s.id === activeId}
+          className={`rounded-full px-3 py-1 text-caption transition-colors duration-fast ${
+            s.id === activeId
+              ? 'bg-forest text-cream'
+              : 'border border-forest/20 text-charcoal/70 hover:bg-forest/5'
+          }`}
+        >
+          {s.name}
+        </button>
+      ))}
     </div>
   );
 }
@@ -90,7 +132,7 @@ function GraphHeader({ children }: { children?: React.ReactNode }) {
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-charcoal/50">Atlas</p>
         <h1 className="mt-1 font-display text-h1 font-medium text-charcoal">Knowledge Graph</h1>
       </div>
-      {children}
+      <div className="flex items-center gap-3">{children}</div>
     </header>
   );
 }

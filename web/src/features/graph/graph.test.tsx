@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, waitFor } from '@testing-library/react';
 import { Route, Routes } from 'react-router-dom';
 import { ReactFlowProvider } from 'reactflow';
 import { renderWithProviders, stubFetchByPath } from '../../test/utils';
@@ -41,6 +42,19 @@ describe('ConceptNode', () => {
       </ReactFlowProvider>,
     );
     expect(screen.getByLabelText('Eigenvector, Warm')).toHaveStyle({ opacity: '0.26' });
+  });
+
+  it('is keyboard-operable: Tab-focusable and activates on Enter', () => {
+    const onActivate = vi.fn();
+    renderWithProviders(
+      <ReactFlowProvider>
+        <ConceptNode data={nodeData({ onActivate })} />
+      </ReactFlowProvider>,
+    );
+    const node = screen.getByRole('button', { name: 'Eigenvector, Warm' });
+    expect(node).toHaveAttribute('tabindex', '0');
+    fireEvent.keyDown(node, { key: 'Enter' });
+    expect(onActivate).toHaveBeenCalledOnce();
   });
 });
 
@@ -130,6 +144,31 @@ describe('ConceptInspector', () => {
     await screen.findByRole('heading', { name: 'Eigenvector' });
     fireEvent.keyDown(window, { key: 'Escape' });
     expect(onClose).toHaveBeenCalledOnce();
+  });
+
+  it('restores focus to the opener when closed (focus trap)', async () => {
+    vi.stubGlobal('fetch', stub());
+    function Harness() {
+      const [open, setOpen] = useState(false);
+      return (
+        <>
+          <button data-testid="opener" onClick={() => setOpen(true)}>
+            open
+          </button>
+          {open && (
+            <ConceptInspector conceptId="c1" onClose={() => setOpen(false)} onShowPath={() => {}} />
+          )}
+        </>
+      );
+    }
+    renderWithProviders(<Harness />);
+    const opener = screen.getByTestId('opener');
+    opener.focus();
+    fireEvent.click(opener); // mounts the inspector, capturing the opener as the return target
+    expect(await screen.findByRole('dialog')).toBeInTheDocument();
+
+    fireEvent.keyDown(window, { key: 'Escape' });
+    await waitFor(() => expect(opener).toHaveFocus());
   });
 });
 

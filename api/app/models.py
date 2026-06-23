@@ -327,3 +327,19 @@ class ReviewSessionItem(Base):
     score: Mapped[Optional[int]] = mapped_column(SmallInteger)
 
     session: Mapped["ReviewSession"] = relationship(back_populates="items")
+
+
+# --------------------------------------------------------------------------- #
+# User preferences — presentational choices only (Phase 6 optional modes).
+# Single-user product → a singleton row. `modes` never holds a learning metric;
+# it only swaps layout/tone, so it is safe to mutate and cache optimistically.
+# --------------------------------------------------------------------------- #
+class UserPreference(Base):
+    __tablename__ = "user_preferences"
+
+    id: Mapped[uuid.UUID] = mapped_column(Uuid, primary_key=True, default=uuid.uuid4)
+    modes: Mapped[dict] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utcnow, onupdate=utcnow
+    )

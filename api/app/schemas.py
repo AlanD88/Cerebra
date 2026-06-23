@@ -186,3 +186,14 @@ class LayoutPosIn(CamelModel):
 
 class LayoutPatchIn(CamelModel):
     positions: list[LayoutPosIn]
+
+
+# --- Preferences DTOs (polish-frontend.md §2) ------------------------------- #
+# `modes` maps a surface ("concept"|"graph"|"review") to its presentational
+# variant. Presentation only — never a data binding or a learning metric.
+class PreferencesOut(CamelModel):
+    modes: dict[str, str]
+
+
+class PreferencesPatchIn(CamelModel):
+    modes: dict[str, str]

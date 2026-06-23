@@ -22,15 +22,24 @@ import type { GraphFilter } from './types';
 
 const nodeTypes = { concept: ConceptNode };
 
-export function GraphCanvas({ subjectId, subjectName }: { subjectId: string; subjectName?: string }) {
+interface GraphCanvasProps {
+  subjectId: string;
+  subjectName?: string;
+  // Immersive mode (polish-frontend §1): full-bleed frame, controls float over it.
+  immersive?: boolean;
+  // Slot rendered top-center over the canvas (used for immersive-mode chrome).
+  overlay?: React.ReactNode;
+}
+
+export function GraphCanvas(props: GraphCanvasProps) {
   return (
     <ReactFlowProvider>
-      <GraphCanvasInner subjectId={subjectId} subjectName={subjectName} />
+      <GraphCanvasInner {...props} />
     </ReactFlowProvider>
   );
 }
 
-function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subjectName?: string }) {
+function GraphCanvasInner({ subjectId, subjectName, immersive = false, overlay }: GraphCanvasProps) {
   const layoutQ = useQuery(graphQueries.layout(subjectId));
   const nodesQ = useQuery(graphQueries.nodes(subjectId));
   const edgesQ = useQuery(graphQueries.edges(subjectId));
@@ -99,6 +108,7 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
           mastery: n.mastery,
           dimmed: isNodeDimmed(active, n.conceptId),
           selected: selected === n.conceptId,
+          onActivate: () => setSelected(n.conceptId),
         },
       })),
     [nodes, positions, active, selected],
@@ -142,7 +152,7 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
 
   if (isError) {
     return (
-      <CanvasFrame>
+      <CanvasFrame immersive={immersive}>
         <div className="m-auto max-w-sm text-center">
           <ErrorState
             onRetry={() => {
@@ -159,7 +169,7 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
 
   if (!isLoading && nodes.length === 0) {
     return (
-      <CanvasFrame>
+      <CanvasFrame immersive={immersive}>
         <p className="m-auto text-body text-charcoal/55">
           No concepts yet — create some to grow your atlas.
         </p>
@@ -170,7 +180,10 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
   const noMatch = search.trim().length > 0 && active !== null && active.size === 0;
 
   return (
-    <CanvasFrame>
+    <CanvasFrame immersive={immersive}>
+      {/* Immersive-mode chrome floats top-center, clear of the corner controls. */}
+      {overlay && <div className="absolute left-1/2 top-5 z-20 -translate-x-1/2">{overlay}</div>}
+
       {/* faint region watermark — the named region behind the constellation */}
       {subjectName && (
         <span className="pointer-events-none absolute left-1/2 top-10 z-0 -translate-x-1/2 font-mono text-[11px] uppercase tracking-[0.3em] text-charcoal/15">
@@ -195,6 +208,7 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
         onlyRenderVisibleElements
         proOptions={{ hideAttribution: true }}
         nodesConnectable={false}
+        nodesFocusable={false}
       >
         <Background variant={BackgroundVariant.Dots} gap={28} size={1} color="rgba(141,156,132,0.25)" />
       </ReactFlow>
@@ -264,9 +278,21 @@ function GraphCanvasInner({ subjectId, subjectName }: { subjectId: string; subje
   );
 }
 
-function CanvasFrame({ children }: { children: React.ReactNode }) {
+function CanvasFrame({
+  children,
+  immersive = false,
+}: {
+  children: React.ReactNode;
+  immersive?: boolean;
+}) {
   return (
-    <div className="relative flex h-[calc(100vh-9rem)] min-h-[480px] w-full overflow-hidden rounded-xl border border-forest/10 bg-cream">
+    <div
+      className={`relative flex min-h-[480px] w-full overflow-hidden bg-cream ${
+        immersive
+          ? 'h-[calc(100vh-1.5rem)] rounded-none'
+          : 'h-[calc(100vh-9rem)] rounded-xl border border-forest/10'
+      }`}
+    >
       {children}
     </div>
   );

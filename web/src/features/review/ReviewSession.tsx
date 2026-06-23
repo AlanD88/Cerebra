@@ -4,10 +4,47 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../lib/api';
 import { HeatDot } from '../../components/HeatDot';
 import { Tex } from '../../components/Tex';
+import { ModeToggle } from '../../components/ModeToggle';
 import { ErrorState } from '../../components/feedback';
+import { useMode } from '../preferences/useMode';
 import { initialState, reducer } from './reducer';
 import { reviewQueries } from './queries';
 import type { AssessResult, ReviewItem } from './types';
+
+// Tutor tone (polish-frontend §1) warms the microcopy only. The score is still
+// AI-assigned and read-only; the keyboard model and write path are unchanged.
+interface ReviewCopy {
+  promptEyebrow: string;
+  answerLabel: string;
+  submitHint: string;
+  submit: string;
+  submitting: string;
+  modelAnswer: string;
+  assessedBy: string;
+  placeholder: string;
+}
+
+const DEFAULT_COPY: ReviewCopy = {
+  promptEyebrow: 'Prompt',
+  answerLabel: 'Your recall',
+  submitHint: '⌘/Ctrl + Enter to submit',
+  submit: 'Submit',
+  submitting: 'Assessing your answer…',
+  modelAnswer: 'Model answer',
+  assessedBy: 'AI-assessed',
+  placeholder: 'Answer in your own words…',
+};
+
+const TUTOR_COPY: ReviewCopy = {
+  promptEyebrow: "Let's recall",
+  answerLabel: 'In your own words',
+  submitHint: "⌘/Ctrl + Enter when you're ready",
+  submit: 'Share my answer',
+  submitting: 'Reading your answer…',
+  modelAnswer: "How I'd put it",
+  assessedBy: 'Your tutor',
+  placeholder: 'Take your time — say it however it comes to you…',
+};
 
 function ReviewChrome({ children }: { children: React.ReactNode }) {
   return (
@@ -22,6 +59,9 @@ export function ReviewSession() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const sessionQ = useQuery(reviewQueries.session(sessionId));
+  const { mode } = useMode('review');
+  const tutor = mode === 'tutor';
+  const copy = tutor ? TUTOR_COPY : DEFAULT_COPY;
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const answerRef = useRef<HTMLTextAreaElement>(null);
@@ -123,6 +163,9 @@ export function ReviewSession() {
 
   return (
     <ReviewChrome>
+      <div className="mb-4 flex justify-end">
+        <ModeToggle surface="review" />
+      </div>
       <ProgressIndicator
         index={state.index}
         total={total}
@@ -131,12 +174,12 @@ export function ReviewSession() {
       />
 
       <div className="mt-8 flex-1">
-        <p className="eyebrow">Prompt</p>
+        <p className="eyebrow">{copy.promptEyebrow}</p>
         <div className="mt-2 font-display text-h2 leading-snug text-charcoal">{current?.prompt}</div>
 
         <div className="mt-7">
           <label htmlFor="recall-answer" className="eyebrow">
-            Your recall
+            {copy.answerLabel}
           </label>
           <textarea
             id="recall-answer"
@@ -150,7 +193,7 @@ export function ReviewSession() {
                 handleSubmit();
               }
             }}
-            placeholder="Answer in your own words…"
+            placeholder={copy.placeholder}
             rows={5}
             className="mt-2 w-full resize-none rounded-xl border border-forest/15 bg-paper p-4 text-body-lg leading-relaxed text-charcoal outline-none transition-colors duration-fast focus:border-moss disabled:opacity-70"
             style={{ background: '#FBF9F3' }}
@@ -164,14 +207,14 @@ export function ReviewSession() {
 
         {!assessed && (
           <div className="mt-4 flex items-center justify-between">
-            <span className="font-mono text-[11px] text-charcoal/40">⌘/Ctrl + Enter to submit</span>
+            <span className="font-mono text-[11px] text-charcoal/40">{copy.submitHint}</span>
             <button
               type="button"
               onClick={handleSubmit}
               disabled={!state.draft.trim() || assessing}
               className="rounded-xl bg-forest px-5 py-2.5 text-body font-semibold text-cream transition-colors duration-fast hover:bg-forest/90 disabled:opacity-40"
             >
-              {assessing ? 'Assessing your answer…' : 'Submit'}
+              {assessing ? copy.submitting : copy.submit}
             </button>
           </div>
         )}
@@ -179,6 +222,7 @@ export function ReviewSession() {
         {assessed && state.outcome && (
           <AssessmentReveal
             outcome={state.outcome}
+            copy={copy}
             isLast={state.index + 1 >= total}
             onContinue={handleContinue}
             continueRef={continueRef}
@@ -230,11 +274,13 @@ function ProgressIndicator({
 // Continue; there is no scoring control (agent-rules: no self-grading).
 function AssessmentReveal({
   outcome,
+  copy,
   isLast,
   onContinue,
   continueRef,
 }: {
   outcome: AssessResult;
+  copy: ReviewCopy;
   isLast: boolean;
   onContinue: () => void;
   continueRef: React.RefObject<HTMLButtonElement>;
@@ -243,7 +289,7 @@ function AssessmentReveal({
     <div className="card-reveal mt-7">
       {outcome.modelAnswer && (
         <div className="surface-paper p-5">
-          <p className="eyebrow">Model answer</p>
+          <p className="eyebrow">{copy.modelAnswer}</p>
           <div className="mt-2 overflow-x-auto">
             <Tex display tex={outcome.modelAnswer} className="text-charcoal" />
           </div>
@@ -256,7 +302,7 @@ function AssessmentReveal({
             <HeatDot state={outcome.heatState} showLabel={false} />
             <span className="text-body-lg font-semibold text-charcoal">{outcome.label}</span>
             <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-charcoal/45">
-              AI-assessed · score {outcome.score}
+              {copy.assessedBy} · score {outcome.score}
             </span>
           </span>
           <span className="font-mono text-caption text-charcoal/55">

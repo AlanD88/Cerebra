@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { HeatDot } from '../../components/HeatDot';
 import { ErrorState, Skeleton } from '../../components/feedback';
 import { pct } from '../../lib/format';
+import { useFocusTrap } from '../../lib/useFocusTrap';
 import { conceptQueries } from '../concept/queries';
 
 // L3 floating inspector. Reuses the Phase 3 ['concept', id] + deps queries so
@@ -23,15 +24,7 @@ export function ConceptInspector({
   const detailQ = useQuery(conceptQueries.detail(conceptId));
   const depsQ = useQuery(conceptQueries.deps(conceptId));
   const panelRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    panelRef.current?.focus();
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [onClose]);
+  useFocusTrap(panelRef, onClose);
 
   const detail = detailQ.data;
 
