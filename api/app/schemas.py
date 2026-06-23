@@ -148,3 +148,41 @@ class AssessResultOut(CamelModel):
     next_interval_days: float
     heat_state: HeatState
     model_answer: Optional[str]
+
+
+# --- Knowledge Graph DTOs (graph-frontend.md §2/§3) ------------------------- #
+class SubjectOut(CamelModel):
+    id: uuid.UUID
+    name: str
+
+
+class GraphLayoutOut(CamelModel):
+    concept_id: uuid.UUID
+    x: float
+    y: float
+    pinned: bool
+
+
+class GraphNodeOut(CamelModel):
+    concept_id: uuid.UUID
+    name: str
+    importance: int
+    heat_state: HeatState
+    mastery: float
+
+
+class GraphEdgeOut(CamelModel):
+    source: uuid.UUID
+    target: uuid.UUID
+    type: str
+    strength: Optional[float]
+
+
+class LayoutPosIn(CamelModel):
+    concept_id: uuid.UUID
+    x: float
+    y: float
+
+
+class LayoutPatchIn(CamelModel):
+    positions: list[LayoutPosIn]

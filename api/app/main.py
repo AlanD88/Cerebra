@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import settings
-from .routers import concepts, dashboard, health, review, subjects
+from .routers import concepts, dashboard, graph, health, review, subjects
 
 
 def create_app() -> FastAPI:
@@ -14,7 +14,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"],
     )
-    for module in (health, dashboard, concepts, subjects, review):
+    for module in (health, dashboard, concepts, subjects, review, graph):
         app.include_router(module.router, prefix="/api/v1")
     return app
 
