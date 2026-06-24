@@ -66,7 +66,8 @@ projections only change when the projection job runs (after a review).
 | `projections.py` | The event→projection pipeline + the metric/heat math |
 | `scoring.py` | Server-side answer assessment (the "AI" score; heuristic default) |
 | `*_service.py` | Read aggregations / orchestration per surface |
-| `routers/*` | Thin FastAPI routers, all mounted under `/api/v1` |
+| `ingest_service.py` | The external write surface (deep-learn → Cerebra bridge): upsert subjects/concepts/relationships and log recall/problem/explanation events, each through the projection pipeline; `sync_session` batches a whole study session |
+| `routers/*` | Thin FastAPI routers, all mounted under `/api/v1` (incl. `ingest` for the bridge) |
 | `seed.py` | Demo dataset + `python -m app.seed` entrypoint |
 | `schemas.py` | Pydantic DTOs, emitted as camelCase |
 

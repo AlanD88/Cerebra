@@ -37,6 +37,7 @@ web/        React + TypeScript + Vite frontend              — detail: ARCHITEC
 specs/      authoritative written specs (read to change behavior)
 prototypes/ hi-fi HTML design references (open in a browser; do not copy)
 screenshots/ static PNG captures of the four surfaces
+mcp/        Cerebra MCP bridge (deep-learn ↔ Cerebra over the ingest API) — see mcp/README.md
 dev.sh      one-command local runner (see DEVELOPMENT.md)
 ```
 
@@ -46,6 +47,7 @@ dev.sh      one-command local runner (see DEVELOPMENT.md)
 - `scheduler.py` — pure SM-2 policy on a 0–3 score scale (no DB/clock)
 - `scoring.py` — server-side answer assessment (the "AI" score; heuristic by default)
 - `*_service.py` — read aggregations per surface; `routers/*` — thin FastAPI routers under `/api/v1`
+- `ingest_service.py` — external write surface (the deep-learn → Cerebra bridge): upserts content + logs events through the projection pipeline (`routers/ingest.py`); see `mcp/`
 - `schemas.py` — Pydantic DTOs, emitted as **camelCase**; `seed.py` — demo dataset
 - `tests/` — pytest, against an in-memory SQLite engine (not mocks)
 

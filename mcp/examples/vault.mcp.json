@@ -1,0 +1,12 @@
+{
+  "_comment": "Copy to your vault root (e.g. ~/github/LearningMD/.mcp.json) and replace /ABS/PATH with the absolute path to this cerebra checkout. deep-learn sessions started anywhere under the vault will then auto-discover the cerebra MCP server. Requires the Cerebra API running (./dev.sh).",
+  "mcpServers": {
+    "cerebra": {
+      "command": "/ABS/PATH/cerebra/api/.venv/bin/python",
+      "args": ["/ABS/PATH/cerebra/mcp/cerebra_mcp.py"],
+      "env": {
+        "CEREBRA_API_URL": "http://localhost:8000/api/v1"
+      }
+    }
+  }
+}

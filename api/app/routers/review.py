@@ -8,7 +8,13 @@ from sqlalchemy.orm import Session
 
 from .. import review_service as rs
 from ..db import get_db
-from ..schemas import AssessIn, AssessResultOut, CreateSessionIn, ReviewSessionOut
+from ..schemas import (
+    AssessIn,
+    AssessResultOut,
+    CreateSessionIn,
+    DueReviewOut,
+    ReviewSessionOut,
+)
 
 router = APIRouter(prefix="/review", tags=["review"])
 
@@ -18,6 +24,12 @@ def create_session(body: CreateSessionIn, db: Session = Depends(get_db)) -> Revi
     session = rs.create_session(db, concept_id=body.concept_id)
     db.commit()
     return session
+
+
+# Literal route declared before the `/{session_id}` param route so it wins.
+@router.get("/due", response_model=list[DueReviewOut])
+def due(db: Session = Depends(get_db)) -> list[DueReviewOut]:
+    return rs.due_reviews(db)
 
 
 @router.get("/{session_id}", response_model=ReviewSessionOut)

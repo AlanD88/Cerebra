@@ -188,6 +188,156 @@ class LayoutPatchIn(CamelModel):
     positions: list[LayoutPosIn]
 
 
+# --- Ingest write DTOs (deep-learn → Cerebra bridge) ------------------------ #
+# A thin authoring/event-logging surface used by the MCP bridge. Every write
+# still flows through the projection pipeline; reads stay on projection tables.
+# `subject`/`concept` references accept a name OR a UUID string (resolved server
+# side). Outcomes are read-only — the score is server-assigned, never proposed.
+class SubjectIn(CamelModel):
+    name: str
+    description: Optional[str] = None
+
+
+class SubjectRefOut(CamelModel):
+    id: uuid.UUID
+    name: str
+    created: bool
+
+
+class ConceptIn(CamelModel):
+    subject: str  # name or UUID
+    name: str
+    slug: Optional[str] = None
+    importance: int = 3
+    intuition: Optional[str] = None
+    definition: Optional[str] = None
+    notes: Optional[str] = None
+    viz_spec: Optional[dict] = None
+
+
+class ConceptRefOut(CamelModel):
+    concept_id: uuid.UUID
+    subject_id: uuid.UUID
+    name: str
+    slug: str
+    created: bool
+
+
+class RelationshipIn(CamelModel):
+    subject: str  # name or UUID
+    source: str  # prerequisite — name or UUID
+    target: str  # dependent — name or UUID
+    type: str = "prerequisite"
+    strength: Optional[float] = None
+
+
+class RelationshipOut(CamelModel):
+    id: uuid.UUID
+    source: uuid.UUID
+    target: uuid.UUID
+    type: str
+    created: bool
+
+
+class RecallIn(CamelModel):
+    subject: Optional[str] = None  # required only when createIfMissing
+    concept: str  # name or UUID
+    prompt: str
+    grade: Optional[str] = None  # full | partial | forgotten
+    score: Optional[int] = None  # 0–3, alternative to grade
+    learner_answer: Optional[str] = None
+    rationale: Optional[str] = None
+    assessed_by: str = "deep-learn"
+    occurred_at: Optional[datetime] = None
+    create_if_missing: bool = False
+
+
+class ProblemIn(CamelModel):
+    subject: Optional[str] = None
+    concept: str
+    prompt: str
+    is_correct: bool
+    partial: Optional[float] = None
+    occurred_at: Optional[datetime] = None
+    create_if_missing: bool = False
+
+
+class ExplanationIn(CamelModel):
+    subject: Optional[str] = None
+    concept: str
+    content: str
+    quality: Optional[int] = None  # 0–3, feeds the mastery bonus
+    direction: str = "learner_to_ai"
+    occurred_at: Optional[datetime] = None
+    create_if_missing: bool = False
+
+
+class IngestOutcomeOut(CamelModel):
+    """Read-only projection snapshot returned after an event is logged."""
+
+    concept_id: uuid.UUID
+    name: str
+    score: Optional[int] = None  # set for recall events only
+    mastery: float
+    retention: float
+    heat_state: HeatState
+    review_count: int
+    due_at: Optional[datetime]
+    next_interval_days: float
+
+
+class SessionTopicIn(CamelModel):
+    name: str
+    slug: Optional[str] = None
+    importance: int = 3
+    intuition: Optional[str] = None
+    definition: Optional[str] = None
+    notes: Optional[str] = None
+    viz_spec: Optional[dict] = None
+    prerequisites: list[str] = []  # names of prerequisite topics in this subject
+
+
+class SessionEventIn(CamelModel):
+    type: str  # recall | problem | explanation
+    concept: str  # topic name or UUID
+    # recall
+    prompt: Optional[str] = None
+    grade: Optional[str] = None
+    score: Optional[int] = None
+    learner_answer: Optional[str] = None
+    rationale: Optional[str] = None
+    # problem
+    is_correct: Optional[bool] = None
+    partial: Optional[float] = None
+    # explanation
+    content: Optional[str] = None
+    quality: Optional[int] = None
+    direction: str = "learner_to_ai"
+    occurred_at: Optional[datetime] = None
+
+
+class SessionIn(CamelModel):
+    subject: str  # name or UUID
+    description: Optional[str] = None
+    topics: list[SessionTopicIn] = []
+    events: list[SessionEventIn] = []
+
+
+class SessionOutcomeOut(CamelModel):
+    subject_id: uuid.UUID
+    subject_name: str
+    concepts: list[IngestOutcomeOut]
+
+
+class DueReviewOut(CamelModel):
+    concept_id: uuid.UUID
+    name: str
+    subject: str
+    mastery: float
+    heat_state: HeatState
+    due_at: Optional[datetime]
+
+
 # --- Preferences DTOs (polish-frontend.md §2) ------------------------------- #
 # `modes` maps a surface ("concept"|"graph"|"review") to its presentational
 # variant. Presentation only — never a data binding or a learning metric.
