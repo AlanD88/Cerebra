@@ -1,0 +1,4 @@
+# Cerebra MCP bridge dependencies.
+# Install into the existing API venv:  api/.venv/bin/pip install -r mcp/requirements.txt
+mcp>=1.2
+httpx>=0.27

@@ -18,14 +18,48 @@ from .models import (
     ReviewSchedule,
     ReviewSession,
     ReviewSessionItem,
+    Subject,
 )
 from .projections import ensure_utc, regenerate_snapshots, run_projection
 from .scoring import LABELS, assess_answer
-from .schemas import AssessResultOut, ReviewItemOut, ReviewSessionOut
+from .schemas import AssessResultOut, DueReviewOut, ReviewItemOut, ReviewSessionOut
 
 
 def _build_prompt(concept: Concept) -> str:
     return f"Explain {concept.name} in your own words, and state its defining relationship."
+
+
+def due_reviews(db: Session, now: datetime | None = None) -> list[DueReviewOut]:
+    """The concepts due now, read straight from review_schedule (a projection
+    table) — never a live event scan. A clean read for "what's due" that, unlike
+    create_session, does not materialize a ReviewSession row. Comparison is done
+    in Python so the result is identical on SQLite and PostgreSQL."""
+    now = ensure_utc(now or datetime.now(timezone.utc))
+    rows = db.execute(
+        select(Concept, ConceptMetric, ReviewSchedule.due_at, Subject.name)
+        .join(ReviewSchedule, ReviewSchedule.concept_id == Concept.id)
+        .join(Subject, Subject.id == Concept.subject_id)
+        .outerjoin(ConceptMetric, ConceptMetric.concept_id == Concept.id)
+    ).all()
+
+    due = [
+        (concept, metric, due_at, subject_name)
+        for concept, metric, due_at, subject_name in rows
+        if due_at is not None and ensure_utc(due_at) <= now
+    ]
+    due.sort(key=lambda r: (ensure_utc(r[2]), r[0].name))
+
+    return [
+        DueReviewOut(
+            concept_id=concept.id,
+            name=concept.name,
+            subject=subject_name,
+            mastery=metric.mastery if metric else 0.0,
+            heat_state=metric.heat_state if metric else HeatState.frozen,
+            due_at=due_at,
+        )
+        for concept, metric, due_at, subject_name in due
+    ]
 
 
 def create_session(
