@@ -1,3 +1,6 @@
+"""Preferences routes: read the optional-mode map and merge a partial update.
+Invalid surface/mode → 422. Presentation only — never a learning metric."""
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 

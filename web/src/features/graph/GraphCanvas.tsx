@@ -31,6 +31,13 @@ interface GraphCanvasProps {
   overlay?: React.ReactNode;
 }
 
+/**
+ * The Knowledge Graph canvas. Fetches the three independent reads (layout, nodes,
+ * edges) and merges them client-side; dragging persists positions via a debounced
+ * PATCH and never touches relationships. Search / weak / dependency-path filters
+ * feed the dim-and-emphasize highlight model in graphModel. Wrapped in its own
+ * ReactFlowProvider so the zoom/fit controls can use the React Flow store.
+ */
 export function GraphCanvas(props: GraphCanvasProps) {
   return (
     <ReactFlowProvider>

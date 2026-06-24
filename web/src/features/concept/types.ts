@@ -1,3 +1,6 @@
+// Concept Page DTOs — the camelCase mirror of the backend's schemas
+// (ConceptDetailOut, RecallCardOut, DependencyOut, InsightOut). Read-only; the
+// viz spec drives the always-on visualization, and SCORE_LABEL names recall scores.
 import type { Heat } from '../../lib/heat';
 
 export interface VizEig {

@@ -31,6 +31,8 @@ def _build_prompt(concept: Concept) -> str:
 def create_session(
     db: Session, concept_id=None, now: datetime | None = None
 ) -> ReviewSessionOut:
+    """Build a session queue: one item for the given concept, or one per concept
+    due now (read from review_schedule, never from raw events). Caller commits."""
     now = ensure_utc(now or datetime.now(timezone.utc))
 
     if concept_id is not None:
@@ -67,6 +69,8 @@ def create_session(
 
 
 def get_session(db: Session, session_id) -> ReviewSessionOut | None:
+    """Hydrate a session into its DTO (prompts only — never the score).
+    ``concept_name`` is set only for single-item sessions, for the header."""
     session = db.get(ReviewSession, session_id)
     if session is None:
         return None
@@ -96,6 +100,11 @@ def get_session(db: Session, session_id) -> ReviewSessionOut | None:
 def assess(
     db: Session, session_id, item_id, learner_answer: str, now: datetime | None = None
 ) -> AssessResultOut | None:
+    """The single write in the review loop. Score the answer (server-side — the
+    learner never proposes a score), append an immutable ``recall_event``, then
+    re-derive the schedule + metrics from the event log via the projection, and
+    return the read-only outcome. Returns None if the item isn't in this session;
+    caller commits."""
     now = ensure_utc(now or datetime.now(timezone.utc))
     item = db.get(ReviewSessionItem, item_id)
     if item is None or item.session_id != session_id:

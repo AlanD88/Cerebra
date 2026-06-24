@@ -1,3 +1,4 @@
+// Browser entry point: load global styles (KaTeX + Tailwind) and mount the app.
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'katex/dist/katex.min.css';

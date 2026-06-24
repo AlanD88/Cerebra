@@ -1,3 +1,5 @@
+// Dashboard DTOs — the camelCase mirror of the backend's dashboard/subject
+// projection reads, one shape per card.
 import type { Heat } from '../../lib/heat';
 
 export interface DueSummary {

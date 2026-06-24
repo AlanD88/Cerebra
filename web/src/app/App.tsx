@@ -1,3 +1,5 @@
+// App root: the single QueryClient (server state) wrapping the data router.
+// Nothing else lives above the router.
 import { QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from 'react-router-dom';
 import { queryClient } from '../lib/queryClient';

@@ -1,3 +1,6 @@
+"""FastAPI application factory. Wires CORS and mounts every router under
+``/api/v1``; all read routes serve projection tables, never live event scans."""
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -6,6 +9,7 @@ from .routers import concepts, dashboard, graph, health, preferences, review, su
 
 
 def create_app() -> FastAPI:
+    """Build and configure the ASGI app (one instance is created as ``app`` below)."""
     app = FastAPI(title="Cerebra API", version="0.1.0")
     app.add_middleware(
         CORSMiddleware,

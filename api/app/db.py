@@ -1,3 +1,11 @@
+"""Database engine, session factory, and the FastAPI request-scoped session.
+
+The engine is chosen at import time from ``settings.database_url`` — SQLite for
+dev/test, PostgreSQL in production — and the ORM models are written to run on
+either (see ``models.py``). Nothing else in the app constructs sessions; routes
+depend on :func:`get_db` so every request gets exactly one session that is always
+closed."""
+
 from collections.abc import Iterator
 
 from sqlalchemy import create_engine
@@ -12,6 +20,8 @@ class Base(DeclarativeBase):
 
 
 def engine_kwargs(url: str) -> dict:
+    """Per-dialect engine options: SQLite needs cross-thread access for FastAPI's
+    threadpool; networked databases get liveness pre-pings."""
     if url.startswith("sqlite"):
         # Allow cross-thread use (FastAPI) for the file/memory SQLite engine.
         return {"connect_args": {"check_same_thread": False}}
@@ -23,6 +33,8 @@ SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False
 
 
 def get_db() -> Iterator[Session]:
+    """FastAPI dependency yielding one session per request, closed on teardown.
+    Routes commit explicitly; read-only routes never need to."""
     db = SessionLocal()
     try:
         yield db

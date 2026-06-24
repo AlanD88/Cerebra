@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { EmptyState, ErrorState, Skeleton } from '../../components/feedback';
 import { dashboardQueries } from './queries';
 
+// Dashboard hero (L3 forest surface): what's due now, and the entry into a review.
 export function DueReviewsHero() {
   const navigate = useNavigate();
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.dueSummary());

@@ -1,3 +1,5 @@
+// Reactively tracks the OS "reduce motion" setting, honored across surfaces
+// (agent-rules invariant #6) — e.g. the graph settles instantly when it is set.
 import { useEffect, useState } from 'react';
 
 const QUERY = '(prefers-reduced-motion: reduce)';

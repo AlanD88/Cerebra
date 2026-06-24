@@ -7,6 +7,8 @@ import { HEAT_LABEL, heatColor } from '../../lib/heat';
 import { pct } from '../../lib/format';
 import { dashboardQueries } from './queries';
 
+// A compact per-subject heat grid; hovering a cell reveals its concept's heat
+// label (the meaning is never carried by color alone — invariant #7).
 export function KnowledgeHeatMap() {
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.heatmap());
   const [hoverLabel, setHoverLabel] = useState<string | null>(null);

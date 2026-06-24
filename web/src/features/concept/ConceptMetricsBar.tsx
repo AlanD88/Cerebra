@@ -3,6 +3,8 @@ import { heatColor } from '../../lib/heat';
 import { pct } from '../../lib/format';
 import type { ConceptDetail } from './types';
 
+// Four-stat bar (mastery, retention, recall, problem accuracy); teaches an empty
+// state until the concept has been reviewed.
 interface Stat {
   label: string;
   value: number; // 0..1

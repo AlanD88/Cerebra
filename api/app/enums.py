@@ -1,3 +1,9 @@
+"""Domain enumerations, shared by the ORM, the projection logic, and the API DTOs.
+
+Each is a ``str`` enum so the member *value* is what crosses every boundary —
+stored as portable VARCHAR + CHECK (via ``models._enum``), emitted in JSON, and
+compared in projection code — keeping one vocabulary end to end."""
+
 import enum
 
 

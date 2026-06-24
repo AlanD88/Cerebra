@@ -4,6 +4,7 @@ import { EmptyState, ErrorState, Skeleton } from '../../components/feedback';
 import { pct, signedPct } from '../../lib/format';
 import { dashboardQueries } from './queries';
 
+// Headline averages (mastery, retention) with the 7-day retention delta.
 export function LearningHealth() {
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.health());
 

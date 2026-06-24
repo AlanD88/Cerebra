@@ -6,6 +6,7 @@ import { EmptyState, ErrorState, Skeleton } from '../../components/feedback';
 import { pct } from '../../lib/format';
 import { dashboardQueries } from './queries';
 
+// The lowest-mastery engaged concepts, each linking to its Concept Page.
 export function WeakConcepts() {
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.weak(5));
 

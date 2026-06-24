@@ -1,3 +1,6 @@
+// Knowledge Graph DTOs + local view-model types: layout positions (presentation)
+// and nodes/edges (knowledge) are independent reads, merged on the client.
+// GraphFilter is local highlight state, never persisted.
 import type { Heat } from '../../lib/heat';
 
 export interface GraphLayoutPos {

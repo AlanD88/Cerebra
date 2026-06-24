@@ -29,6 +29,9 @@ from .schemas import (
 
 
 def get_concept_detail(db: Session, concept_id) -> ConceptDetailOut | None:
+    """The Concept Page core read: the concept joined to its metric projection and
+    next due date. Returns None for an unknown id (router → 404); a concept that
+    has never been reviewed has no metric row and reads as zeros / frozen."""
     row = db.execute(
         select(Concept, Subject.name, ConceptMetric, ReviewSchedule.due_at)
         .join(Subject, Subject.id == Concept.subject_id)
@@ -61,6 +64,8 @@ def get_concept_detail(db: Session, concept_id) -> ConceptDetailOut | None:
 
 
 def get_recall_card(db: Session, concept_id, now: datetime | None = None) -> RecallCardOut:
+    """The most recent recall prompts for this concept (newest first, from the
+    per-prompt RecallState projection) plus whether the concept is due now."""
     now = ensure_utc(now or datetime.now(timezone.utc))
     schedule = db.get(ReviewSchedule, concept_id)
     due = 1 if schedule and schedule.due_at and ensure_utc(schedule.due_at) <= now else 0
@@ -79,6 +84,9 @@ def get_recall_card(db: Session, concept_id, now: datetime | None = None) -> Rec
 
 
 def get_dependencies(db: Session, concept_id) -> list[DependencyOut]:
+    """Prerequisite concepts (relationships where this concept is the target), each
+    with its current heat/mastery. The weakest is flagged ``is_root_weakness`` so
+    the UI can point the learner at the true blocker beneath a struggling concept."""
     rows = db.execute(
         select(
             ConceptRelationship.source_concept_id,
@@ -115,6 +123,10 @@ def _heat_label(state: HeatState) -> str:
 
 
 def get_insight(db: Session, concept_id) -> InsightOut | None:
+    """A deterministic "AI insight" derived purely from projection data — no model
+    call, so it always runs offline. When a prerequisite is the root weakness and
+    is cold/frozen, it names that concept and suggests reviewing it; otherwise it
+    returns a generic nudge. (A real model could later swap in behind this shape.)"""
     detail = get_concept_detail(db, concept_id)
     if detail is None:
         return None

@@ -12,6 +12,11 @@ function dueLabel(dueAt: string | null): string {
   return `Next review in ${days} day${days === 1 ? '' : 's'}`;
 }
 
+/**
+ * Concept Page header: breadcrumb, title, the heat + mastery + due-date summary,
+ * and the primary actions (Practice recall, Open in graph). Renders a skeleton
+ * until the core query resolves.
+ */
 export function ConceptHeader({ detail }: { detail?: ConceptDetail }) {
   const navigate = useNavigate();
 

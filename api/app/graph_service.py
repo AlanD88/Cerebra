@@ -22,11 +22,14 @@ LAYOUT_VERSION = 1
 
 
 def list_subjects(db: Session) -> list[SubjectOut]:
+    """All subjects (alphabetical) — backs the graph's subject switcher."""
     rows = db.scalars(select(Subject).order_by(Subject.name.asc())).all()
     return [SubjectOut(id=s.id, name=s.name) for s in rows]
 
 
 def get_layout(db: Session, subject_id) -> list[GraphLayoutOut]:
+    """Saved node positions for a subject — the *presentation* half of the graph,
+    independent of the knowledge (nodes/edges) read below."""
     rows = db.scalars(
         select(GraphLayout).where(
             GraphLayout.subject_id == subject_id,
@@ -37,6 +40,8 @@ def get_layout(db: Session, subject_id) -> list[GraphLayoutOut]:
 
 
 def get_nodes(db: Session, subject_id) -> list[GraphNodeOut]:
+    """A subject's concepts joined to their heat/mastery projection (never-reviewed
+    concepts read as frozen / 0). The *knowledge* half — carries no position."""
     rows = db.execute(
         select(
             Concept.id,
@@ -62,6 +67,8 @@ def get_nodes(db: Session, subject_id) -> list[GraphNodeOut]:
 
 
 def get_edges(db: Session, subject_id) -> list[GraphEdgeOut]:
+    """A subject's concept relationships (prerequisite / related / extends). Read
+    independently of layout, so editing a relationship never moves a node."""
     rows = db.scalars(
         select(ConceptRelationship).where(ConceptRelationship.subject_id == subject_id)
     ).all()

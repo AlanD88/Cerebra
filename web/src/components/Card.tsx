@@ -1,3 +1,5 @@
+// Surface primitives (foundations.md §3). Card wraps content in one of the L1–L3
+// surfaces with the standard reveal animation; CardHeading is the eyebrow row.
 import type { ReactNode } from 'react';
 
 type Surface = 'paper' | 'glass' | 'floating';

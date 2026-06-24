@@ -1,3 +1,6 @@
+"""Subject routes: the subject list (for the graph's subject switcher) and the
+per-subject progress rollup (dashboard card + Subjects page)."""
+
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 

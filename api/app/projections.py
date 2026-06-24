@@ -190,6 +190,11 @@ def compute_metrics(
     schedule: ScheduleResult,
     now: datetime,
 ) -> MetricsResult:
+    """The mastery blend (data-architecture.md §4/§5). Recall and problem accuracy
+    are recency-weighted (30-day half-life); retention is exp(-Δt / stability) from
+    the SM-2 schedule. Mastery = 0.45·recall + 0.25·problem + 0.30·retention, plus
+    a capped Feynman-explanation bonus, clamped to [0, 1]. Heat is derived from the
+    result. Pure — the clock is injected via ``now``."""
     now = ensure_utc(now)
 
     recall_accuracy = recency_weighted_average(

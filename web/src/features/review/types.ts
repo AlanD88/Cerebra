@@ -1,3 +1,5 @@
+// Review DTOs — the session queue (prompts only) and the read-only assess
+// outcome. The score is AI-assigned; the client never sends or proposes one.
 import type { Heat } from '../../lib/heat';
 
 export interface ReviewItem {

@@ -97,3 +97,17 @@ swap-in point, not a weakened invariant:
   ~50 rows; the seed has 4 concepts, so adding `react-window` now would be dead
   weight. It's the natural first follow-up when real datasets grow (weak-concepts,
   recall queue, dependency lists).
+
+## Backlog / follow-ups
+
+Tracked here so we can come back to them:
+
+- **Flesh out the Subjects and Settings pages.** Both resolve today
+  (`web/src/features/subjects/`, `web/src/features/settings/`) but are intentionally
+  minimal — they weren't part of the original four-surface spec, and were added to
+  fix dead sidebar links. Candidate work: Subjects could gain per-concept
+  drill-down and a "start review for this subject" action; Settings could grow
+  account/data controls beyond the display-mode toggles.
+- **List virtualization** — see *Deliberate deviations* above; wire up
+  `react-window` for the weak-concepts, recall-queue and dependency lists once any
+  realistically exceeds ~50 rows.

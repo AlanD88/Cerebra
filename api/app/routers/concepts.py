@@ -1,3 +1,6 @@
+"""Concept Page routes: the core detail (concept ⨝ metrics) plus the recall,
+dependency and insight satellites, and the dashboard's weak-concepts list."""
+
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException, Query

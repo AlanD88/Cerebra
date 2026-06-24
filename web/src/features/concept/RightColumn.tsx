@@ -7,6 +7,8 @@ import { pct } from '../../lib/format';
 import { conceptQueries } from './queries';
 import { SCORE_LABEL, type ConceptDetail } from './types';
 
+// The "practice & connect" column: recall queue, problem accuracy, dependencies
+// (root weakness flagged), and the deterministic AI insight — each a satellite query.
 export function RightColumn({ conceptId, detail }: { conceptId: string; detail?: ConceptDetail }) {
   return (
     <div className="flex flex-col gap-5">

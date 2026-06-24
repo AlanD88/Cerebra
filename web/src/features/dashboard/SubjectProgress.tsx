@@ -5,6 +5,7 @@ import { HEAT_LABEL, heatColor } from '../../lib/heat';
 import { pct } from '../../lib/format';
 import { dashboardQueries } from './queries';
 
+// Per-subject average mastery as labeled progress bars (also the Subjects page data).
 export function SubjectProgress() {
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.subjectProgress());
 

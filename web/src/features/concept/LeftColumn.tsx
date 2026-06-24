@@ -3,6 +3,7 @@ import { Tex } from '../../components/Tex';
 import { Skeleton } from '../../components/feedback';
 import type { ConceptDetail } from './types';
 
+// The "understand" column: intuition prose, the KaTeX-typeset definition, and notes.
 export function LeftColumn({ detail }: { detail?: ConceptDetail }) {
   if (!detail) {
     return (

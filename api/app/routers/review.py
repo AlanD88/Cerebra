@@ -1,3 +1,6 @@
+"""Review routes: create a session (due queue or one concept), fetch it, and
+assess an answer. Assess is the only write — it appends an event and re-projects."""
+
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException

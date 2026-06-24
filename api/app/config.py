@@ -1,3 +1,6 @@
+"""Runtime configuration, read once from the environment / ``.env`` at import.
+Defaults let the app boot with zero external services (SQLite, no model key)."""
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 

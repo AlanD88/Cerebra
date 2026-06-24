@@ -39,11 +39,16 @@ class Assessment:
 
 
 def key_terms(concept: Concept) -> set[str]:
+    """The concept's salient terms (name + intuition, minus short and stop words) —
+    the heuristic's stand-in for 'what a good answer should mention'."""
     text = f"{concept.name} {concept.intuition or ''}"
     return {w for w in _WORD.findall(text.lower()) if w not in _STOP}
 
 
 def assess_answer(concept: Concept, learner_answer: str) -> Assessment:
+    """Score 0–3 by the fraction of the concept's key terms the answer covers
+    (empty → 0). Deterministic by design, so the review loop runs with no model
+    and the tests stay hermetic."""
     answer = (learner_answer or "").strip()
     if not answer:
         return Assessment(0, LABELS[0], _RATIONALE[0], "heuristic-v1")

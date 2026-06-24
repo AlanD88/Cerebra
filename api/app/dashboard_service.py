@@ -29,6 +29,9 @@ def _mean(values: list[float]) -> float:
 
 
 def due_summary(db: Session, now: datetime | None = None) -> DueSummaryOut:
+    """Overdue vs. due-today review counts and how many subjects they span — the
+    dashboard's "what's due" hero. Comparison is done in Python so the result is
+    identical on SQLite (which stores naive timestamps) and PostgreSQL."""
     now = ensure_utc(now or datetime.now(timezone.utc))
     today_start = datetime(now.year, now.month, now.day, tzinfo=timezone.utc)
     tomorrow_start = today_start + timedelta(days=1)
@@ -59,6 +62,8 @@ def due_summary(db: Session, now: datetime | None = None) -> DueSummaryOut:
 
 
 def weak_concepts(db: Session, limit: int = 5) -> list[WeakConceptOut]:
+    """The lowest-mastery concepts the learner has actually engaged
+    (``review_count > 0``), so never-reviewed concepts don't masquerade as weak."""
     rows = db.execute(
         select(ConceptMetric, Concept.name, Subject.name)
         .join(Concept, Concept.id == ConceptMetric.concept_id)
@@ -80,6 +85,9 @@ def weak_concepts(db: Session, limit: int = 5) -> list[WeakConceptOut]:
 
 
 def retention_trends(db: Session, days: int = 30) -> RetentionTrendsOut:
+    """The last ``days`` of the global daily snapshot (the rows with both
+    subject_id and concept_id NULL — the all-up rollup) as a retention sparkline
+    plus reviews-per-day. Snapshots are written by the projection, not computed here."""
     rows = (
         db.scalars(
             select(MetricSnapshot)
@@ -96,6 +104,8 @@ def retention_trends(db: Session, days: int = 30) -> RetentionTrendsOut:
 
 
 def learning_health(db: Session, now: datetime | None = None) -> LearningHealthOut:
+    """Headline averages (mastery, retention) over reviewed concepts, plus the
+    retention change vs. ~7 days ago read from the snapshot history."""
     now = ensure_utc(now or datetime.now(timezone.utc))
     metrics = db.scalars(select(ConceptMetric)).all()
     reviewed = [m for m in metrics if m.review_count > 0]
@@ -126,6 +136,8 @@ def learning_health(db: Session, now: datetime | None = None) -> LearningHealthO
 
 
 def knowledge_heatmap(db: Session) -> list[HeatRowOut]:
+    """Every concept metric as a heat cell, grouped by subject (strongest first
+    within each), for the dashboard's at-a-glance heat grid."""
     rows = db.execute(
         select(
             Subject.name,
@@ -150,6 +162,8 @@ def knowledge_heatmap(db: Session) -> list[HeatRowOut]:
 
 
 def subject_progress(db: Session) -> list[SubjectProgressOut]:
+    """Average mastery + derived heat per subject, over reviewed concepts only,
+    sorted strongest first. Backs both the dashboard card and the Subjects page."""
     rows = db.execute(
         select(
             Subject.id,

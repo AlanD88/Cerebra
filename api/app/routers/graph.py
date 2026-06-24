@@ -1,3 +1,6 @@
+"""Knowledge Graph routes: three independent reads (layout, nodes, edges) merged
+client-side, and a layout PATCH. Layout writes never touch relationships."""
+
 import uuid
 
 from fastapi import APIRouter, Depends

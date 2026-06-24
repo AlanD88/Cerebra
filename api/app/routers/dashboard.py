@@ -1,3 +1,7 @@
+"""Dashboard routes: the due summary, retention trend, learning-health rollup and
+knowledge heatmap. Each reads projection rows only (the weak-concepts and
+subject-progress cards live under /concepts and /subjects)."""
+
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 

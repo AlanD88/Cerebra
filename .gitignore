@@ -3,6 +3,7 @@ web/node_modules/
 web/dist/
 web/coverage/
 web/.vite/
+*.tsbuildinfo
 *.local
 
 # Python / backend

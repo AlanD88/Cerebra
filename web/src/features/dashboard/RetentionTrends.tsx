@@ -10,6 +10,8 @@ const W = 320;
 const H = 96;
 const PAD_Y = 8;
 
+// A hand-drawn SVG sparkline of the 30-day retention rollup plus reviews-per-day;
+// hovering a day reads out its values. Constants W/H/PAD define the plot box.
 export function RetentionTrends() {
   const { data, isLoading, isError, refetch } = useQuery(dashboardQueries.retention(30));
 
