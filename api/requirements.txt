@@ -1,0 +1,9 @@
+# Runtime deps for the Vercel Python function (api/index.py).
+# Mirrors the runtime subset of pyproject.toml plus the Turso/libSQL driver.
+# uvicorn/alembic are intentionally omitted — Vercel provides the ASGI server,
+# and migrations are run out-of-band (see DEPLOY.md), not at request time.
+fastapi>=0.115
+sqlalchemy>=2.0.30
+pydantic>=2.7
+pydantic-settings>=2.3
+sqlalchemy-libsql>=0.1.0
