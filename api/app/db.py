@@ -20,14 +20,8 @@ class Base(DeclarativeBase):
 
 
 def engine_kwargs(url: str) -> dict:
-    """Per-dialect engine options. Networked databases (PostgreSQL, Turso/libSQL)
-    get liveness pre-pings; only file/in-memory SQLite needs the cross-thread
-    escape hatch for FastAPI's threadpool."""
-    if url.startswith("sqlite+libsql"):
-        # Turso speaks libSQL over the network — treat it like any networked DB.
-        # The `check_same_thread` connect arg is a file-SQLite concept the libSQL
-        # driver does not accept, so it must not fall through to the branch below.
-        return {"pool_pre_ping": True}
+    """Per-dialect engine options: SQLite needs cross-thread access for FastAPI's
+    threadpool; networked databases (PostgreSQL) get liveness pre-pings."""
     if url.startswith("sqlite"):
         # Allow cross-thread use (FastAPI) for the file/memory SQLite engine.
         return {"connect_args": {"check_same_thread": False}}
