@@ -28,3 +28,5 @@ api/*.sqlite3
 .idea/
 .vscode/
 *.swp
+.vercel
+.env*

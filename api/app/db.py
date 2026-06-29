@@ -21,11 +21,14 @@ class Base(DeclarativeBase):
 
 def engine_kwargs(url: str) -> dict:
     """Per-dialect engine options: SQLite needs cross-thread access for FastAPI's
-    threadpool; networked databases (PostgreSQL) get liveness pre-pings."""
+    threadpool; networked Postgres gets liveness pre-pings and disables psycopg's
+    server-side prepared statements so it is safe behind PgBouncer transaction
+    pooling (Neon's pooled endpoint), which otherwise errors on reused prepared
+    statement names across pooled connections."""
     if url.startswith("sqlite"):
         # Allow cross-thread use (FastAPI) for the file/memory SQLite engine.
         return {"connect_args": {"check_same_thread": False}}
-    return {"pool_pre_ping": True}
+    return {"pool_pre_ping": True, "connect_args": {"prepare_threshold": None}}
 
 
 engine: Engine = create_engine(settings.database_url, future=True, **engine_kwargs(settings.database_url))
