@@ -5,6 +5,11 @@ web/coverage/
 web/.vite/
 *.tsbuildinfo
 *.local
+# Stray root Node artifacts from Vercel's Neon JS quickstart (the Python backend
+# uses psycopg, not @neondatabase/serverless) — keep them out of the repo.
+/node_modules/
+/package.json
+/package-lock.json
 
 # Python / backend
 api/.venv/
