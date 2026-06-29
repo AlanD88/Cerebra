@@ -47,7 +47,7 @@ extra (psycopg ships a wheel for your Python — no native build):
 
 ```bash
 cd api
-uv pip install -e '.[postgres]'             # adds psycopg (v3)
+uv pip install -e .                          # psycopg (v3) is a base dep
 
 export DATABASE_URL='postgresql://<user>:<pass>@<host>.neon.tech/<db>?sslmode=require'
 
